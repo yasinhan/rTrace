@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.25)
 project(ray_trace CXX)
 
 
@@ -18,11 +18,15 @@ include_directories(.)
 
 enable_testing()
 add_executable(
-        ray_trace_test
-        src/test/tuple_test.cpp)
+        tests
+        src/test/tuple_test.cpp
+        src/tuple.cpp
+)
+
 target_link_libraries(
-        ray_trace_test
+        tests
+        gtest
         GTest::gtest_main
 )
 include(GoogleTest)
-gtest_discover_tests(ray_trace_test)
+gtest_discover_tests(tests)
