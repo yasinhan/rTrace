@@ -8,19 +8,19 @@
 class Tuple {
 
 public:
-    Tuple(float x, float y, float z, int w);
+    Tuple(float x, float y, float z, float w);
 
     ~Tuple();
 
-    bool equals(Tuple other);
+    bool equals(const Tuple& other);
 
     [[nodiscard]] float getX() const;
 
-    float getY() const;
+    [[nodiscard]] float getY() const;
 
-    float getZ() const;
+    [[nodiscard]] float getZ() const;
 
-    int getW() const;
+    [[nodiscard]] float getW() const;
 
     static Tuple point(float x, float y, float z);
 
@@ -31,5 +31,7 @@ private:
     float x, y, z;
     int w;
 };
+
+Tuple operator+(const Tuple& lhs, const Tuple& rhs);
 
 #endif //RAY_TRACE_TUPLE_H

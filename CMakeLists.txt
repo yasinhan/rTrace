@@ -21,6 +21,7 @@ add_executable(
         tests
         src/test/tuple_test.cpp
         src/tuple.cpp
+        src/math.h
 )
 
 target_link_libraries(
