@@ -5,6 +5,8 @@
 #ifndef RAY_TRACE_TUPLE_H
 #define RAY_TRACE_TUPLE_H
 
+#include <memory>
+
 class Tuple {
 
 public:
@@ -22,9 +24,11 @@ public:
 
     [[nodiscard]] float getW() const;
 
-    static Tuple point(float x, float y, float z);
+    static std::unique_ptr<Tuple> point(float x, float y, float z);
 
-    static Tuple vector(float x, float y, float z);
+    static std::unique_ptr<Tuple> vector(float x, float y, float z);
+
+    float magnitude();
 
 private:
 
@@ -33,5 +37,7 @@ private:
 };
 
 Tuple operator+(const Tuple& lhs, const Tuple& rhs);
+
+Tuple operator-(const Tuple &lhs, const Tuple &rhs);
 
 #endif //RAY_TRACE_TUPLE_H

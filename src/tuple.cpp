@@ -36,12 +36,16 @@ float Tuple::getW() const {
     return w;
 }
 
-Tuple Tuple::vector(float x, float y, float z) {
-    return {x, y, z, 1};
+std::unique_ptr<Tuple> Tuple::point(float x, float y, float z) {
+    return std::make_unique<Tuple>(x, y, z, 1);
 }
 
-Tuple Tuple::point(float x, float y, float z) {
-    return {x, y, z, 0};
+std::unique_ptr<Tuple> Tuple::vector(float x, float y, float z) {
+    return std::make_unique<Tuple>(x, y, z, 0);
+}
+
+float Tuple::magnitude() {
+    return 0;
 }
 
 
@@ -50,4 +54,11 @@ Tuple operator+(const Tuple &lhs, const Tuple &rhs) {
         throw std::invalid_argument("Two point cannot add");
     }
     return {lhs.getX() + rhs.getX(), lhs.getY() + rhs.getY(), lhs.getZ() + rhs.getZ(), lhs.getW() + rhs.getW()};
+}
+
+Tuple operator-(const Tuple &lhs, const Tuple &rhs) {
+    if (epsilon(lhs.getW(), 0) && epsilon(rhs.getW(), 1)) {
+        throw std::invalid_argument("Vector cannot subtract Point");
+    }
+    return {lhs.getX() - rhs.getX(), lhs.getY() - rhs.getY(), lhs.getZ() - rhs.getZ(), lhs.getW() - rhs.getW()};
 }
