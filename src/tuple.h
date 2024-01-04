@@ -28,7 +28,11 @@ public:
 
     static std::unique_ptr<Tuple> vector(float x, float y, float z);
 
-    float magnitude();
+    [[nodiscard]] float get_magnitude() const;
+
+    [[nodiscard]] std::unique_ptr<Tuple> negate() const;
+
+    std::unique_ptr<Tuple> normalized() const;
 
 private:
 

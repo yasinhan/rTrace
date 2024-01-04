@@ -1,7 +1,7 @@
 #include "tuple.h"
 #include "math.h"
 #include <stdexcept>
-
+#include <cmath>
 //
 // Created by han on 12/22/23.
 //
@@ -44,8 +44,18 @@ std::unique_ptr<Tuple> Tuple::vector(float x, float y, float z) {
     return std::make_unique<Tuple>(x, y, z, 0);
 }
 
-float Tuple::magnitude() {
-    return 0;
+float Tuple::get_magnitude() const {
+    return sqrtf(x * x + y * y + z * z);
+}
+
+// return a new tuple
+std::unique_ptr<Tuple> Tuple::negate() const {
+    return std::make_unique<Tuple>(-x , -y, -z, w);
+}
+
+std::unique_ptr<Tuple> Tuple::normalized() const {
+    float length = get_magnitude();
+    return std::make_unique<Tuple>(x / length, y / length, z / length, w);
 }
 
 
