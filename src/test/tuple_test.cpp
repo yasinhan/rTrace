@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "src/tuple.h"
+#include "src/primitive/tuple.h"
 #include <cmath>
 
 class TupleTest : public ::testing::Test {
@@ -103,4 +103,17 @@ TEST(TUPLE_TEST, DOT_TEST) {
     auto dot_vec = vec_1.dot(vec_2);
 
     EXPECT_EQ(dot_vec, 28);
+}
+
+TEST(TUPLE_TEST, CROSS_TEST) {
+    auto vec_1 = Tuple::vector(1, 2, 3);
+    auto vec_2 = Tuple::vector(2, 3, 4);
+
+    auto vec_1_cross_2 = std::make_unique<Tuple>(vec_1.cross(vec_2));
+    EXPECT_EQ(vec_1_cross_2->getX(), -1);
+    EXPECT_EQ(vec_1_cross_2->getY(), 2);
+    EXPECT_EQ(vec_1_cross_2->getZ(), -1);
+
+    auto vec_2_cross_1 = std::make_unique<Tuple>(vec_2.cross(vec_1));
+    EXPECT_TRUE(vec_1_cross_2->negate().equals(*vec_2_cross_1));
 }

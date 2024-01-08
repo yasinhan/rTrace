@@ -20,7 +20,9 @@ enable_testing()
 add_executable(
         tests
         src/test/tuple_test.cpp
-        src/tuple.cpp
+        src/test/color_test.cpp
+        src/primitive/tuple.cpp
+        src/primitive/color.cpp
         src/math.h
 )
 

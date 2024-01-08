@@ -1,5 +1,5 @@
 #include "tuple.h"
-#include "math.h"
+#include "src/math.h"
 #include <stdexcept>
 #include <cmath>
 //
@@ -66,7 +66,13 @@ float Tuple::dot(Tuple& other) const {
 }
 
 Tuple Tuple::cross(Tuple& other) const {
-    return {0 ,0 , 0, 0};
+    if (isPoint() || other.isPoint()) {
+        throw std::invalid_argument("Only two vector can cross");
+    }
+    return {y * other.getZ() - z * other.getY(),
+            z * other.getX() - x * other.getZ(),
+            x * other.getY() - y * other.getX(),
+            0};
 }
 
 bool Tuple::isPoint() const {
