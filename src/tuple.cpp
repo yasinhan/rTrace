@@ -36,12 +36,12 @@ float Tuple::getW() const {
     return w;
 }
 
-std::unique_ptr<Tuple> Tuple::point(float x, float y, float z) {
-    return std::make_unique<Tuple>(x, y, z, 1);
+Tuple Tuple::point(float x, float y, float z) {
+    return {x, y, z, 1};
 }
 
-std::unique_ptr<Tuple> Tuple::vector(float x, float y, float z) {
-    return std::make_unique<Tuple>(x, y, z, 0);
+Tuple Tuple::vector(float x, float y, float z) {
+    return {x, y, z, 0};
 }
 
 float Tuple::get_magnitude() const {
@@ -49,18 +49,37 @@ float Tuple::get_magnitude() const {
 }
 
 // return a new tuple
-std::unique_ptr<Tuple> Tuple::negate() const {
-    return std::make_unique<Tuple>(-x , -y, -z, w);
+Tuple Tuple::negate() const {
+    return {-x , -y, -z, w};
 }
 
-std::unique_ptr<Tuple> Tuple::normalized() const {
+Tuple Tuple::normalized() const {
     float length = get_magnitude();
-    return std::make_unique<Tuple>(x / length, y / length, z / length, w);
+    return {x / length, y / length, z / length, w};
+}
+
+float Tuple::dot(Tuple& other) const {
+    if (isPoint() || other.isPoint()) {
+        throw std::invalid_argument("Only two vector can dot");
+    }
+    return x * other.getX() + y * other.getY() + z * other.getZ();
+}
+
+Tuple Tuple::cross(Tuple& other) const {
+    return {0 ,0 , 0, 0};
+}
+
+bool Tuple::isPoint() const {
+    return epsilon(w, 1);
+}
+
+bool Tuple::isVector() const {
+    return epsilon(w, 0);
 }
 
 
 Tuple operator+(const Tuple &lhs, const Tuple &rhs) {
-    if (epsilon(lhs.getW(), 1) && epsilon(rhs.getW(), 1)) {
+    if (lhs.isPoint() && rhs.isPoint()) {
         throw std::invalid_argument("Two point cannot add");
     }
     return {lhs.getX() + rhs.getX(), lhs.getY() + rhs.getY(), lhs.getZ() + rhs.getZ(), lhs.getW() + rhs.getW()};
@@ -71,4 +90,18 @@ Tuple operator-(const Tuple &lhs, const Tuple &rhs) {
         throw std::invalid_argument("Vector cannot subtract Point");
     }
     return {lhs.getX() - rhs.getX(), lhs.getY() - rhs.getY(), lhs.getZ() - rhs.getZ(), lhs.getW() - rhs.getW()};
+}
+
+Tuple operator*(const Tuple &lhs, float rhs) {
+    if (lhs.isPoint()) {
+        throw std::invalid_argument("Point cannot multiply");
+    }
+    return {lhs.getX() * rhs, lhs.getY() * rhs, lhs.getZ() * rhs, lhs.getW()};
+}
+
+Tuple operator/(const Tuple &lhs, float rhs) {
+    if (lhs.isPoint()) {
+        throw std::invalid_argument("Point cannot divide");
+    }
+    return {lhs.getX() / rhs, lhs.getY() / rhs, lhs.getZ() / rhs, lhs.getW()};
 }
