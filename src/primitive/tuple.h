@@ -5,8 +5,6 @@
 #ifndef RAY_TRACE_TUPLE_H
 #define RAY_TRACE_TUPLE_H
 
-#include <memory>
-
 class Tuple {
 
 public:
