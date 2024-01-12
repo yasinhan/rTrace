@@ -21,4 +21,13 @@ public:
 private:
     float red, green, blue;
 };
+
+Color operator+(const Color &lhs, const Color &rhs);
+
+Color operator-(const Color &lhs, const Color &rhs);
+
+Color operator*(const Color &lhs, float scalar);
+
+Color operator*(const Color &lhs, const Color &rhs);
+
 #endif //RAY_TRACE_COLOR_H

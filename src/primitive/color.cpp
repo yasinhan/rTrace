@@ -21,3 +21,27 @@ float Color::getGreen() const {
 float Color::getBlue() const {
     return blue;
 }
+
+Color operator+(const Color &lhs, const Color &rhs) {
+    return {lhs.getRed() + rhs.getRed(),
+            lhs.getGreen() + rhs.getGreen(),
+            lhs.getBlue() + rhs.getBlue()};
+}
+
+Color operator-(const Color &lhs, const Color &rhs) {
+    return {lhs.getRed() - rhs.getRed(),
+                 lhs.getGreen() - rhs.getGreen(),
+                 lhs.getBlue() - rhs.getBlue()};
+}
+
+Color operator*(const Color &lhs, float scalar) {
+    return {lhs.getRed() * scalar,
+            lhs.getGreen() * scalar,
+            lhs.getBlue() * scalar};
+}
+
+Color operator*(const Color &lhs, const Color &rhs) {
+    return {lhs.getRed() * rhs.getRed(),
+            lhs.getGreen() * rhs.getGreen(),
+            lhs.getBlue() * rhs.getBlue()};
+}
