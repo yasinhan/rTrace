@@ -25,6 +25,8 @@ add_executable(
         src/primitive/color.cpp
         src/math.h
         src/canvas.cpp
+        src/test/canvas_test.cpp
+        src/primitive/matrix.cpp
 )
 
 target_link_libraries(
