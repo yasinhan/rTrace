@@ -27,6 +27,7 @@ add_executable(
         src/canvas.cpp
         src/test/canvas_test.cpp
         src/primitive/matrix.cpp
+        src/test/matrix_test.cpp
 )
 
 target_link_libraries(
