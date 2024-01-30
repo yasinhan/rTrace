@@ -23,10 +23,11 @@ add_executable(
         src/test/color_test.cpp
         src/primitive/tuple.cpp
         src/primitive/color.cpp
+        src/primitive/matrix.cpp
+        src/primitive/vector.cpp
         src/math.h
         src/canvas.cpp
         src/test/canvas_test.cpp
-        src/primitive/matrix.cpp
         src/test/matrix_test.cpp
 )
 

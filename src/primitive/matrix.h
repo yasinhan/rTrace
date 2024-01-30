@@ -5,11 +5,13 @@
 #ifndef RAY_TRACE_MATRIX_H
 #define RAY_TRACE_MATRIX_H
 
+#include "vector.h"
+
 class Matrix {
 
 public:
 
-    Matrix(int w, int h);
+    Matrix(int row, int col);
 
     virtual ~Matrix();
 
@@ -17,12 +19,14 @@ public:
 
     void set_value(float value, int x, int y);
 
-    int getW() const;
+    int getRow() const;
 
-    int getH() const;
+    int getCol() const;
+
+    static Matrix build_identity_matrix(int w);
 
 private:
-    int w, h;
+    int row, col;
     float *data;
 
     inline int get_index(int x, int y) const;
@@ -30,6 +34,8 @@ private:
 
 Matrix operator*(const Matrix &lhs, const Matrix &rhs);
 
-bool operator==(const Matrix lhs, const Matrix rhs);
+Vector operator*(const Matrix &lhx, const Vector &rhs);
+
+bool operator==(const Matrix &lhs, const Matrix &rhs);
 
 #endif //RAY_TRACE_MATRIX_H
