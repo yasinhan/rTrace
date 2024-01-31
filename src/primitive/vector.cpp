@@ -20,11 +20,11 @@ void Vector::set_value(float value, int index) {
     data[index] = value;
 }
 
-float Vector::get_value(int index) {
-    if (index <= 0 || index > length - 1) {
+float Vector::operator()(int x) const {
+    if (x <= 0 || x > length - 1) {
         throw std::invalid_argument("invalid index, must between 0 and length-1");
     }
-    return data[index];
+    return data[x];
 }
 
 int Vector::getLength() const {

@@ -60,19 +60,41 @@ bool operator==(const Matrix &lhs, const Matrix &rhs) {
     return true;
 }
 
-Vector operator*(const Matrix &lhx, const Vector &rhs) {
-    if (lhx.getCol() != rhs.getLength()) {
+Vector operator*(const Matrix &lhs, const Vector &rhs) {
+    if (lhs.getCol() != rhs.getLength()) {
         throw std::invalid_argument("Matrix A with n columns, Vector B must have n elements");
     }
-    auto ret = Vector(lhx.getCol());
-    
+    auto ret = Vector(lhs.getCol());
+    for (int i = 0; i < rhs.getLength(); i++) {
+        float element = 0;
+        for (int j = 0; j < lhs.getRow(); j++) {
+            element += lhs(i, j) * rhs(i);
+        }
+        ret.set_value(element, i);
+    }
+    return ret;
+}
 
+float calculate_matrix_value(const Matrix &left, const Matrix &right, int row, int col) {
+    float result = 0;
+    for (int i = 0; i < left.getCol(); i++) {
+        for (int j = 0; j < right.getRow(); j++) {
+            result += left(row, i) * right(j, col);
+        }
+    }
+    return result;
 }
 
 Matrix operator*(const Matrix &lhs, const Matrix &rhs) {
     if (lhs.getCol() != rhs.getRow()) {
         throw std::invalid_argument("Matrix A with n columns, Matrix B must have n rows");
     }
+    auto ret = Matrix(lhs.getRow(), rhs.getCol());
 
-    return Matrix(0, 0);
+    for (int i = 0; i < ret.getRow(); i++) {
+        for (int j = 0; j < ret.getCol(); j++) {
+            ret.set_value(calculate_matrix_value(lhs, rhs, i, j), i, j);
+        }
+    }
+    return ret;
 }

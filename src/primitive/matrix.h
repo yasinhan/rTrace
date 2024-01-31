@@ -25,16 +25,19 @@ public:
 
     static Matrix build_identity_matrix(int w);
 
+    Matrix transpose();
+
 private:
     int row, col;
     float *data;
 
     inline int get_index(int x, int y) const;
+
 };
 
 Matrix operator*(const Matrix &lhs, const Matrix &rhs);
 
-Vector operator*(const Matrix &lhx, const Vector &rhs);
+Vector operator*(const Matrix &lhs, const Vector &rhs);
 
 bool operator==(const Matrix &lhs, const Matrix &rhs);
 
