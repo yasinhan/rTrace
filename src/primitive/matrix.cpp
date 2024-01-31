@@ -78,9 +78,7 @@ Vector operator*(const Matrix &lhs, const Vector &rhs) {
 float calculate_matrix_value(const Matrix &left, const Matrix &right, int row, int col) {
     float result = 0;
     for (int i = 0; i < left.getCol(); i++) {
-        for (int j = 0; j < right.getRow(); j++) {
-            result += left(row, i) * right(j, col);
-        }
+        result += left(row, i) * right(i, col);
     }
     return result;
 }

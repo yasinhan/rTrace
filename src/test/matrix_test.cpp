@@ -62,9 +62,17 @@ TEST(MATRIX_TEST, TEST_MULTIPLY) {
     matrix_3.set_value(4, 1, 1);
     matrix_3.set_value(6, 1, 2);
 
-    auto ret = matrix_1 * matrix_3;
+    auto ret = matrix_2 * matrix_3;
 
     ASSERT_EQ(ret.getRow(), 3);
     ASSERT_EQ(ret.getCol(), 3);
 
+    ASSERT_FLOAT_EQ(ret(0, 0), 5);
+    ASSERT_FLOAT_EQ(ret(0, 1), 10);
+    ASSERT_FLOAT_EQ(ret(0, 2), 15);
+
+}
+
+TEST(MATRIX_TEST, TEST_TRANSPOSE) {
+    
 }
