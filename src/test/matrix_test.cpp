@@ -74,5 +74,19 @@ TEST(MATRIX_TEST, TEST_MULTIPLY) {
 }
 
 TEST(MATRIX_TEST, TEST_TRANSPOSE) {
-    
+    auto matrix = Matrix(3, 2);
+    matrix.set_value(1, 0, 0);
+    matrix.set_value(2, 0, 1);
+    matrix.set_value(1, 1, 0);
+    matrix.set_value(2, 1, 1);
+    matrix.set_value(1, 2, 0);
+    matrix.set_value(2, 2, 1);
+
+    auto matrix_t = matrix.transpose();
+    ASSERT_EQ(matrix_t.getRow(), 2);
+    ASSERT_EQ(matrix_t.getCol(), 3);
+    ASSERT_FLOAT_EQ(matrix_t(0, 0), 1);
+    ASSERT_FLOAT_EQ(matrix_t(0, 1), 1);
+    ASSERT_FLOAT_EQ(matrix_t(0, 2), 1);
+    ASSERT_FLOAT_EQ(matrix_t(1, 0), 2);
 }

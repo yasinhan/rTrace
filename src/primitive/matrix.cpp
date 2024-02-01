@@ -44,6 +44,21 @@ int Matrix::getCol() const {
     return col;
 }
 
+Matrix Matrix::build_identity_matrix(int w) {
+    return Matrix(0, 0);
+}
+
+Matrix Matrix::transpose() const {
+    auto ret = Matrix(this->getCol(), this->getRow());
+
+    for (int i = 0; i < ret.getRow(); i++) {
+        for (int j = 0; j < ret.getCol(); j++) {
+            ret.set_value(operator()(j, i), i, j);
+        }
+    }
+    return ret;
+}
+
 bool operator==(const Matrix &lhs, const Matrix &rhs) {
     if (lhs.getRow() != rhs.getRow() || lhs.getCol() != rhs.getCol()) {
         return false;

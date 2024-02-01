@@ -25,7 +25,7 @@ public:
 
     static Matrix build_identity_matrix(int w);
 
-    Matrix transpose();
+    Matrix transpose() const;
 
 private:
     int row, col;
