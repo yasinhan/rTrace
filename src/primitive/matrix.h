@@ -27,6 +27,8 @@ public:
 
     Matrix transpose() const;
 
+    Matrix sub_matrix(int row, int col) const;
+
 private:
     int row, col;
     float *data;

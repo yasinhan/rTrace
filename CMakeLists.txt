@@ -25,6 +25,7 @@ add_executable(
         src/primitive/color.cpp
         src/primitive/matrix.cpp
         src/primitive/vector.cpp
+        src/primitive/matrix_sub.cpp
         src/math.h
         src/canvas.cpp
         src/test/canvas_test.cpp

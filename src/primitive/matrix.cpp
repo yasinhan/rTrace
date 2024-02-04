@@ -22,7 +22,7 @@ int Matrix::get_index(int x, int y) const {
         throw std::invalid_argument("x cannot smaller than 0, y cannot smaller than 0");
     }
     if (x >= row || y >= col) {
-        throw std::invalid_argument("x cannot bigger than row, y cannot bigger than h");
+        throw std::invalid_argument("x cannot bigger than row, y cannot bigger than col");
     }
     return x * col + y;
 }
@@ -49,11 +49,32 @@ Matrix Matrix::build_identity_matrix(int w) {
 }
 
 Matrix Matrix::transpose() const {
-    auto ret = Matrix(this->getCol(), this->getRow());
+    auto ret = Matrix(this->col, this->row);
 
     for (int i = 0; i < ret.getRow(); i++) {
         for (int j = 0; j < ret.getCol(); j++) {
             ret.set_value(operator()(j, i), i, j);
+        }
+    }
+    return ret;
+}
+
+Matrix Matrix::sub_matrix(int row, int col) const {
+    if (this->row <= 1 || this->col <= 1) {
+        throw std::invalid_argument("Matrix with 1 row or 1 column have no SubMatrix");
+    }
+    auto ret = Matrix(this->row - 1, this->col - 1);
+    for (int i = 0; i < this->row; i++) {
+        if (i == row) {
+            continue;
+        }
+        int i_index = i > row ? i - 1 : i;
+        for (int j = 0; j < this->col; j++) {
+            if (j == col) {
+                continue;
+            }
+            int j_index = j > col ? j - 1 : j;
+            ret.set_value(operator()(i, j), i_index, j_index);
         }
     }
     return ret;

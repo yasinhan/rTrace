@@ -90,3 +90,23 @@ TEST(MATRIX_TEST, TEST_TRANSPOSE) {
     ASSERT_FLOAT_EQ(matrix_t(0, 2), 1);
     ASSERT_FLOAT_EQ(matrix_t(1, 0), 2);
 }
+
+TEST(MATRIX_TEST, TEST_SUB_MATRIX) {
+    auto matrix = Matrix(3, 2);
+    matrix.set_value(1, 0, 0);
+    matrix.set_value(2, 0, 1);
+    matrix.set_value(1, 1, 0);
+    matrix.set_value(2, 1, 1);
+    matrix.set_value(1, 2, 0);
+    matrix.set_value(2, 2, 1);
+
+    auto sub_matrix = matrix.sub_matrix(0, 1);
+
+    ASSERT_EQ(sub_matrix.getRow(), 2);
+    ASSERT_EQ(sub_matrix.getCol(), 1);
+
+    ASSERT_FLOAT_EQ(sub_matrix(0, 0), 1);
+    ASSERT_FLOAT_EQ(sub_matrix(1, 0), 1);
+
+    EXPECT_THROW(sub_matrix.sub_matrix(0, 1), std::invalid_argument);
+}
