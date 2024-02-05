@@ -13,7 +13,7 @@ class MatrixSub {
 
 public:
 
-    MatrixSub(Matrix &origin, MatrixSub *parent, int row, int col, int remove_row, int remove_col);
+    MatrixSub(const Matrix &origin, MatrixSub *parent, int row, int col, int remove_row, int remove_col);
 
     virtual ~MatrixSub();
 
@@ -27,17 +27,12 @@ public:
 
     float cofactor();
 
-
 private:
     Matrix &origin;
     MatrixSub *parent;
     int row, col, remove_row, remove_col;
+    inline std::tuple<int, int> get_coordinate_in_parent(int x, int y) const;
 
-    inline int get_index_in_origin(int x, int y) const;
-
-    std::tuple<int, int> get_coordinate_in_parent(int x, int y) const;
-
-}
-
+};
 
 #endif //RAY_TRACE_MATRIX_SUB_H

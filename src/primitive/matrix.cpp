@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <stdexcept>
 #include "matrix.h"
+#include "matrix_sub.h"
 #include "src/math.h"
 
 Matrix::Matrix(int row, int col) {
@@ -78,6 +79,18 @@ Matrix Matrix::sub_matrix(int row, int col) const {
         }
     }
     return ret;
+}
+
+float Matrix::determinant() const {
+    if (row == 2 && col == 2) {
+        return operator()(0, 0) * operator()(1, 1) - operator()(0, 1) * operator()(1, 0);
+    }
+    float result = 0;
+    for (int i = 0; i < col; i++) {
+        auto sub = MatrixSub(*this, nullptr, row - 1, col - 1, 0, i);
+        result += operator()(0, i) * sub.cofactor();
+    }
+    return result;
 }
 
 bool operator==(const Matrix &lhs, const Matrix &rhs) {

@@ -6,18 +6,32 @@
 #include <tuple>
 #include <stdexcept>
 
-MatrixSub::MatrixSub(Matrix &origin, MatrixSub *parent, int row, int col, int remove_row, int remove_col) : origin(
-        origin), parent(parent), row(row), col(col), remove_row(remove_row), remove_col(remove_col) {}
+MatrixSub::MatrixSub(const Matrix &origin, MatrixSub *parent, int row, int col, int remove_row, int remove_col) : origin(
+        const_cast<Matrix &>(origin)), parent(parent), row(row), col(col), remove_row(remove_row), remove_col(remove_col) {}
 
 MatrixSub::~MatrixSub() {
 
 }
 
+float MatrixSub::minor() {
+    return determinant();
+}
+
+float MatrixSub::cofactor() {
+    int factor = (remove_col + remove_row) % 2 == 0 ? 1 : -1;
+    return factor * minor();
+}
+
 float MatrixSub::determinant() {
-
-
-
-    return 0;
+    if (row == 2 && col == 2) {
+        return operator()(0, 0) * operator()(1, 1) - operator()(0, 1) * operator()(1, 0);
+    }
+    float result = 0;
+    for (int i = 0; i < col; i++) {
+        auto sub = this->sub(0, i);
+        result += operator()(0, i) * sub.cofactor();
+    }
+    return result;
 }
 
 float MatrixSub::operator()(int x, int y) {

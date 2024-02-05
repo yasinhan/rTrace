@@ -29,6 +29,8 @@ public:
 
     Matrix sub_matrix(int row, int col) const;
 
+    float determinant() const;
+
 private:
     int row, col;
     float *data;
