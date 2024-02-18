@@ -93,6 +93,22 @@ float Matrix::determinant() const {
     return result;
 }
 
+Matrix Matrix::inverse() const {
+    auto det = determinant();
+    if (epsilon(det, 0.0)) {
+        throw std::invalid_argument("Determinant is 0, cannot inverse");
+    }
+    auto result = Matrix(col, row);
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < col; j++) {
+            auto sub = MatrixSub(*this, nullptr, row - 1, col - 1, i, j);
+            result.set_value(sub.cofactor() / det, j, i);
+        }
+    }
+
+    return result;
+}
+
 bool operator==(const Matrix &lhs, const Matrix &rhs) {
     if (lhs.getRow() != rhs.getRow() || lhs.getCol() != rhs.getCol()) {
         return false;

@@ -31,6 +31,8 @@ public:
 
     float determinant() const;
 
+    Matrix inverse() const;
+
 private:
     int row, col;
     float *data;

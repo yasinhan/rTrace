@@ -5,6 +5,7 @@
 #include "src/primitive/matrix.h"
 #include <gtest/gtest.h>
 #include <cmath>
+#include "src/math.h"
 
 TEST(MATRIX_TEST, TEST_CREATE) {
     Matrix matrix = Matrix(3, 3);
@@ -160,4 +161,42 @@ TEST(MATRIX_TEST, TEST_DETERMINANT) {
     matrix_3.set_value(-9, 3, 3);
 
     ASSERT_FLOAT_EQ(matrix_3.determinant(), -4071);
+}
+
+TEST(MATRIX_TEST, TEST_INVERSE) {
+
+    auto matrix_1 = Matrix(4, 4);
+    matrix_1.set_value(-5, 0, 0);
+    matrix_1.set_value(2, 0, 1);
+    matrix_1.set_value(6, 0, 2);
+    matrix_1.set_value(-8, 0, 3);
+    matrix_1.set_value(1, 1, 0);
+    matrix_1.set_value(-5, 1, 1);
+    matrix_1.set_value(1, 1, 2);
+    matrix_1.set_value(8, 1, 3);
+    matrix_1.set_value(7, 2, 0);
+    matrix_1.set_value(7, 2, 1);
+    matrix_1.set_value(-6, 2, 2);
+    matrix_1.set_value(-7, 2, 3);
+    matrix_1.set_value(1, 3, 0);
+    matrix_1.set_value(-3, 3, 1);
+    matrix_1.set_value(7, 3, 2);
+    matrix_1.set_value(4, 3, 3);
+
+    auto matrix_1_inverse = matrix_1.inverse();
+    ASSERT_EQ(matrix_1_inverse.getCol(), 4);
+    ASSERT_EQ(matrix_1_inverse.getRow(), 4);
+
+    ASSERT_TRUE(epsilon(matrix_1_inverse(0,0), 0.21805));
+    ASSERT_TRUE(epsilon(matrix_1_inverse(0,1), 0.45113));
+    ASSERT_TRUE(epsilon(matrix_1_inverse(0,2), 0.24060));
+    ASSERT_TRUE(epsilon(matrix_1_inverse(0,3), -0.04511));
+    ASSERT_TRUE(epsilon(matrix_1_inverse(1,0), -0.80827));
+
+    auto product = matrix_1 * matrix_1_inverse;
+    ASSERT_TRUE(epsilon(product(0,0), 1));
+    ASSERT_TRUE(epsilon(product(1,1), 1));
+    ASSERT_TRUE(epsilon(product(2,2), 1));
+    ASSERT_TRUE(epsilon(product(3,3), 1));
+    ASSERT_TRUE(epsilon(product(0,1), 0));
 }
