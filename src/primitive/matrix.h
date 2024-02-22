@@ -6,6 +6,7 @@
 #define RAY_TRACE_MATRIX_H
 
 #include "vector.h"
+#include "tuple.h"
 
 class Matrix {
 
@@ -44,6 +45,8 @@ private:
 Matrix operator*(const Matrix &lhs, const Matrix &rhs);
 
 Vector operator*(const Matrix &lhs, const Vector &rhs);
+
+Tuple operator*(const Matrix &lhs, const Tuple &rhs);
 
 bool operator==(const Matrix &lhs, const Matrix &rhs);
 

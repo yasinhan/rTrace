@@ -8,6 +8,12 @@
 #include <cmath>
 #include "src/math.h"
 
+class CanvasTest : public ::testing::Test {
+protected:
+    CanvasTest() = default;
+    ~CanvasTest() override = default;
+};
+
 TEST(CANVAS_TEST, TEST_CREATE) {
     auto canvas = new Canvas(3, 3);
     auto color_0_0 = canvas->pixel_at(0, 0);

@@ -8,8 +8,8 @@
 
 class TupleTest : public ::testing::Test {
 protected:
-    TupleTest() {};
-    ~TupleTest() {};
+    TupleTest() = default;
+    ~TupleTest() override = default;
 };
 
 

@@ -46,7 +46,17 @@ int Matrix::getCol() const {
 }
 
 Matrix Matrix::build_identity_matrix(int w) {
-    return Matrix(0, 0);
+    auto result = Matrix(w, w);
+    for (int i = 0; i < w; i++) {
+        for (int j = 0; j < w; j++) {
+            if (i == j) {
+                result.set_value(1, i, j);
+            } else {
+                result.set_value(0, i, j);
+            }
+        }
+    }
+    return result;
 }
 
 Matrix Matrix::transpose() const {
@@ -138,6 +148,18 @@ Vector operator*(const Matrix &lhs, const Vector &rhs) {
         ret.set_value(element, i);
     }
     return ret;
+}
+
+Tuple operator*(const Matrix &lhs, const Tuple &rhs) {
+    if (lhs.getCol() != 4) {
+        throw std::invalid_argument("Only Matrix A with 4 columns can multiply Tuple");
+    }
+
+    return {
+            lhs(0, 0) * rhs.getX() + lhs(0, 1) * rhs.getY() + lhs(0, 2) * rhs.getZ() + lhs(0, 3) * rhs.getW(),
+            0,
+            0,
+            0};
 }
 
 float calculate_matrix_value(const Matrix &left, const Matrix &right, int row, int col) {

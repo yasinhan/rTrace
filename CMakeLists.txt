@@ -21,15 +21,17 @@ add_executable(
         tests
         src/test/tuple_test.cpp
         src/test/color_test.cpp
+        src/test/canvas_test.cpp
+        src/test/matrix_test.cpp
+        src/test/transformation_test.cpp
         src/primitive/tuple.cpp
         src/primitive/color.cpp
         src/primitive/matrix.cpp
         src/primitive/vector.cpp
         src/primitive/matrix_sub.cpp
+        src/primitive/transformation.cpp
         src/math.h
         src/canvas.cpp
-        src/test/canvas_test.cpp
-        src/test/matrix_test.cpp
 )
 
 target_link_libraries(

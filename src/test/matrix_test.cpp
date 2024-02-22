@@ -200,3 +200,15 @@ TEST(MATRIX_TEST, TEST_INVERSE) {
     ASSERT_TRUE(epsilon(product(3,3), 1));
     ASSERT_TRUE(epsilon(product(0,1), 0));
 }
+
+TEST(MATRIX_TEST, TEST_INDENTITY) {
+    auto matrix_1 = Matrix::build_identity_matrix(3);
+
+    ASSERT_EQ(matrix_1.getRow(), 3);
+    ASSERT_EQ(matrix_1.getCol(), 3);
+
+    ASSERT_FLOAT_EQ(matrix_1(0, 0), 1);
+    ASSERT_FLOAT_EQ(matrix_1(0, 1), 0);
+    ASSERT_FLOAT_EQ(matrix_1(1, 1), 1);
+    ASSERT_FLOAT_EQ(matrix_1(2, 2), 1);
+}
