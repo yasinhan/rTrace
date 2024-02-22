@@ -157,9 +157,10 @@ Tuple operator*(const Matrix &lhs, const Tuple &rhs) {
 
     return {
             lhs(0, 0) * rhs.getX() + lhs(0, 1) * rhs.getY() + lhs(0, 2) * rhs.getZ() + lhs(0, 3) * rhs.getW(),
-            0,
-            0,
-            0};
+            lhs(1, 0) * rhs.getX() + lhs(1, 1) * rhs.getY() + lhs(1, 2) * rhs.getZ() + lhs(1, 3) * rhs.getW(),
+            lhs(2, 0) * rhs.getX() + lhs(2, 1) * rhs.getY() + lhs(2, 2) * rhs.getZ() + lhs(2, 3) * rhs.getW(),
+            lhs(3, 0) * rhs.getX() + lhs(3, 1) * rhs.getY() + lhs(3, 2) * rhs.getZ() + lhs(3, 3) * rhs.getW(),
+            };
 }
 
 float calculate_matrix_value(const Matrix &left, const Matrix &right, int row, int col) {

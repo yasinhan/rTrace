@@ -212,3 +212,31 @@ TEST(MATRIX_TEST, TEST_INDENTITY) {
     ASSERT_FLOAT_EQ(matrix_1(1, 1), 1);
     ASSERT_FLOAT_EQ(matrix_1(2, 2), 1);
 }
+
+TEST(MATRIX_TEST, TEST_MULTIPLY_TUPLE) {
+    auto matrix_1 = Matrix(2, 2);
+
+    auto tuple = Tuple(1, 1, 1, 1);
+    EXPECT_THROW(matrix_1 * tuple, std::invalid_argument);
+
+    auto matrix_2 = Matrix(4, 4);
+    matrix_2.set_value(-5, 0, 0);
+    matrix_2.set_value(2, 0, 1);
+    matrix_2.set_value(6, 0, 2);
+    matrix_2.set_value(-8, 0, 3);
+    matrix_2.set_value(1, 1, 0);
+    matrix_2.set_value(-5, 1, 1);
+    matrix_2.set_value(1, 1, 2);
+    matrix_2.set_value(8, 1, 3);
+    matrix_2.set_value(7, 2, 0);
+    matrix_2.set_value(7, 2, 1);
+    matrix_2.set_value(-6, 2, 2);
+    matrix_2.set_value(-7, 2, 3);
+    matrix_2.set_value(1, 3, 0);
+    matrix_2.set_value(-3, 3, 1);
+    matrix_2.set_value(7, 3, 2);
+    matrix_2.set_value(4, 3, 3);
+
+    auto ret = matrix_2 * tuple;
+    ASSERT_FLOAT_EQ(ret.getX(), -5);
+}
