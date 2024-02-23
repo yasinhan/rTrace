@@ -117,3 +117,14 @@ TEST(TUPLE_TEST, CROSS_TEST) {
     auto vec_2_cross_1 = std::make_unique<Tuple>(vec_2.cross(vec_1));
     EXPECT_TRUE(vec_1_cross_2->negate().equals(*vec_2_cross_1));
 }
+
+TEST(TUPLE_TEST, EQUAL_TEST) {
+    auto vec1 = Tuple::vector(1, 2, 3);
+    auto vec2 = Tuple::vector(1, 2, 3);
+
+    ASSERT_EQ(vec1, vec2);
+
+    auto point_1 = Tuple::point(1, 2, 3);
+    auto point_2 = Tuple::point(1, 2, 3);
+    ASSERT_EQ(point_1, point_2);
+}

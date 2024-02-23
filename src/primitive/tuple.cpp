@@ -6,9 +6,6 @@
 // Created by han on 12/22/23.
 //
 Tuple::Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {
-    if (!epsilon(w, 0) && !epsilon(w, 1)) {
-        throw std::invalid_argument("w must be 0 or 1");
-    }
 }
 
 Tuple::~Tuple() = default;
@@ -83,6 +80,10 @@ bool Tuple::isVector() const {
     return epsilon(w, 0);
 }
 
+bool operator==(const Tuple &lhs, const Tuple &rhs) {
+    return epsilon(lhs.getX(), rhs.getX()) && epsilon(lhs.getY(), rhs.getY())
+           && epsilon(lhs.getZ(), rhs.getZ()) && epsilon(lhs.getW(), rhs.getW());
+}
 
 Tuple operator+(const Tuple &lhs, const Tuple &rhs) {
     if (lhs.isPoint() && rhs.isPoint()) {

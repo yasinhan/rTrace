@@ -46,6 +46,8 @@ private:
     float w;
 };
 
+bool operator==(const Tuple &lhs, const Tuple &rhs);
+
 Tuple operator+(const Tuple &lhs, const Tuple &rhs);
 
 Tuple operator-(const Tuple &lhs, const Tuple &rhs);

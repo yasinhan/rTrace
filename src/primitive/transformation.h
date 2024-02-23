@@ -9,5 +9,11 @@
 
 Matrix translation(float x, float y, float z);
 
+Matrix scaling(float x, float y, float z);
 
+Matrix rotate_x(float radian);
+
+Matrix rotate_y(float radian);
+
+Matrix rotate_z(float radian);
 #endif //RAY_TRACE_TRANSFORMATION_H
