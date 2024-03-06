@@ -83,3 +83,68 @@ TEST(TRANSFORMATION_TEST, TEST_ROTATION_Z) {
     auto ret_2 = transform_2 * point;
     ASSERT_EQ(ret_2, Tuple::point(-1, 0, 0));
 }
+
+TEST(TRANSFORMATION_TEST, TEST_SHEARING_X_Y) {
+    auto transform = shearing(1, 0, 0, 0, 0, 0);
+
+    auto point = Tuple::point(2, 3, 4);
+    auto ret = transform * point;
+    ASSERT_EQ(ret, Tuple::point(5, 3, 4));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_SHEARING_X_Z) {
+    auto transform = shearing(0, 1, 0, 0, 0, 0);
+
+    auto point = Tuple::point(2, 3, 4);
+    auto ret = transform * point;
+    ASSERT_EQ(ret, Tuple::point(6, 3, 4));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_SHEARING_Y_X) {
+    auto transform = shearing(0, 0, 1, 0, 0, 0);
+
+    auto point = Tuple::point(2, 3, 4);
+    auto ret = transform * point;
+    ASSERT_EQ(ret, Tuple::point(2, 5, 4));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_SHEARING_Y_Z) {
+    auto transform = shearing(0, 0, 0, 1, 0, 0);
+
+    auto point = Tuple::point(2, 3, 4);
+    auto ret = transform * point;
+    ASSERT_EQ(ret, Tuple::point(2, 7, 4));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_SHEARING_Z_X) {
+    auto transform = shearing(0, 0, 0, 0, 1, 0);
+
+    auto point = Tuple::point(2, 3, 4);
+    auto ret = transform * point;
+    ASSERT_EQ(ret, Tuple::point(2, 3, 6));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_SHEARING_Z_Y) {
+    auto transform = shearing(0, 0, 0, 0, 0, 1);
+
+    auto point = Tuple::point(2, 3, 4);
+    auto ret = transform * point;
+    ASSERT_EQ(ret, Tuple::point(2, 3, 7));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_CHAINED) {
+    auto a = rotate_x(M_PI / 2);
+    auto b = scaling(5, 5, 5);
+    auto c = translation(10, 5, 7);
+
+    auto point = Tuple::point(1, 0, 1);
+    auto mid_1 = a * point;
+    auto mid_2 = b * mid_1;
+    auto ret_1 = c * mid_2;
+
+    ASSERT_EQ(ret_1, Tuple::point(15, 0, 7));
+
+    auto matrix = c * b * a;
+    auto ret_2 = matrix * point;
+    ASSERT_EQ(ret_2, ret_1);
+}

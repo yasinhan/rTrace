@@ -79,3 +79,20 @@ Matrix rotate_z(float radian) {
     ret.set_value(1, 3, 3);
     return ret;
 }
+
+Matrix shearing(float x_y, float x_z, float y_x, float y_z, float z_x, float z_y) {
+    auto ret = Matrix(4, 4);
+    ret.set_value(1, 0, 0);
+    ret.set_value(x_y, 0, 1);
+    ret.set_value(x_z, 0, 2);
+
+    ret.set_value(y_x, 1, 0);
+    ret.set_value(1, 1, 1);
+    ret.set_value(y_z, 1, 2);
+
+    ret.set_value(z_x, 2, 0);
+    ret.set_value(z_y, 2, 1);
+    ret.set_value(1, 2, 2);
+    ret.set_value(1, 3, 3);
+    return ret;
+}

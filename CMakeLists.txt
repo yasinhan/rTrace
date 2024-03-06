@@ -32,6 +32,8 @@ add_executable(
         src/primitive/transformation.cpp
         src/math.h
         src/canvas.cpp
+        src/primitive/ray.h
+        src/test/ray_test.cpp
 )
 
 target_link_libraries(

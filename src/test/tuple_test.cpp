@@ -6,10 +6,10 @@
 #include "src/primitive/tuple.h"
 #include <cmath>
 
-class TupleTest : public ::testing::Test {
+class RayTest : public ::testing::Test {
 protected:
-    TupleTest() = default;
-    ~TupleTest() override = default;
+    RayTest() = default;
+    ~RayTest() override = default;
 };
 
 

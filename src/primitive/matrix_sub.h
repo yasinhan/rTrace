@@ -31,6 +31,7 @@ private:
     Matrix &origin;
     MatrixSub *parent;
     int row, col, remove_row, remove_col;
+
     inline std::tuple<int, int> get_coordinate_in_parent(int x, int y) const;
 
 };
