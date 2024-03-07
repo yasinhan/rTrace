@@ -25,6 +25,7 @@ add_executable(
         src/test/matrix_test.cpp
         src/test/ray_test.cpp
         src/test/transformation_test.cpp
+        src/test/sphere_test.cpp
         src/primitive/tuple.cpp
         src/primitive/color.cpp
         src/primitive/matrix.cpp
@@ -32,9 +33,11 @@ add_executable(
         src/primitive/matrix_sub.cpp
         src/primitive/transformation.cpp
         src/primitive/ray.cpp
+        src/primitive/intersection.cpp
+        src/primitive/intersections.cpp
         src/math.h
         src/canvas.cpp
-        src/shape/sphere.h
+        src/shape/sphere.cpp
 )
 
 target_link_libraries(

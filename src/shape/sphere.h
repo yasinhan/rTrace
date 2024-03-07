@@ -7,11 +7,17 @@
 
 #include "../primitive/tuple.h"
 #include "../primitive/ray.h"
+#include "../primitive/intersections.h"
 
 
 class Sphere {
 
-    void intersect(Ray ray) const;
+public:
+    Sphere();
+
+    ~Sphere() = default;
+
+    [[nodiscard]] Intersections intersect(const Ray& ray) const;
 
 private:
     Tuple origin;
