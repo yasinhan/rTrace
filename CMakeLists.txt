@@ -23,6 +23,7 @@ add_executable(
         src/test/color_test.cpp
         src/test/canvas_test.cpp
         src/test/matrix_test.cpp
+        src/test/ray_test.cpp
         src/test/transformation_test.cpp
         src/primitive/tuple.cpp
         src/primitive/color.cpp
@@ -30,10 +31,10 @@ add_executable(
         src/primitive/vector.cpp
         src/primitive/matrix_sub.cpp
         src/primitive/transformation.cpp
+        src/primitive/ray.cpp
         src/math.h
         src/canvas.cpp
-        src/primitive/ray.h
-        src/test/ray_test.cpp
+        src/shape/sphere.h
 )
 
 target_link_libraries(

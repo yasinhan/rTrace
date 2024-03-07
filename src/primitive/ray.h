@@ -10,11 +10,13 @@ class Ray {
 
 public:
 
-    Ray(const Tuple &origin, const Tuple &direction) : origin(origin), direction(direction) {}
+    Ray(const Tuple &origin, const Tuple &direction);
 
-    virtual ~Ray() {
+    virtual ~Ray();
 
-    }
+    [[nodiscard]] const Tuple &getOrigin() const;
+
+    [[nodiscard]] const Tuple &getDirection() const;
 
     Tuple position(float t);
 
