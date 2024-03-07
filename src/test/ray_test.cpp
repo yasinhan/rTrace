@@ -16,5 +16,5 @@ protected:
 TEST(RAY_TEST, TEST_POSITION) {
 
     auto ray = Ray(Tuple::point(2, 3, 4), Tuple::vector(1, 0, 0));
-    
+
 }
