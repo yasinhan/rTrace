@@ -40,6 +40,8 @@ public:
 
     float dot(Tuple& other) const;
 
+    float self_dot() const;
+
     Tuple cross(Tuple& other) const;
 
 private:

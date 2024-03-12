@@ -62,6 +62,13 @@ float Tuple::dot(Tuple& other) const {
     return x * other.getX() + y * other.getY() + z * other.getZ();
 }
 
+float Tuple::self_dot() const {
+    if (isPoint()) {
+        throw std::invalid_argument("Only vector can dot self");
+    }
+    return x * x + y * y + z * z;
+}
+
 Tuple Tuple::cross(Tuple& other) const {
     if (isPoint() || other.isPoint()) {
         throw std::invalid_argument("Only two vector can cross");
