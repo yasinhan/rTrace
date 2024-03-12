@@ -16,7 +16,7 @@ public:
 
     ~Intersections() = default;
 
-    size_t size();
+    size_t count();
 
     Intersection operator[](int index);
 private:

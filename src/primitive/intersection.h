@@ -11,15 +11,19 @@
 class Intersection {
 public:
 
-    explicit Intersection(float t);
+    Intersection(float t, const void *obj);
 
     ~Intersection() = default;
 
     [[nodiscard]] float getT() const;
 
+    [[nodiscard]] const void *getObj() const;
+
 private:
 
     float t;
+
+    const void *obj;
 };
 
 

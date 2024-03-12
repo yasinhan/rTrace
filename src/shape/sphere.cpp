@@ -22,5 +22,5 @@ Intersections Sphere::intersect(const Ray& ray) const {
     float t1 = (-b - sqrt_dis) / (2 * a);
     float t2 = (-b + sqrt_dis) / (2 * a);
 
-    return Intersections(std::vector<Intersection>{Intersection(t1), Intersection(t2)});
+    return Intersections(std::vector<Intersection>{Intersection(t1, this), Intersection(t2, this)});
 }

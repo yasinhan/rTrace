@@ -9,7 +9,7 @@ Intersection Intersections::operator[](int index) {
     return intersections[index];
 }
 
-size_t Intersections::size() {
+size_t Intersections::count() {
     return intersections.size();
 }
 
