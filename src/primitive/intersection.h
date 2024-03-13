@@ -19,6 +19,8 @@ public:
 
     [[nodiscard]] const void *getObj() const;
 
+    bool operator==(Intersection other) const;
+
 private:
 
     float t;

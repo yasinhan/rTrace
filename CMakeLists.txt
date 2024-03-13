@@ -26,6 +26,7 @@ add_executable(
         src/test/ray_test.cpp
         src/test/transformation_test.cpp
         src/test/sphere_test.cpp
+        src/test/intersection_test.cpp
         src/primitive/tuple.cpp
         src/primitive/color.cpp
         src/primitive/matrix.cpp

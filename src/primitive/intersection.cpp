@@ -13,5 +13,9 @@ const void *Intersection::getObj() const {
     return obj;
 }
 
+bool Intersection::operator==(Intersection other) const {
+    return obj == other.getObj() && t == other.getT();
+}
+
 
 

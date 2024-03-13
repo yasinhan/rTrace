@@ -16,6 +16,8 @@ public:
 
     ~Intersections() = default;
 
+    std::optional<Intersection> hit() const;
+
     size_t count();
 
     Intersection operator[](int index);
