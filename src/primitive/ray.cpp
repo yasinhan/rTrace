@@ -29,3 +29,7 @@ const Tuple &Ray::getOrigin() const {
 const Tuple &Ray::getDirection() const {
     return direction;
 }
+
+Ray Ray::transform(const Matrix &transform) const {
+    return {transform * origin, transform * direction};
+}

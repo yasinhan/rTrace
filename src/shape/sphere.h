@@ -19,8 +19,12 @@ public:
 
     [[nodiscard]] Intersections intersect(const Ray& ray) const;
 
+    void set_transform(const Matrix &transform);
+
 private:
     Tuple origin;
+
+    Matrix transform_ = Matrix::build_identity_matrix(4);
 };
 
 #endif //RAY_TRACE_SPHERE_H
