@@ -47,8 +47,8 @@ TEST(SPHERE_TEST, TEST_SCALING) {
     s.set_transform(scaling(2, 2, 2));
     auto intersection = s.intersect(ray);
     ASSERT_EQ(intersection.count(), 2);
-//    ASSERT_FLOAT_EQ(intersection[0].getT(), 3);
-//    ASSERT_FLOAT_EQ(intersection[1].getT(), 7);
+    ASSERT_FLOAT_EQ(intersection[0].getT(), 3);
+    ASSERT_FLOAT_EQ(intersection[1].getT(), 7);
 }
 
 TEST(SPHERE_TEST, TEST_TRANSLATION) {
