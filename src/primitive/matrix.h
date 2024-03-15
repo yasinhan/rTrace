@@ -34,6 +34,10 @@ public:
 
     Matrix inverse() const;
 
+    Matrix& operator=(const Matrix& other);
+
+    Matrix(const Matrix& other);
+
 private:
     int row, col;
     float *data;

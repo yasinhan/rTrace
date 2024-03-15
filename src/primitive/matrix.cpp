@@ -4,6 +4,7 @@
 
 #include <cstdlib>
 #include <stdexcept>
+#include <cstring>
 #include "matrix.h"
 #include "matrix_sub.h"
 #include "src/math.h"
@@ -117,6 +118,28 @@ Matrix Matrix::inverse() const {
     }
 
     return result;
+}
+
+Matrix &Matrix::operator=(const Matrix &other) {
+    if (this != &other) {
+        if (row == other.row && col == other.col) {
+            memcpy(data, other.data, row * col * sizeof(float));
+        } else{
+            row = other.row;
+            col = other.col;
+            free(data);
+            data = (float *)calloc(sizeof(float), row * col);
+            memcpy(data, other.data, row * col * sizeof(float));
+        }
+    }
+    return *this;
+}
+
+Matrix::Matrix(const Matrix &other) {
+    row = other.row;
+    col = other.col;
+    data = (float *) calloc(sizeof(float), row * col);
+    memcpy(data, other.data, row * col * sizeof(float));
 }
 
 bool operator==(const Matrix &lhs, const Matrix &rhs) {
