@@ -27,6 +27,9 @@ private:
     Tuple origin;
 
     Matrix trans = Matrix::build_identity_matrix(4);
+
+    Matrix inverse_trans = trans;
+    bool has_trans = false;
 };
 
 #endif //RAY_TRACE_SPHERE_H

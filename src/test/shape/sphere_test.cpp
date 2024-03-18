@@ -77,3 +77,15 @@ TEST(SPHERE_TEST, TEST_NORMAL_AT) {
     auto n_3 = s.normal_at(Tuple::point(sqrt_3, sqrt_3, sqrt_3));
     ASSERT_EQ(n_3, Tuple::vector(sqrt_3, sqrt_3, sqrt_3));
 }
+
+TEST(SPHERE_TEST, TEST_NORMAL_AT_WITH_TRANS) {
+    auto s = Sphere();
+
+    s.set_transform(translation(0, 1, 0));
+    auto n = s.normal_at(Tuple::point(0, 1.70711, -0.70711));
+    ASSERT_EQ(n, Tuple::vector(0, 0.70711, -0.70711));
+
+    s.set_transform(scaling(1, 0.5, 1) * rotate_z(M_PI / 5));
+    auto n_1 = s.normal_at(Tuple::point(0, sqrt(2) / 2, -sqrt(2) / 2));
+    ASSERT_EQ(n_1, Tuple::vector(0, 0.97014, -0.24254));
+}

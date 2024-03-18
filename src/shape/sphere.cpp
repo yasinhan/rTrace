@@ -9,7 +9,10 @@ Sphere::Sphere() {
 }
 
 Intersections Sphere::intersect(const Ray& ray) const {
-    auto actual_ray = ray.transform(trans.inverse());
+    auto actual_ray = ray;
+    if (has_trans) {
+        actual_ray = ray.transform(inverse_trans);
+    }
 
     auto sphere_to_ray = actual_ray.getOrigin() - this->origin;
     auto a = actual_ray.getDirection().self_dot();
@@ -29,12 +32,13 @@ Intersections Sphere::intersect(const Ray& ray) const {
 
 void Sphere::set_transform(const Matrix &transform) {
     trans = transform;
-}
-
-bool on_sphere(const Tuple &point) {
-    
+    inverse_trans = trans.inverse();
+    has_trans = true;
 }
 
 Tuple Sphere::normal_at(const Tuple &point) const {
-    return (point - this->origin).normalized();
+    if (!has_trans) {
+        return (point - this->origin).normalized();
+    }
+
 }
