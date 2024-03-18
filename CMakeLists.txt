@@ -19,14 +19,14 @@ include_directories(.)
 enable_testing()
 add_executable(
         tests
-        src/test/tuple_test.cpp
-        src/test/color_test.cpp
-        src/test/canvas_test.cpp
-        src/test/matrix_test.cpp
-        src/test/ray_test.cpp
-        src/test/transformation_test.cpp
-        src/test/sphere_test.cpp
-        src/test/intersection_test.cpp
+        src/test/primitive/tuple_test.cpp
+        src/test/primitive/color_test.cpp
+        src/test/application/canvas_test.cpp
+        src/test/primitive/matrix_test.cpp
+        src/test/primitive/ray_test.cpp
+        src/test/primitive/transformation_test.cpp
+        src/test/shape/sphere_test.cpp
+        src/test/primitive/intersection_test.cpp
         src/primitive/tuple.cpp
         src/primitive/color.cpp
         src/primitive/matrix.cpp
@@ -37,8 +37,10 @@ add_executable(
         src/primitive/intersection.cpp
         src/primitive/intersections.cpp
         src/math.h
-        src/canvas.cpp
+        src/application/canvas.cpp
         src/shape/sphere.cpp
+        src/application/projectile.cpp
+        src/test/application/projectile_test.cpp
 )
 
 target_link_libraries(

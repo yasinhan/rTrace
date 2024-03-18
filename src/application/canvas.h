@@ -5,7 +5,7 @@
 #ifndef RAY_TRACE_CANVAS_H
 #define RAY_TRACE_CANVAS_H
 
-#include "primitive/color.h"
+#include "src/primitive/color.h"
 
 class Canvas {
 

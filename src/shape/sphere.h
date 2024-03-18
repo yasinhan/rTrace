@@ -21,10 +21,12 @@ public:
 
     void set_transform(const Matrix &transform);
 
+    [[nodiscard]] Tuple normal_at(const Tuple &point) const;
+
 private:
     Tuple origin;
 
-    Matrix transform_ = Matrix::build_identity_matrix(4);
+    Matrix trans = Matrix::build_identity_matrix(4);
 };
 
 #endif //RAY_TRACE_SPHERE_H

@@ -3,6 +3,7 @@
 //
 
 #include <gtest/gtest.h>
+#include <cmath>
 #include "src/shape/sphere.h"
 #include "src/primitive/transformation.h"
 
@@ -58,4 +59,21 @@ TEST(SPHERE_TEST, TEST_TRANSLATION) {
     s.set_transform(translation(5, 0, 0));
     auto intersection = s.intersect(ray);
     ASSERT_EQ(intersection.count(), 0);
+}
+
+TEST(SPHERE_TEST, TEST_NORMAL_AT) {
+    auto s = Sphere();
+
+    auto n_0 = s.normal_at(Tuple::point(1, 0, 0));
+    ASSERT_EQ(n_0, Tuple::vector(1, 0, 0));
+
+    auto n_1 = s.normal_at(Tuple::point(0, 1, 0));
+    ASSERT_EQ(n_1, Tuple::vector(0, 1, 0));
+
+    auto n_2 = s.normal_at(Tuple::point(0, 0, 1));
+    ASSERT_EQ(n_2, Tuple::vector(0, 0, 1));
+
+    float sqrt_3 = sqrt(3) / 3;
+    auto n_3 = s.normal_at(Tuple::point(sqrt_3, sqrt_3, sqrt_3));
+    ASSERT_EQ(n_3, Tuple::vector(sqrt_3, sqrt_3, sqrt_3));
 }

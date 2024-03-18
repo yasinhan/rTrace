@@ -3,7 +3,7 @@
 //
 
 #include "src/primitive/color.h"
-#include "src/canvas.h"
+#include "src/application/canvas.h"
 #include <gtest/gtest.h>
 #include <cmath>
 #include "src/math.h"
