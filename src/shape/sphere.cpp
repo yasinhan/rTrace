@@ -40,5 +40,8 @@ Tuple Sphere::normal_at(const Tuple &point) const {
     if (!has_trans) {
         return (point - this->origin).normalized();
     }
-
+    auto object_normal = inverse_trans * point - origin;
+    auto world_normal = inverse_trans.transpose() * object_normal;
+    world_normal.setW(0);
+    return world_normal.normalized();
 }

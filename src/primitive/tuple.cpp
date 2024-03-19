@@ -55,7 +55,7 @@ Tuple Tuple::normalized() const {
     return {x / length, y / length, z / length, w};
 }
 
-float Tuple::dot(Tuple& other) const {
+float Tuple::dot(const Tuple& other) const {
     if (isPoint() || other.isPoint()) {
         throw std::invalid_argument("Only two vector can dot");
     }
@@ -85,6 +85,14 @@ bool Tuple::isPoint() const {
 
 bool Tuple::isVector() const {
     return epsilon(w, 0);
+}
+
+void Tuple::setW(const float w) {
+    this->w = w;
+}
+
+Tuple Tuple::reflect(const Tuple &in) const {
+    return in - (*this * 2) * (*this).dot(in);
 }
 
 bool operator==(const Tuple &lhs, const Tuple &rhs) {
