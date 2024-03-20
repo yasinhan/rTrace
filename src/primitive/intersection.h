@@ -15,9 +15,9 @@ public:
 
     ~Intersection() = default;
 
-    [[nodiscard]] float getT() const;
+    [[nodiscard]] float get_t() const;
 
-    [[nodiscard]] const void *getObj() const;
+    [[nodiscard]] const void *get_obj() const;
 
     bool operator==(Intersection other) const;
 

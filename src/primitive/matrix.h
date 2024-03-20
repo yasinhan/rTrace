@@ -20,9 +20,9 @@ public:
 
     void set_value(float value, int x, int y);
 
-    int getRow() const;
+    int get_row() const;
 
-    int getCol() const;
+    int get_col() const;
 
     static Matrix build_identity_matrix(int w);
 
@@ -39,8 +39,8 @@ public:
     Matrix(const Matrix& other);
 
 private:
-    int row, col;
-    float *data;
+    int row_, col_;
+    float *data_;
 
     inline int get_index(int x, int y) const;
 

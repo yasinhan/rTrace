@@ -7,8 +7,8 @@
 Matrix translation(float x, float y, float z) {
     auto ret = Matrix(4, 4);
 
-    for (int i = 0; i < ret.getRow(); i++) {
-        for (int j = 0; j < ret.getCol(); j++) {
+    for (int i = 0; i < ret.get_row(); i++) {
+        for (int j = 0; j < ret.get_col(); j++) {
             if (i == j) {
                 ret.set_value(1, i, j);
             } else {
@@ -24,8 +24,8 @@ Matrix translation(float x, float y, float z) {
 
 Matrix scaling(float x, float y, float z) {
     auto ret = Matrix(4, 4);
-    for (int i = 0; i < ret.getRow(); i++) {
-        for (int j = 0; j < ret.getCol(); j++) {
+    for (int i = 0; i < ret.get_row(); i++) {
+        for (int j = 0; j < ret.get_col(); j++) {
             if (i != j) {
                 ret.set_value(0, i, j);
             }

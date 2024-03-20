@@ -5,32 +5,32 @@
 //
 // Created by han on 12/22/23.
 //
-Tuple::Tuple(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {
+Tuple::Tuple(float x, float y, float z, float w) : x_(x), y_(y), z_(z), w_(w) {
 }
 
 Tuple::~Tuple() = default;
 
 bool Tuple::equals(const Tuple& other) {
-    if (!epsilon(this->w, other.w)) {
+    if (!epsilon(this->w_, other.w_)) {
         return false;
     }
-    return epsilon(this->x, other.x) && epsilon(this->y, other.y) && epsilon(this->z, other.z);
+    return epsilon(this->x_, other.x_) && epsilon(this->y_, other.y_) && epsilon(this->z_, other.z_);
 }
 
 float Tuple::getX() const {
-    return x;
+    return x_;
 }
 
 float Tuple::getY() const {
-    return y;
+    return y_;
 }
 
 float Tuple::getZ() const {
-    return z;
+    return z_;
 }
 
 float Tuple::getW() const {
-    return w;
+    return w_;
 }
 
 Tuple Tuple::point(float x, float y, float z) {
@@ -42,53 +42,53 @@ Tuple Tuple::vector(float x, float y, float z) {
 }
 
 float Tuple::get_magnitude() const {
-    return sqrtf(x * x + y * y + z * z);
+    return sqrtf(x_ * x_ + y_ * y_ + z_ * z_);
 }
 
 // return a new tuple
 Tuple Tuple::negate() const {
-    return {-x , -y, -z, w};
+    return {-x_ , -y_, -z_, w_};
 }
 
 Tuple Tuple::normalized() const {
     float length = get_magnitude();
-    return {x / length, y / length, z / length, w};
+    return {x_ / length, y_ / length, z_ / length, w_};
 }
 
 float Tuple::dot(const Tuple& other) const {
-    if (isPoint() || other.isPoint()) {
+    if (is_point() || other.is_point()) {
         throw std::invalid_argument("Only two vector can dot");
     }
-    return x * other.getX() + y * other.getY() + z * other.getZ();
+    return x_ * other.getX() + y_ * other.getY() + z_ * other.getZ();
 }
 
 float Tuple::self_dot() const {
-    if (isPoint()) {
+    if (is_point()) {
         throw std::invalid_argument("Only vector can dot self");
     }
-    return x * x + y * y + z * z;
+    return x_ * x_ + y_ * y_ + z_ * z_;
 }
 
 Tuple Tuple::cross(Tuple& other) const {
-    if (isPoint() || other.isPoint()) {
+    if (is_point() || other.is_point()) {
         throw std::invalid_argument("Only two vector can cross");
     }
-    return {y * other.getZ() - z * other.getY(),
-            z * other.getX() - x * other.getZ(),
-            x * other.getY() - y * other.getX(),
+    return {y_ * other.getZ() - z_ * other.getY(),
+            z_ * other.getX() - x_ * other.getZ(),
+            x_ * other.getY() - y_ * other.getX(),
             0};
 }
 
-bool Tuple::isPoint() const {
-    return epsilon(w, 1);
+bool Tuple::is_point() const {
+    return epsilon(w_, 1);
 }
 
-bool Tuple::isVector() const {
-    return epsilon(w, 0);
+bool Tuple::is_vector() const {
+    return epsilon(w_, 0);
 }
 
 void Tuple::setW(const float w) {
-    this->w = w;
+    this->w_ = w;
 }
 
 Tuple Tuple::reflect(const Tuple &in) const {
@@ -101,7 +101,7 @@ bool operator==(const Tuple &lhs, const Tuple &rhs) {
 }
 
 Tuple operator+(const Tuple &lhs, const Tuple &rhs) {
-    if (lhs.isPoint() && rhs.isPoint()) {
+    if (lhs.is_point() && rhs.is_point()) {
         throw std::invalid_argument("Two point cannot add");
     }
     return {lhs.getX() + rhs.getX(), lhs.getY() + rhs.getY(), lhs.getZ() + rhs.getZ(), lhs.getW() + rhs.getW()};
@@ -115,14 +115,14 @@ Tuple operator-(const Tuple &lhs, const Tuple &rhs) {
 }
 
 Tuple operator*(const Tuple &lhs, float rhs) {
-    if (lhs.isPoint()) {
+    if (lhs.is_point()) {
         throw std::invalid_argument("Point cannot multiply");
     }
     return {lhs.getX() * rhs, lhs.getY() * rhs, lhs.getZ() * rhs, lhs.getW()};
 }
 
 Tuple operator/(const Tuple &lhs, float rhs) {
-    if (lhs.isPoint()) {
+    if (lhs.is_point()) {
         throw std::invalid_argument("Point cannot divide");
     }
     return {lhs.getX() / rhs, lhs.getY() / rhs, lhs.getZ() / rhs, lhs.getW()};

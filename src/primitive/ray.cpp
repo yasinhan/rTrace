@@ -5,12 +5,12 @@
 #include "ray.h"
 #include <stdexcept>
 
-Ray::Ray(const Tuple &origin, const Tuple &direction) : origin(origin), direction(direction) {
-    if (!origin.isPoint()) {
-        throw std::invalid_argument("origin must be point");
+Ray::Ray(const Tuple &origin, const Tuple &direction) : origin_(origin), direction_(direction) {
+    if (!origin.is_point()) {
+        throw std::invalid_argument("origin_ must be point");
     }
-    if (!direction.isVector()) {
-        throw std::invalid_argument("direction must be vector");
+    if (!direction.is_vector()) {
+        throw std::invalid_argument("direction_ must be vector");
     }
 }
 
@@ -19,17 +19,17 @@ Ray::~Ray() {
 }
 
 Tuple Ray::position(float t) {
-    return origin + direction * t;
+    return origin_ + direction_ * t;
 }
 
-const Tuple &Ray::getOrigin() const {
-    return origin;
+const Tuple &Ray::get_origin() const {
+    return origin_;
 }
 
-const Tuple &Ray::getDirection() const {
-    return direction;
+const Tuple &Ray::get_direction() const {
+    return direction_;
 }
 
 Ray Ray::transform(const Matrix &transform) const {
-    return {transform * origin, transform * direction};
+    return {transform * origin_, transform * direction_};
 }

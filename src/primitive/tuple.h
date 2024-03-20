@@ -16,9 +16,9 @@ public:
 
     bool equals(const Tuple& other);
 
-    bool isPoint() const;
+    bool is_point() const;
 
-    bool isVector() const;
+    bool is_vector() const;
 
     [[nodiscard]] float getX() const;
 
@@ -50,8 +50,8 @@ public:
 
 private:
 
-    float x, y, z;
-    float w;
+    float x_, y_, z_;
+    float w_;
 };
 
 bool operator==(const Tuple &lhs, const Tuple &rhs);

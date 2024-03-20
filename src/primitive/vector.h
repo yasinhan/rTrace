@@ -21,9 +21,9 @@ public:
 
 private:
 
-    int length;
+    int length_;
 
-    float* data;
+    float* data_;
 };
 
 

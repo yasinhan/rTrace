@@ -65,8 +65,8 @@ TEST(MATRIX_TEST, TEST_MULTIPLY) {
 
     auto ret = matrix_2 * matrix_3;
 
-    ASSERT_EQ(ret.getRow(), 3);
-    ASSERT_EQ(ret.getCol(), 3);
+    ASSERT_EQ(ret.get_row(), 3);
+    ASSERT_EQ(ret.get_col(), 3);
 
     ASSERT_FLOAT_EQ(ret(0, 0), 5);
     ASSERT_FLOAT_EQ(ret(0, 1), 10);
@@ -84,8 +84,8 @@ TEST(MATRIX_TEST, TEST_TRANSPOSE) {
     matrix.set_value(2, 2, 1);
 
     auto matrix_t = matrix.transpose();
-    ASSERT_EQ(matrix_t.getRow(), 2);
-    ASSERT_EQ(matrix_t.getCol(), 3);
+    ASSERT_EQ(matrix_t.get_row(), 2);
+    ASSERT_EQ(matrix_t.get_col(), 3);
     ASSERT_FLOAT_EQ(matrix_t(0, 0), 1);
     ASSERT_FLOAT_EQ(matrix_t(0, 1), 1);
     ASSERT_FLOAT_EQ(matrix_t(0, 2), 1);
@@ -103,8 +103,8 @@ TEST(MATRIX_TEST, TEST_SUB_MATRIX) {
 
     auto sub_matrix = matrix.sub_matrix(0, 1);
 
-    ASSERT_EQ(sub_matrix.getRow(), 2);
-    ASSERT_EQ(sub_matrix.getCol(), 1);
+    ASSERT_EQ(sub_matrix.get_row(), 2);
+    ASSERT_EQ(sub_matrix.get_col(), 1);
 
     ASSERT_FLOAT_EQ(sub_matrix(0, 0), 1);
     ASSERT_FLOAT_EQ(sub_matrix(1, 0), 1);
@@ -184,8 +184,8 @@ TEST(MATRIX_TEST, TEST_INVERSE) {
     matrix_1.set_value(4, 3, 3);
 
     auto matrix_1_inverse = matrix_1.inverse();
-    ASSERT_EQ(matrix_1_inverse.getCol(), 4);
-    ASSERT_EQ(matrix_1_inverse.getRow(), 4);
+    ASSERT_EQ(matrix_1_inverse.get_col(), 4);
+    ASSERT_EQ(matrix_1_inverse.get_row(), 4);
 
     ASSERT_TRUE(epsilon(matrix_1_inverse(0,0), 0.21805));
     ASSERT_TRUE(epsilon(matrix_1_inverse(0,1), 0.45113));
@@ -204,8 +204,8 @@ TEST(MATRIX_TEST, TEST_INVERSE) {
 TEST(MATRIX_TEST, TEST_INDENTITY) {
     auto matrix_1 = Matrix::build_identity_matrix(3);
 
-    ASSERT_EQ(matrix_1.getRow(), 3);
-    ASSERT_EQ(matrix_1.getCol(), 3);
+    ASSERT_EQ(matrix_1.get_row(), 3);
+    ASSERT_EQ(matrix_1.get_col(), 3);
 
     ASSERT_FLOAT_EQ(matrix_1(0, 0), 1);
     ASSERT_FLOAT_EQ(matrix_1(0, 1), 0);

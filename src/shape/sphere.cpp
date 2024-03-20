@@ -5,7 +5,7 @@
 #include <cmath>
 
 Sphere::Sphere() {
-    origin = Tuple::point(0, 0, 0);
+    origin_ = Tuple::point(0, 0, 0);
 }
 
 Intersections Sphere::intersect(const Ray& ray) const {
@@ -14,9 +14,9 @@ Intersections Sphere::intersect(const Ray& ray) const {
         actual_ray = ray.transform(inverse_trans);
     }
 
-    auto sphere_to_ray = actual_ray.getOrigin() - this->origin;
-    auto a = actual_ray.getDirection().self_dot();
-    auto b = 2 * actual_ray.getDirection().dot(sphere_to_ray);
+    auto sphere_to_ray = actual_ray.get_origin() - this->origin_;
+    auto a = actual_ray.get_direction().self_dot();
+    auto b = 2 * actual_ray.get_direction().dot(sphere_to_ray);
     auto c = sphere_to_ray.self_dot() - 1;
 
     auto discriminant = b * b - 4 * a * c;
@@ -31,17 +31,25 @@ Intersections Sphere::intersect(const Ray& ray) const {
 }
 
 void Sphere::set_transform(const Matrix &transform) {
-    trans = transform;
-    inverse_trans = trans.inverse();
+    trans_ = transform;
+    inverse_trans = trans_.inverse();
     has_trans = true;
 }
 
 Tuple Sphere::normal_at(const Tuple &point) const {
     if (!has_trans) {
-        return (point - this->origin).normalized();
+        return (point - this->origin_).normalized();
     }
-    auto object_normal = inverse_trans * point - origin;
+    auto object_normal = inverse_trans * point - origin_;
     auto world_normal = inverse_trans.transpose() * object_normal;
     world_normal.setW(0);
     return world_normal.normalized();
+}
+
+void Sphere::set_material(const Material &material) {
+    material_ = material;
+}
+
+const Material &Sphere::get_material() const {
+    return material_;
 }

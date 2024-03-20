@@ -6,10 +6,10 @@
 #include <stdexcept>
 
 Environment::Environment(const Tuple &gravity, const Tuple &wind) : gravity(gravity), wind(wind) {
-    if (!gravity.isVector()) {
+    if (!gravity.is_vector()) {
         throw std::invalid_argument("gravity must be vector");
     }
-    if (!wind.isVector()) {
+    if (!wind.is_vector()) {
         throw std::invalid_argument("wind must be vector");
     }
 }
@@ -23,10 +23,10 @@ const Tuple &Environment::getWind() const {
 }
 
 Projectile::Projectile(const Tuple &position, const Tuple &velocity) : position(position), velocity(velocity) {
-    if (!position.isPoint()) {
-        throw std::invalid_argument("position must be point");
+    if (!position.is_point()) {
+        throw std::invalid_argument("position_ must be point");
     }
-    if (!velocity.isVector()) {
+    if (!velocity.is_vector()) {
         throw std::invalid_argument("velocity must be vector");
     }
 }

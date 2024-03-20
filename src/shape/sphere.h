@@ -8,7 +8,7 @@
 #include "../primitive/tuple.h"
 #include "../primitive/ray.h"
 #include "../primitive/intersections.h"
-
+#include "material.h"
 
 class Sphere {
 
@@ -23,13 +23,20 @@ public:
 
     [[nodiscard]] Tuple normal_at(const Tuple &point) const;
 
+    void set_material(const Material &material);
+
+    const Material &get_material() const;
+
 private:
-    Tuple origin;
+    Tuple origin_;
 
-    Matrix trans = Matrix::build_identity_matrix(4);
+    Matrix trans_ = Matrix::build_identity_matrix(4);
 
-    Matrix inverse_trans = trans;
+    Matrix inverse_trans = trans_;
+
     bool has_trans = false;
+
+    Material material_ = Material();
 };
 
 #endif //RAY_TRACE_SPHERE_H

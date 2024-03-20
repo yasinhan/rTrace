@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 project(ray_trace CXX)
 
-
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -21,12 +20,14 @@ add_executable(
         tests
         src/test/primitive/tuple_test.cpp
         src/test/primitive/color_test.cpp
-        src/test/application/canvas_test.cpp
         src/test/primitive/matrix_test.cpp
         src/test/primitive/ray_test.cpp
         src/test/primitive/transformation_test.cpp
-        src/test/shape/sphere_test.cpp
         src/test/primitive/intersection_test.cpp
+        src/test/shape/sphere_test.cpp
+        src/test/application/projectile_test.cpp
+        src/test/application/canvas_test.cpp
+        src/test/light/light_test.cpp
         src/primitive/tuple.cpp
         src/primitive/color.cpp
         src/primitive/matrix.cpp
@@ -38,9 +39,10 @@ add_executable(
         src/primitive/intersections.cpp
         src/math.h
         src/application/canvas.cpp
-        src/shape/sphere.cpp
         src/application/projectile.cpp
-        src/test/application/projectile_test.cpp
+        src/shape/sphere.cpp
+        src/shape/material.cpp
+        src/light/light.cpp
 )
 
 target_link_libraries(

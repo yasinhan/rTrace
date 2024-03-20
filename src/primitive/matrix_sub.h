@@ -28,9 +28,9 @@ public:
     float cofactor();
 
 private:
-    Matrix &origin;
-    MatrixSub *parent;
-    int row, col, remove_row, remove_col;
+    Matrix &origin_;
+    MatrixSub *parent_;
+    int row_, col_, remove_row_, remove_col_;
 
     inline std::tuple<int, int> get_coordinate_in_parent(int x, int y) const;
 

@@ -10,40 +10,40 @@
 #include "src/math.h"
 
 Matrix::Matrix(int row, int col) {
-    this->row = row;
-    this->col = col;
-    data = (float *) calloc(sizeof(float), row * col);
+    this->row_ = row;
+    this->col_ = col;
+    data_ = (float *) calloc(sizeof(float), row * col);
 }
 
 Matrix::~Matrix() {
-    free(data);
+    free(data_);
 }
 
 int Matrix::get_index(int x, int y) const {
     if (x < 0 || y < 0) {
-        throw std::invalid_argument("x cannot smaller than 0, y cannot smaller than 0");
+        throw std::invalid_argument("x cannot smaller than 0, y_ cannot smaller than 0");
     }
-    if (x >= row || y >= col) {
-        throw std::invalid_argument("x cannot bigger than row, y cannot bigger than col");
+    if (x >= row_ || y >= col_) {
+        throw std::invalid_argument("x cannot bigger than row_, y_ cannot bigger than col_");
     }
-    return x * col + y;
+    return x * col_ + y;
 }
 
 void Matrix::set_value(float value, int x, int y) {
     int index = get_index(x, y);
-    data[index] = value;
+    data_[index] = value;
 }
 
 float Matrix::operator()(int x, int y) const {
-    return data[get_index(x, y)];
+    return data_[get_index(x, y)];
 }
 
-int Matrix::getRow() const {
-    return row;
+int Matrix::get_row() const {
+    return row_;
 }
 
-int Matrix::getCol() const {
-    return col;
+int Matrix::get_col() const {
+    return col_;
 }
 
 Matrix Matrix::build_identity_matrix(int w) {
@@ -61,10 +61,10 @@ Matrix Matrix::build_identity_matrix(int w) {
 }
 
 Matrix Matrix::transpose() const {
-    auto ret = Matrix(this->col, this->row);
+    auto ret = Matrix(this->col_, this->row_);
 
-    for (int i = 0; i < ret.getRow(); i++) {
-        for (int j = 0; j < ret.getCol(); j++) {
+    for (int i = 0; i < ret.get_row(); i++) {
+        for (int j = 0; j < ret.get_col(); j++) {
             ret.set_value(operator()(j, i), i, j);
         }
     }
@@ -72,16 +72,16 @@ Matrix Matrix::transpose() const {
 }
 
 Matrix Matrix::sub_matrix(int row, int col) const {
-    if (this->row <= 1 || this->col <= 1) {
-        throw std::invalid_argument("Matrix with 1 row or 1 column have no SubMatrix");
+    if (this->row_ <= 1 || this->col_ <= 1) {
+        throw std::invalid_argument("Matrix with 1 row_ or 1 column have no SubMatrix");
     }
-    auto ret = Matrix(this->row - 1, this->col - 1);
-    for (int i = 0; i < this->row; i++) {
+    auto ret = Matrix(this->row_ - 1, this->col_ - 1);
+    for (int i = 0; i < this->row_; i++) {
         if (i == row) {
             continue;
         }
         int i_index = i > row ? i - 1 : i;
-        for (int j = 0; j < this->col; j++) {
+        for (int j = 0; j < this->col_; j++) {
             if (j == col) {
                 continue;
             }
@@ -93,12 +93,12 @@ Matrix Matrix::sub_matrix(int row, int col) const {
 }
 
 float Matrix::determinant() const {
-    if (row == 2 && col == 2) {
+    if (row_ == 2 && col_ == 2) {
         return operator()(0, 0) * operator()(1, 1) - operator()(0, 1) * operator()(1, 0);
     }
     float result = 0;
-    for (int i = 0; i < col; i++) {
-        auto sub = MatrixSub(*this, nullptr, row - 1, col - 1, 0, i);
+    for (int i = 0; i < col_; i++) {
+        auto sub = MatrixSub(*this, nullptr, row_ - 1, col_ - 1, 0, i);
         result += operator()(0, i) * sub.cofactor();
     }
     return result;
@@ -109,10 +109,10 @@ Matrix Matrix::inverse() const {
     if (epsilon(det, 0.0)) {
         throw std::invalid_argument("Determinant is 0, cannot inverse");
     }
-    auto result = Matrix(col, row);
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            auto sub = MatrixSub(*this, nullptr, row - 1, col - 1, i, j);
+    auto result = Matrix(col_, row_);
+    for (int i = 0; i < row_; i++) {
+        for (int j = 0; j < col_; j++) {
+            auto sub = MatrixSub(*this, nullptr, row_ - 1, col_ - 1, i, j);
             result.set_value(sub.cofactor() / det, j, i);
         }
     }
@@ -122,32 +122,32 @@ Matrix Matrix::inverse() const {
 
 Matrix &Matrix::operator=(const Matrix &other) {
     if (this != &other) {
-        if (row == other.row && col == other.col) {
-            memcpy(data, other.data, row * col * sizeof(float));
+        if (row_ == other.row_ && col_ == other.col_) {
+            memcpy(data_, other.data_, row_ * col_ * sizeof(float));
         } else{
-            row = other.row;
-            col = other.col;
-            free(data);
-            data = (float *)calloc(sizeof(float), row * col);
-            memcpy(data, other.data, row * col * sizeof(float));
+            row_ = other.row_;
+            col_ = other.col_;
+            free(data_);
+            data_ = (float *)calloc(sizeof(float), row_ * col_);
+            memcpy(data_, other.data_, row_ * col_ * sizeof(float));
         }
     }
     return *this;
 }
 
 Matrix::Matrix(const Matrix &other) {
-    row = other.row;
-    col = other.col;
-    data = (float *) calloc(sizeof(float), row * col);
-    memcpy(data, other.data, row * col * sizeof(float));
+    row_ = other.row_;
+    col_ = other.col_;
+    data_ = (float *) calloc(sizeof(float), row_ * col_);
+    memcpy(data_, other.data_, row_ * col_ * sizeof(float));
 }
 
 bool operator==(const Matrix &lhs, const Matrix &rhs) {
-    if (lhs.getRow() != rhs.getRow() || lhs.getCol() != rhs.getCol()) {
+    if (lhs.get_row() != rhs.get_row() || lhs.get_col() != rhs.get_col()) {
         return false;
     }
-    for (int row = 0; row < lhs.getRow(); row++) {
-        for (int col = 0; col < lhs.getCol(); col++) {
+    for (int row = 0; row < lhs.get_row(); row++) {
+        for (int col = 0; col < lhs.get_col(); col++) {
             float l = lhs(row, col);
             float r = rhs(row, col);
             if (!epsilon(l, r)) {
@@ -159,13 +159,13 @@ bool operator==(const Matrix &lhs, const Matrix &rhs) {
 }
 
 Vector operator*(const Matrix &lhs, const Vector &rhs) {
-    if (lhs.getCol() != rhs.getLength()) {
+    if (lhs.get_col() != rhs.getLength()) {
         throw std::invalid_argument("Matrix A with n columns, Vector B must have n elements");
     }
-    auto ret = Vector(lhs.getCol());
+    auto ret = Vector(lhs.get_col());
     for (int i = 0; i < rhs.getLength(); i++) {
         float element = 0;
-        for (int j = 0; j < lhs.getRow(); j++) {
+        for (int j = 0; j < lhs.get_row(); j++) {
             element += lhs(i, j) * rhs(i);
         }
         ret.set_value(element, i);
@@ -174,7 +174,7 @@ Vector operator*(const Matrix &lhs, const Vector &rhs) {
 }
 
 Tuple operator*(const Matrix &lhs, const Tuple &rhs) {
-    if (lhs.getCol() != 4) {
+    if (lhs.get_col() != 4) {
         throw std::invalid_argument("Only Matrix A with 4 columns can multiply Tuple");
     }
 
@@ -188,20 +188,20 @@ Tuple operator*(const Matrix &lhs, const Tuple &rhs) {
 
 float calculate_matrix_value(const Matrix &left, const Matrix &right, int row, int col) {
     float result = 0;
-    for (int i = 0; i < left.getCol(); i++) {
+    for (int i = 0; i < left.get_col(); i++) {
         result += left(row, i) * right(i, col);
     }
     return result;
 }
 
 Matrix operator*(const Matrix &lhs, const Matrix &rhs) {
-    if (lhs.getCol() != rhs.getRow()) {
+    if (lhs.get_col() != rhs.get_row()) {
         throw std::invalid_argument("Matrix A with n columns, Matrix B must have n rows");
     }
-    auto ret = Matrix(lhs.getRow(), rhs.getCol());
+    auto ret = Matrix(lhs.get_row(), rhs.get_col());
 
-    for (int i = 0; i < ret.getRow(); i++) {
-        for (int j = 0; j < ret.getCol(); j++) {
+    for (int i = 0; i < ret.get_row(); i++) {
+        for (int j = 0; j < ret.get_col(); j++) {
             ret.set_value(calculate_matrix_value(lhs, rhs, i, j), i, j);
         }
     }

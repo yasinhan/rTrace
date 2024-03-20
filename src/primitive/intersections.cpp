@@ -19,10 +19,10 @@ std::optional<Intersection> Intersections::hit() const {
     }
     std::optional<Intersection> res = std::nullopt;
     for (auto i = intersections.begin();i != intersections.end(); ++i) {
-        if ((*i).getT() < 0) {
+        if ((*i).get_t() < 0) {
             continue;
         }
-        if (res == std::nullopt || res.value().getT() > (*i).getT()) {
+        if (res == std::nullopt || res.value().get_t() > (*i).get_t()) {
             res = std::optional<Intersection>(*i);
         }
     }

@@ -16,9 +16,9 @@ public:
 
     virtual ~Ray();
 
-    [[nodiscard]] const Tuple &getOrigin() const;
+    [[nodiscard]] const Tuple &get_origin() const;
 
-    [[nodiscard]] const Tuple &getDirection() const;
+    [[nodiscard]] const Tuple &get_direction() const;
 
     Tuple position(float t);
 
@@ -26,7 +26,7 @@ public:
 
 private:
 
-    Tuple origin, direction;
+    Tuple origin_, direction_;
 };
 
 #endif //RAY_TRACE_RAY_H

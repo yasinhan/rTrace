@@ -5,16 +5,16 @@
 
 Intersection::Intersection(float t, const void *obj) : t(t), obj(obj) {}
 
-float Intersection::getT() const {
+float Intersection::get_t() const {
     return t;
 }
 
-const void *Intersection::getObj() const {
+const void *Intersection::get_obj() const {
     return obj;
 }
 
 bool Intersection::operator==(Intersection other) const {
-    return obj == other.getObj() && t == other.getT();
+    return obj == other.get_obj() && t == other.get_t();
 }
 
 

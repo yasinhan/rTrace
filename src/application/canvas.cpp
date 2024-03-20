@@ -17,9 +17,9 @@ Canvas::~Canvas() {
 
 void Canvas::write_pixel(int x, int y, const Color& color) {
     int index = index_of(x, y);
-    canvas[index++] = color.getRed();
-    canvas[index++] = color.getGreen();
-    canvas[index++] = color.getBlue();
+    canvas[index++] = color.get_red();
+    canvas[index++] = color.get_green();
+    canvas[index++] = color.get_blue();
 }
 
 Color Canvas::pixel_at(int x, int y) {

@@ -35,8 +35,8 @@ TEST(RAY_TEST, TEST_TRANSLATION) {
     auto transform = translation(3, 4, 5);
 
     auto ret = ray.transform(transform);
-    ASSERT_EQ(ret.getOrigin(), Tuple::point(4, 6, 8));
-    ASSERT_EQ(ret.getDirection(), Tuple::vector(0, 1, 0));
+    ASSERT_EQ(ret.get_origin(), Tuple::point(4, 6, 8));
+    ASSERT_EQ(ret.get_direction(), Tuple::vector(0, 1, 0));
 }
 
 TEST(RAY_TEST, TEST_SCALING) {
@@ -44,6 +44,6 @@ TEST(RAY_TEST, TEST_SCALING) {
     auto transform = scaling(2, 3, 4);
 
     auto ret = ray.transform(transform);
-    ASSERT_EQ(ret.getOrigin(), Tuple::point(2, 6, 12));
-    ASSERT_EQ(ret.getDirection(), Tuple::vector(0, 3, 0));
+    ASSERT_EQ(ret.get_origin(), Tuple::point(2, 6, 12));
+    ASSERT_EQ(ret.get_direction(), Tuple::vector(0, 3, 0));
 }

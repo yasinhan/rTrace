@@ -8,15 +8,18 @@
 class Color {
 
 public:
+
+    Color() = default;
+
     Color(float red, float green, float blue);
 
     virtual ~Color();
 
-    [[nodiscard]] float getRed() const;
+    [[nodiscard]] float get_red() const;
 
-    [[nodiscard]] float getGreen() const;
+    [[nodiscard]] float get_green() const;
 
-    [[nodiscard]] float getBlue() const;
+    [[nodiscard]] float get_blue() const;
 
 private:
     float red, green, blue;
@@ -29,5 +32,7 @@ Color operator-(const Color &lhs, const Color &rhs);
 Color operator*(const Color &lhs, float scalar);
 
 Color operator*(const Color &lhs, const Color &rhs);
+
+bool operator==(const Color &lhs, const Color &rhs);
 
 #endif //RAY_TRACE_COLOR_H
