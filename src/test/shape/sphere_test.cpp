@@ -93,6 +93,10 @@ TEST(SPHERE_TEST, TEST_NORMAL_AT_WITH_TRANS) {
 TEST(SPHERE_TEST, TEST_MATERIAL_EQUAL) {
     auto s = Sphere();
     auto m = Material();
-    
+
+    ASSERT_EQ(s.get_material(), m);
+
+    m.set_ambient(1);
+    s.set_material(m);
     ASSERT_EQ(s.get_material(), m);
 }
