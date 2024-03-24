@@ -133,13 +133,13 @@ TEST(TUPLE_TEST, REFLECT_TEST) {
     auto in = Tuple::vector(1, -1, 0);
     auto normal = Tuple::vector(0, 1, 0);
 
-    auto ret = normal.reflect(in);
+    auto ret = in.reflect(normal);
     ASSERT_EQ(ret, Tuple::vector(1, 1, 0));
 
     auto in_1 = Tuple::vector(0, -1, 0);
     auto normal_1 = Tuple::vector((float )sqrt(2) / 2, (float )sqrt(2) / 2, 0);
 
-    auto ret_1 = normal_1.reflect(in_1);
+    auto ret_1 = in_1.reflect(normal_1);
     ASSERT_EQ(ret_1, Tuple::vector(1, 0, 0));
 }
 

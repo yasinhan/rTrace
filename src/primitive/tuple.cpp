@@ -47,7 +47,7 @@ float Tuple::get_magnitude() const {
 
 // return a new tuple
 Tuple Tuple::negate() const {
-    return {-x_ , -y_, -z_, w_};
+    return {-x_ , -y_, -z_, -w_};
 }
 
 Tuple Tuple::normalized() const {
@@ -92,7 +92,7 @@ void Tuple::setW(const float w) {
 }
 
 Tuple Tuple::reflect(const Tuple &in) const {
-    return in - (*this * 2) * (*this).dot(in);
+    return *this - in * (*this).dot(in) * 2;
 }
 
 bool operator==(const Tuple &lhs, const Tuple &rhs) {
@@ -126,4 +126,9 @@ Tuple operator/(const Tuple &lhs, float rhs) {
         throw std::invalid_argument("Point cannot divide");
     }
     return {lhs.getX() / rhs, lhs.getY() / rhs, lhs.getZ() / rhs, lhs.getW()};
+}
+
+Tuple operator-(const Tuple &origin) {
+    return {-origin.getX(), -origin.getY(), -origin.getZ(), -origin.getW()};
+
 }

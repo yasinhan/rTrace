@@ -3,6 +3,7 @@
 //
 
 #include "material.h"
+#include <cmath>
 
 Material::Material() {
     color_ = Color(1, 1, 1);
@@ -13,8 +14,31 @@ Material::Material() {
 }
 
 Color Material::lighting(Light &light, Tuple &position, Tuple &eye_vector, Tuple &normal_vector) {
-    
-    return Color();
+    auto effective_color = this->color_ * light.get_intensity();
+    auto ambient_color = effective_color * this->ambient_;
+
+    auto light_vector = (light.get_position() - position).normalized();
+    auto light_dot_normal = light_vector.dot(normal_vector);
+
+    Color diffuse_color;
+    Color specular_color;
+    if (light_dot_normal < 0) {
+        diffuse_color = Color(0, 0, 0);
+        specular_color = Color(0, 0, 0);
+    } else {
+        diffuse_color = effective_color * this->diffuse_ * light_dot_normal;
+
+        auto reflect_vector = (-light_vector).reflect(normal_vector);
+        auto reflect_dot_eye = reflect_vector.dot(eye_vector);
+        if (reflect_dot_eye <= 0) {
+            specular_color = Color(0, 0, 0);
+        } else {
+            auto factor = (float )pow(reflect_dot_eye, this->shininess_);
+            specular_color = light.get_intensity() * this->get_specular() * factor;
+        }
+
+    }
+    return ambient_color + diffuse_color + specular_color;
 }
 
 const Color &Material::get_color() const {

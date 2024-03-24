@@ -64,4 +64,6 @@ Tuple operator*(const Tuple &lhs, float rhs);
 
 Tuple operator/(const Tuple &lhs, float rhs);
 
+Tuple operator-(const Tuple &origin);
+
 #endif //RAY_TRACE_TUPLE_H
