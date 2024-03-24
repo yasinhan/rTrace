@@ -12,6 +12,11 @@ Material::Material() {
     shininess_ = DEFAULT_SHININESS;
 }
 
+Color Material::lighting(Light &light, Tuple &position, Tuple &eye_vector, Tuple &normal_vector) {
+    
+    return Color();
+}
+
 const Color &Material::get_color() const {
     return color_;
 }

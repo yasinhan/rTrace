@@ -5,11 +5,13 @@
 #ifndef RAY_TRACE_MATERIAL_H
 #define RAY_TRACE_MATERIAL_H
 #include "src/primitive/color.h"
+#include "src/light/light.h"
 
 static const float DEFAULT_AMBIENT = 0.1;
 static const float DEFAULT_DIFFUSE = 0.9;
 static const float DEFAULT_SPECULAR = 0.9;
 static const float DEFAULT_SHININESS = 200.0;
+
 
 class Material {
 public:
@@ -18,6 +20,8 @@ public:
     ~Material() = default;
 
     [[nodiscard]] const Color &get_color() const;
+
+    Color lighting(Light &light, Tuple &position, Tuple &eye_vector, Tuple &normal_vector);
 
     void set_color(const Color &color);
 

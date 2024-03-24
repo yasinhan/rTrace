@@ -25,6 +25,7 @@ add_executable(
         src/test/primitive/transformation_test.cpp
         src/test/primitive/intersection_test.cpp
         src/test/shape/sphere_test.cpp
+        src/test/shape/material_test.cpp
         src/test/application/projectile_test.cpp
         src/test/application/canvas_test.cpp
         src/test/light/light_test.cpp
