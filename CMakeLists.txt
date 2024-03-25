@@ -39,13 +39,19 @@ add_executable(
         src/primitive/intersection.cpp
         src/primitive/intersections.cpp
         src/math.h
-        src/application/canvas.cpp
-        src/application/projectile.cpp
+        src/display/canvas.cpp
+        src/display/projectile.cpp
         src/shape/sphere.cpp
         src/shape/material.cpp
         src/light/light.cpp
         src/image/ppm_writer.cpp
         src/test/image/ppm_writer_test.cpp
+)
+
+add_executable(
+        main
+        src/main.cpp
+        src/application/run_projectile.cpp
 )
 
 target_link_libraries(
