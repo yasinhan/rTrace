@@ -44,6 +44,7 @@ add_executable(
         src/shape/sphere.cpp
         src/shape/material.cpp
         src/light/light.cpp
+        src/image/ppm_writer.cpp
 )
 
 target_link_libraries(

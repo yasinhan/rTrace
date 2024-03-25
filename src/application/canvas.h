@@ -15,16 +15,20 @@ public:
 
     ~Canvas();
 
+    int get_w() const;
+
+    int get_h() const;
+
     void write_pixel(int x, int y, const Color& color);
 
     Color pixel_at(int x, int y);
 
 private:
-    int w;
-    int h;
+    int w_;
+    int h_;
 
     static int index_of(int x, int y);
-    float* canvas;
+    float* canvas_;
 
 };
 
