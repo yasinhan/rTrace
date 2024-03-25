@@ -30,8 +30,8 @@ Color Canvas::pixel_at(int x, int y) {
     return {red, green, blue};
 }
 
-int Canvas::index_of(int x, int y) {
-    return x * y + y * 3;
+int Canvas::index_of(int x, int y) const {
+    return ((y * w_) + x) * 3;
 }
 
 int Canvas::get_w() const {

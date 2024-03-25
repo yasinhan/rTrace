@@ -27,7 +27,7 @@ private:
     int w_;
     int h_;
 
-    static int index_of(int x, int y);
+    inline int index_of(int x, int y) const;
     float* canvas_;
 
 };

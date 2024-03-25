@@ -26,6 +26,8 @@ private:
 
     void write_row(std::ostream &stream, int row_index);
 
+    void write_color_element(std::ostream &stream, float color, int &current_line_len);
+
     int color_int(float color);
 };
 

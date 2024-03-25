@@ -45,6 +45,7 @@ add_executable(
         src/shape/material.cpp
         src/light/light.cpp
         src/image/ppm_writer.cpp
+        src/test/image/ppm_writer_test.cpp
 )
 
 target_link_libraries(
