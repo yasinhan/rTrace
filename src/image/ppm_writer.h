@@ -7,7 +7,7 @@
 
 #include <string>
 #include <ostream>
-#include "src/application/canvas.h"
+#include "src/display/canvas.h"
 
 class PPMWriter {
 public:

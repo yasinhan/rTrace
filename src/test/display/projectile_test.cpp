@@ -2,7 +2,7 @@
 // Created by han on 1/8/24.
 //
 
-#include "src/application/projectile.h"
+#include "src/display/projectile.h"
 #include <gtest/gtest.h>
 
 class ProjectileTest : public ::testing::Test {

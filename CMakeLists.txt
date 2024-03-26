@@ -26,8 +26,8 @@ add_executable(
         src/test/primitive/intersection_test.cpp
         src/test/shape/sphere_test.cpp
         src/test/shape/material_test.cpp
-        src/test/application/projectile_test.cpp
-        src/test/application/canvas_test.cpp
+        src/test/display/projectile_test.cpp
+        src/test/display/canvas_test.cpp
         src/test/light/light_test.cpp
         src/primitive/tuple.cpp
         src/primitive/color.cpp
@@ -46,6 +46,9 @@ add_executable(
         src/light/light.cpp
         src/image/ppm_writer.cpp
         src/test/image/ppm_writer_test.cpp
+        src/scene/world.cpp
+        src/scene/world.h
+        src/test/scene/world_test.cpp
 )
 
 add_executable(
