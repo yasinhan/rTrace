@@ -30,12 +30,6 @@ Intersections Sphere::intersect(const Ray& ray) const {
     return Intersections(std::vector<Intersection>{Intersection(t1, this), Intersection(t2, this)});
 }
 
-void Sphere::set_transform(const Matrix &transform) {
-    trans_ = transform;
-    inverse_trans = trans_.inverse();
-    has_trans = true;
-}
-
 Tuple Sphere::normal_at(const Tuple &point) const {
     if (!has_trans) {
         return (point - this->origin_).normalized();
@@ -44,12 +38,4 @@ Tuple Sphere::normal_at(const Tuple &point) const {
     auto world_normal = inverse_trans.transpose() * object_normal;
     world_normal.setW(0);
     return world_normal.normalized();
-}
-
-void Sphere::set_material(const Material &material) {
-    material_ = material;
-}
-
-const Material &Sphere::get_material() const {
-    return material_;
 }

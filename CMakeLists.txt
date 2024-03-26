@@ -49,6 +49,8 @@ add_executable(
         src/scene/world.cpp
         src/scene/world.h
         src/test/scene/world_test.cpp
+        src/shape/shape.cpp
+        src/shape/shape.h
 )
 
 add_executable(
