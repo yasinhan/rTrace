@@ -15,11 +15,17 @@ public:
 
     ~World() = default;
 
-    [[nodiscard]] Light *get_light() const;
+    Intersections intersect(const Ray &ray) const;
+
+    [[nodiscard]]; Light *get_light() const;
 
     void set_light(Light *light);
 
     void add_shape(Shape *shape);
+
+    bool has_shape() const;
+
+    bool contains_shape(Shape *shape) const;
 
 private:
 

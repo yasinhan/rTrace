@@ -18,12 +18,12 @@ std::optional<Intersection> Intersections::hit() const {
         return std::nullopt;
     }
     std::optional<Intersection> res = std::nullopt;
-    for (auto i = intersections.begin();i != intersections.end(); ++i) {
-        if ((*i).get_t() < 0) {
+    for (auto intersection : intersections) {
+        if (intersection.get_t() < 0) {
             continue;
         }
-        if (res == std::nullopt || res.value().get_t() > (*i).get_t()) {
-            res = std::optional<Intersection>(*i);
+        if (res == std::nullopt || res.value().get_t() > intersection.get_t()) {
+            res = std::optional<Intersection>(intersection);
         }
     }
     return res;

@@ -26,5 +26,6 @@ private:
     std::vector<Intersection> intersections;
 };
 
+Intersections merge(Intersections intersections);
 
 #endif //RAY_TRACE_INTERSECTIONS_H
