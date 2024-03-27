@@ -29,5 +29,12 @@ bool World::contains_shape(Shape *shape) const {
 }
 
 Intersections World::intersect(const Ray &ray) const {
-    return Intersections(std::vector<Intersection>());
+    auto result = Intersections(std::vector<Intersection>());
+
+    for (auto shape : this->objects_) {
+        auto intersections = shape->intersect(ray);
+        result.merge(intersections);
+    }
+
+    return Intersections(result);
 }

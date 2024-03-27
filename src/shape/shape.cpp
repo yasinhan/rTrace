@@ -17,3 +17,7 @@ void Shape::set_material(const Material &material) {
 const Material &Shape::get_material() const {
     return material_;
 }
+
+Intersections Shape::intersect(const Ray &ray) const {
+    return Intersections(std::vector<Intersection>());
+}

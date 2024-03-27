@@ -21,11 +21,11 @@ public:
     size_t count();
 
     Intersection operator[](int index);
+
+    void merge(Intersections &other);
 private:
 
-    std::vector<Intersection> intersections;
+    mutable std::vector<Intersection> intersections_;
 };
-
-Intersections merge(Intersections intersections);
 
 #endif //RAY_TRACE_INTERSECTIONS_H

@@ -21,6 +21,8 @@ public:
 
     const Material &get_material() const;
 
+    virtual Intersections intersect(const Ray &ray) const;
+
 protected:
 
     Matrix trans_ = Matrix::build_identity_matrix(4);

@@ -41,4 +41,13 @@ TEST(WORLD_TEST, TEST_DEFAUL_WORLD_iNTERSECT) {
     ASSERT_TRUE(world.contains_shape(&sphere_1));
     ASSERT_TRUE(world.contains_shape(&sphere_2));
 
+    auto ray = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
+    auto intersection = world.intersect(ray);
+
+    ASSERT_EQ(intersection.count(), 4);
+    ASSERT_FLOAT_EQ(intersection[0].get_t(), 4);
+    ASSERT_FLOAT_EQ(intersection[1].get_t(), 4.5);
+    ASSERT_FLOAT_EQ(intersection[2].get_t(), 5.5);
+    ASSERT_FLOAT_EQ(intersection[3].get_t(), 6);
+
 }

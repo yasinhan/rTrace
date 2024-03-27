@@ -18,7 +18,7 @@ public:
 
     ~Sphere() = default;
 
-    Intersections intersect(const Ray &ray) const;
+    Intersections intersect(const Ray &ray) const override;
 
     [[nodiscard]] Tuple normal_at(const Tuple &point) const;
 
