@@ -7,9 +7,16 @@
 PrepareComputations::PrepareComputations(Intersection hit, Intersections &intersections, Ray &ray) {
     this->t_ = hit.get_t();
     this->object_ = static_cast<const Shape *>(hit.get_obj());
-    this->point = ray.position(t_);
-    this->eye_vector = -ray.get_direction();
-    this->normal_vector = object_->normal_at(this->point);
+    this->point_ = ray.position(t_);
+    this->eye_vector_ = -ray.get_direction();
+    this->normal_vector_ = object_->normal_at(this->point_);
+    auto dot = normal_vector_.dot(eye_vector_);
+    if (dot < 0) {
+        this->inside_ = true;
+        this->normal_vector_ = -normal_vector_;
+    } else {
+        this->inside_ = false;
+    }
 
 }
 
@@ -22,13 +29,17 @@ const Shape *PrepareComputations::get_object() const {
 }
 
 const Tuple &PrepareComputations::get_point() const {
-    return point;
+    return point_;
 }
 
 const Tuple &PrepareComputations::get_eye_vector() const {
-    return eye_vector;
+    return eye_vector_;
 }
 
 const Tuple &PrepareComputations::get_normal_vector() const {
-    return normal_vector;
+    return normal_vector_;
+}
+
+bool PrepareComputations::is_inside() const {
+    return inside_;
 }

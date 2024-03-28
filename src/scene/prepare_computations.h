@@ -23,10 +23,13 @@ public:
 
     const Tuple &get_normal_vector() const;
 
+    bool is_inside() const;
+
 private:
     float t_;
     const Shape *object_;
-    Tuple point, eye_vector, normal_vector;
+    Tuple point_, eye_vector_, normal_vector_;
+    bool inside_;
 };
 
 
