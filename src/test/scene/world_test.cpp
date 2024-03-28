@@ -6,6 +6,7 @@
 #include "src/primitive/transformation.h"
 #include "src/scene/world.h"
 #include "src/shape/sphere.h"
+#include "src/scene/prepare_computations.h"
 
 class WorldTest : public ::testing::Test {
 protected:
@@ -49,5 +50,36 @@ TEST(WORLD_TEST, TEST_DEFAUL_WORLD_iNTERSECT) {
     ASSERT_FLOAT_EQ(intersection[1].get_t(), 4.5);
     ASSERT_FLOAT_EQ(intersection[2].get_t(), 5.5);
     ASSERT_FLOAT_EQ(intersection[3].get_t(), 6);
+}
 
+TEST(WORLD_TEST, TEST_WORLD_SHADING_INTERSECTION) {
+    auto world = default_world();
+
+    auto ray = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
+    auto shape = world.get_objects()[0];
+
+    auto intersections = shape->intersect(ray);
+    auto intersection = intersections.hit();
+    ASSERT_TRUE(intersection.has_value());
+
+    auto prepare = PrepareComputations(intersection.value(), intersections, ray);
+    auto c = world.shade_hit(prepare);
+    ASSERT_EQ(c, Color(0.38066, 0.47583, 0.2855));
+}
+
+
+TEST(WORLD_TEST, TEST_WORLD_SHADING_INTERSECTION_INSIDE) {
+    auto world = default_world();
+    auto light = Light(Color(1, 1, 1), Tuple::point(0, 0.25, 0));
+    world.set_light(&light);
+    auto ray = Ray(Tuple::point(0, 0, 0), Tuple::vector(0, 0, 1));
+    auto shape = world.get_objects()[1];
+
+    auto intersections = shape->intersect(ray);
+    auto intersection = intersections.hit();
+    ASSERT_TRUE(intersection.has_value());
+
+    auto prepare = PrepareComputations(intersection.value(), intersections, ray);
+    auto c = world.shade_hit(prepare);
+    ASSERT_EQ(c, Color(0.90498, 0.90498, 0.90498));
 }
