@@ -23,6 +23,8 @@ public:
 
     virtual Intersections intersect(const Ray &ray) const;
 
+    [[nodiscard]] virtual Tuple normal_at(const Tuple &point) const;
+
 protected:
 
     Matrix trans_ = Matrix::build_identity_matrix(4);

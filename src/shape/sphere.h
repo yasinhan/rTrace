@@ -20,7 +20,7 @@ public:
 
     Intersections intersect(const Ray &ray) const override;
 
-    [[nodiscard]] Tuple normal_at(const Tuple &point) const;
+    [[nodiscard]] Tuple normal_at(const Tuple &point) const override;
 
 private:
     Tuple origin_;
