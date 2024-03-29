@@ -13,7 +13,7 @@ Material::Material() {
     shininess_ = DEFAULT_SHININESS;
 }
 
-Color Material::lighting(Light &light, Tuple &position, Tuple &eye_vector, Tuple &normal_vector) {
+Color Material::lighting(Light &light, const Tuple &position, const Tuple &eye_vector, const Tuple &normal_vector) const {
     auto effective_color = this->color_ * light.get_intensity();
     auto ambient_color = effective_color * this->ambient_;
 

@@ -28,9 +28,9 @@ public:
 
     bool contains_shape(Shape *shape) const;
 
-    [[nodiscard]] const std::vector<Shape *> &get_objects() const;
+    [[nodiscard]] std::vector<Shape *> get_objects() const;
 
-    [[nodiscard]] Color shade_hit(PrepareComputations prepare) const;
+    [[nodiscard]] Color shade_hit(PrepareComputations &prepare) const;
 
 private:
 

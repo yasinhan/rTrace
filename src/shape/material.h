@@ -21,7 +21,7 @@ public:
 
     [[nodiscard]] const Color &get_color() const;
 
-    Color lighting(Light &light, Tuple &position, Tuple &eye_vector, Tuple &normal_vector);
+    Color lighting(Light &light, const Tuple &position, const Tuple &eye_vector, const Tuple &normal_vector) const;
 
     void set_color(const Color &color);
 

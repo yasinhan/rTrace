@@ -9,6 +9,11 @@ Sphere::Sphere() {
 }
 
 Intersections Sphere::intersect(const Ray& ray) const {
+    return intersect_with(ray);
+}
+
+
+Intersections Sphere::intersect_with(const Ray& ray) const {
     auto actual_ray = ray;
     if (has_trans) {
         actual_ray = ray.transform(inverse_trans);

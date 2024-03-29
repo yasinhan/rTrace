@@ -21,11 +21,13 @@ public:
 
     const Material &get_material() const;
 
-    virtual Intersections intersect(const Ray &ray) const;
+    Intersections intersect(const Ray &ray) const;
 
     [[nodiscard]] virtual Tuple normal_at(const Tuple &point) const;
 
 protected:
+
+    virtual Intersections intersect_with(const Ray &ray) const = 0;
 
     Matrix trans_ = Matrix::build_identity_matrix(4);
 

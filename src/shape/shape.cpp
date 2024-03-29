@@ -19,7 +19,7 @@ const Material &Shape::get_material() const {
 }
 
 Intersections Shape::intersect(const Ray &ray) const {
-    return Intersections(std::vector<Intersection>());
+    return intersect_with(ray);
 }
 
 Tuple Shape::normal_at(const Tuple &point) const {

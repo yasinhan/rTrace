@@ -53,7 +53,7 @@ TEST(WORLD_TEST, TEST_DEFAUL_WORLD_iNTERSECT) {
 }
 
 TEST(WORLD_TEST, TEST_WORLD_SHADING_INTERSECTION) {
-    auto world = default_world();
+    World world = default_world();
 
     auto ray = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
     auto shape = world.get_objects()[0];

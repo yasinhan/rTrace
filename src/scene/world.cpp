@@ -38,34 +38,37 @@ Intersections World::intersect(const Ray &ray) const {
         result.merge(intersections);
     }
 
-    return Intersections(result);
+    return {result};
 }
 
-const std::vector<Shape *> &World::get_objects() const {
+std::vector<Shape *> World::get_objects() const {
     return objects_;
 }
 
-Color World::shade_hit(PrepareComputations prepare) const {
-    return Color();
+Color World::shade_hit(PrepareComputations &prepare) const {
+    return prepare.get_object()->get_material().lighting(*light_,
+                                                         prepare.get_point(),
+                                                         prepare.get_eye_vector(),
+                                                         prepare.get_normal_vector());
 }
 
 World default_world() {
     auto world = World();
-    auto light = Light(Color(1, 1, 1), Tuple::point(-10, 10, -10));
-    world.set_light(&light);
+    auto light = new Light(Color(1, 1, 1), Tuple::point(-10, 10, -10));
+    world.set_light(light);
 
-    auto sphere_1 = Sphere();
+    auto sphere_1 = new Sphere();
     auto material_1 = Material();
     material_1.set_color(Color(0.8, 1.0, 0.6));
     material_1.set_diffuse(0.7);
     material_1.set_specular(0.2);
-    sphere_1.set_material(material_1);
+    sphere_1->set_material(material_1);
 
-    auto sphere_2 = Sphere();
-    sphere_2.set_transform(scaling(0.5, 0.5, 0.5));
+    auto sphere_2 = new Sphere();
+    sphere_2->set_transform(scaling(0.5, 0.5, 0.5));
 
-    world.add_shape(&sphere_1);
-    world.add_shape(&sphere_2);
+    world.add_shape(sphere_1);
+    world.add_shape(sphere_2);
 
     return world;
 }
