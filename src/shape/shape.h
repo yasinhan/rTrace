@@ -19,7 +19,7 @@ public:
 
     void set_material(const Material &material);
 
-    const Material &get_material() const;
+    Material &get_material();
 
     Intersections intersect(const Ray &ray) const;
 

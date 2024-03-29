@@ -53,7 +53,7 @@ TEST(WORLD_TEST, TEST_DEFAUL_WORLD_iNTERSECT) {
 }
 
 TEST(WORLD_TEST, TEST_WORLD_SHADING_INTERSECTION) {
-    World world = default_world();
+    auto world = default_world();
 
     auto ray = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
     auto shape = world.get_objects()[0];
@@ -82,4 +82,34 @@ TEST(WORLD_TEST, TEST_WORLD_SHADING_INTERSECTION_INSIDE) {
     auto prepare = PrepareComputations(intersection.value(), intersections, ray);
     auto c = world.shade_hit(prepare);
     ASSERT_EQ(c, Color(0.90498, 0.90498, 0.90498));
+}
+
+TEST(WORLD_TEST, TEST_COLOR_AT_BLACK) {
+    auto world = default_world();
+    auto ray = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 1, 0));
+
+    auto color = world.color_at(ray);
+    ASSERT_EQ(color, Color(0, 0, 0));
+}
+
+TEST(WORLD_TEST, TEST_COLOR_AT_HIT) {
+    auto world = default_world();
+    auto ray = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
+
+    auto color = world.color_at(ray);
+    ASSERT_EQ(color, Color(0.38066, 0.47583, 0.2855));
+}
+
+TEST(WORLD_TEST, TEST_COLOR_AT_INTERSECTION_BEHIND_RAY) {
+    auto world = default_world();
+    auto shape_0 = world.get_objects()[0];
+    shape_0->get_material().set_ambient(1);
+
+    auto shape_1 = world.get_objects()[1];
+    shape_1->get_material().set_ambient(1);
+
+    auto ray = Ray(Tuple::point(0, 0, 0.75), Tuple::vector(0, 0, -1));
+
+    auto color = world.color_at(ray);
+    ASSERT_EQ(color, shape_1->get_material().get_color());
 }

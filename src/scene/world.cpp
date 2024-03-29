@@ -52,6 +52,10 @@ Color World::shade_hit(PrepareComputations &prepare) const {
                                                          prepare.get_normal_vector());
 }
 
+Color World::color_at(const Ray &ray) const {
+    return Color();
+}
+
 World default_world() {
     auto world = World();
     auto light = new Light(Color(1, 1, 1), Tuple::point(-10, 10, -10));
