@@ -32,7 +32,7 @@ public:
 
     [[nodiscard]] Color shade_hit(PrepareComputations &prepare) const;
 
-    Color color_at(const Ray &ray) const;
+    Color color_at(Ray &ray) const;
 private:
 
     std::vector<Shape*> objects_;

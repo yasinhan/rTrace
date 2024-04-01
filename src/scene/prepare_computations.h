@@ -11,6 +11,7 @@ class PrepareComputations {
 
 public:
     PrepareComputations(Intersection hit, Intersections &intersections, Ray &ray);
+
     ~PrepareComputations() = default;
 
     float get_t() const;

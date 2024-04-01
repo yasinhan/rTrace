@@ -52,8 +52,15 @@ Color World::shade_hit(PrepareComputations &prepare) const {
                                                          prepare.get_normal_vector());
 }
 
-Color World::color_at(const Ray &ray) const {
-    return Color();
+Color World::color_at(Ray &ray) const {
+    auto intersections = this->intersect(ray);
+    auto intersect = intersections.hit();
+    if (!intersect.has_value()) {
+        return {0, 0, 0};
+    }
+    auto prepare = PrepareComputations(intersect.value(), intersections, ray);
+
+    return shade_hit(prepare);
 }
 
 World default_world() {

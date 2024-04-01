@@ -103,10 +103,14 @@ TEST(WORLD_TEST, TEST_COLOR_AT_HIT) {
 TEST(WORLD_TEST, TEST_COLOR_AT_INTERSECTION_BEHIND_RAY) {
     auto world = default_world();
     auto shape_0 = world.get_objects()[0];
-    shape_0->get_material().set_ambient(1);
+    auto material_0 = shape_0->get_material();
+    material_0.set_ambient(1);
+    shape_0->set_material(material_0);
 
     auto shape_1 = world.get_objects()[1];
-    shape_1->get_material().set_ambient(1);
+    auto material_1 = shape_1->get_material();
+    material_1.set_ambient(1);
+    shape_1->set_material(material_1);
 
     auto ray = Ray(Tuple::point(0, 0, 0.75), Tuple::vector(0, 0, -1));
 

@@ -14,7 +14,7 @@ void Shape::set_material(const Material &material) {
     material_ = material;
 }
 
-Material &Shape::get_material() {
+const Material &Shape::get_material() const{
     return material_;
 }
 
