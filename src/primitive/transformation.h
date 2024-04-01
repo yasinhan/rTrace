@@ -18,4 +18,6 @@ Matrix rotate_y(float radian);
 Matrix rotate_z(float radian);
 
 Matrix shearing(float x_y, float x_z, float y_x, float y_z, float z_x, float z_y);
+
+Matrix view_transform(Tuple &from, Tuple &to, Tuple &up);
 #endif //RAY_TRACE_TRANSFORMATION_H

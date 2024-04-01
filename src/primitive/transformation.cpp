@@ -96,3 +96,24 @@ Matrix shearing(float x_y, float x_z, float y_x, float y_z, float z_x, float z_y
     ret.set_value(1, 3, 3);
     return ret;
 }
+
+Matrix view_transform(Tuple &from, Tuple &to, Tuple &up) {
+    auto forward = (to - from).normalized();
+    auto up_normal = up.normalized();
+    auto left = forward.cross(up_normal);
+    auto true_up = left.cross(forward);
+
+    auto orientation = Matrix(4, 4);
+    orientation.set_value(left.getX(), 0, 0);
+    orientation.set_value(left.getY(), 0, 1);
+    orientation.set_value(left.getZ(), 0, 2);
+    orientation.set_value(true_up.getX(), 1, 0);
+    orientation.set_value(true_up.getY(), 1, 1);
+    orientation.set_value(true_up.getZ(), 1, 2);
+    orientation.set_value(-forward.getX(), 2, 0);
+    orientation.set_value(-forward.getY(), 2, 1);
+    orientation.set_value(-forward.getZ(), 2, 2);
+    orientation.set_value(1, 3, 3);
+
+    return orientation * translation(-from.getX(), -from.getY(), -from.getZ());
+}

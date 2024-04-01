@@ -148,3 +148,56 @@ TEST(TRANSFORMATION_TEST, TEST_CHAINED) {
     auto ret_2 = matrix * point;
     ASSERT_EQ(ret_2, ret_1);
 }
+
+TEST(TRANSFORMATION_TEST, TEST_VIEW_TRANSFORM_DEFAULT_ORIENTATION) {
+    auto from = Tuple::point(0, 0, 0);
+    auto to = Tuple::point(0, 0, -1);
+    auto up = Tuple::vector(0, 1, 0);
+    auto transform = view_transform(from, to, up);
+
+    ASSERT_EQ(transform, Matrix::build_identity_matrix(4));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_VIEW_TRANSFORM_LOOKING_IN_POSITIVE_Z) {
+    auto from = Tuple::point(0, 0, 0);
+    auto to = Tuple::point(0, 0, 1);
+    auto up = Tuple::vector(0, 1, 0);
+    auto transform = view_transform(from, to, up);
+
+    ASSERT_EQ(transform, scaling(-1, 1, -1));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_VIEW_TRANSFORM_MOVE_WORLD) {
+    auto from = Tuple::point(0, 0, 8);
+    auto to = Tuple::point(0, 0, 0);
+    auto up = Tuple::vector(0, 1, 0);
+    auto transform = view_transform(from, to, up);
+
+    ASSERT_EQ(transform, translation(0, 0, -8));
+}
+
+TEST(TRANSFORMATION_TEST, TEST_VIEW_TRANSFORM_ARBITRARY_TRANSFORM) {
+    auto from = Tuple::point(1, 3, 2);
+    auto to = Tuple::point(4, -2, 8);
+    auto up = Tuple::vector(1, 1, 0);
+    auto transform = view_transform(from, to, up);
+
+    auto ret = Matrix(4, 4);
+    ret.set_value(-0.50709, 0,0);
+    ret.set_value(0.50709, 0,1);
+    ret.set_value(0.67612, 0, 2);
+    ret.set_value(-2.36643, 0, 3);
+    ret.set_value(0.76772, 1, 0);
+    ret.set_value(0.60609, 1,1);
+    ret.set_value(0.12122, 1, 2);
+    ret.set_value(-2.82843, 1, 3);
+    ret.set_value(-0.35857, 2, 0);
+    ret.set_value(0.59761, 2, 1);
+    ret.set_value(-0.71714, 2, 2);
+    ret.set_value(0, 2, 3);
+    ret.set_value(0, 3, 0);
+    ret.set_value(0, 3, 1);
+    ret.set_value(0, 3, 2);
+    ret.set_value(1, 3, 3);
+    ASSERT_EQ(transform, ret);
+}
