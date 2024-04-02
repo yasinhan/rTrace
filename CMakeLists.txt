@@ -25,6 +25,8 @@ add_executable(
         src/test/primitive/transformation_test.cpp
         src/test/primitive/intersection_test.cpp
         src/test/scene/world_test.cpp
+        src/test/scene/camera_test.cpp
+        src/test/scene/prepare_computations_test.cpp
         src/test/image/ppm_writer_test.cpp
         src/test/shape/sphere_test.cpp
         src/test/shape/material_test.cpp
@@ -45,12 +47,12 @@ add_executable(
         src/display/projectile.cpp
         src/shape/sphere.cpp
         src/shape/material.cpp
+        src/shape/shape.cpp
         src/light/light.cpp
         src/image/ppm_writer.cpp
         src/scene/world.cpp
-        src/shape/shape.cpp
+        src/scene/camera.cpp
         src/scene/prepare_computations.cpp
-        src/test/scene/prepare_computations_test.cpp
 )
 
 add_executable(
