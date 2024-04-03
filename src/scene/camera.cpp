@@ -47,7 +47,16 @@ void Camera::calculate_pixel_size() {
     pixel_size_ = (half_width_ * 2) / h_size_;
 }
 
-Ray &Camera::ray_for_pixel(int x, int y) {
+std::unique_ptr<Ray> Camera::ray_for_pixel(int x, int y) {
+    auto x_offset = (x + 0.5) * pixel_size_;
+    auto y_offset = (y + 0.5) * pixel_size_;
 
-    return <#initializer#>;
+    auto world_x = half_width_ - x_offset;
+    auto world_y = half_height_ - y_offset;
+
+    auto transform_inverse = transform_.inverse();
+    auto pixel = transform_inverse * Tuple::point((float )world_x, (float )world_y, -1);
+    auto origin = transform_inverse * Tuple::point(0, 0, 0);
+    auto direction = (pixel - origin).normalized();
+    return std::make_unique<Ray>(Ray(origin, direction));
 }

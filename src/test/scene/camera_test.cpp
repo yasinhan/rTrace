@@ -34,15 +34,15 @@ TEST(CAMERA_TEST, TEST_PIXEL_SIZE_VERTICAL_CANVAS) {
 TEST(CAMERA_TEST, TEST_RAY_THROUGH_CENTER_OF_CANVAS) {
     auto camera = Camera(201, 101, M_PI_2);
     auto ray = camera.ray_for_pixel(100, 50);
-    ASSERT_EQ(ray.get_origin(), Tuple::point(0, 0, 0));
-    ASSERT_EQ(ray.get_direction(), Tuple::vector(0, 0, -1));
+    ASSERT_EQ(ray->get_origin(), Tuple::point(0, 0, 0));
+    ASSERT_EQ(ray->get_direction(), Tuple::vector(0, 0, -1));
 }
 
 TEST(CAMERA_TEST, TEST_RAY_THROUGH_CORNER_OF_CANVAS) {
     auto camera = Camera(201, 101, M_PI_2);
     auto ray = camera.ray_for_pixel(0, 0);
-    ASSERT_EQ(ray.get_origin(), Tuple::point(0, 0, 0));
-    ASSERT_EQ(ray.get_direction(), Tuple::vector(0.66519, 0.33259, -0.66851));
+    ASSERT_EQ(ray->get_origin(), Tuple::point(0, 0, 0));
+    ASSERT_EQ(ray->get_direction(), Tuple::vector(0.66519, 0.33259, -0.66851));
 }
 
 TEST(CAMERA_TEST, TEST_RAY_WHEN_CAMERA_TRANSFORM) {
@@ -50,6 +50,6 @@ TEST(CAMERA_TEST, TEST_RAY_WHEN_CAMERA_TRANSFORM) {
     auto transform = rotate_y(M_PI_4) * translation(0, -2, 5);
     camera.set_transform(transform);
     auto ray = camera.ray_for_pixel(100, 50);
-    ASSERT_EQ(ray.get_origin(), Tuple::point(0, 2, -5));
-    ASSERT_EQ(ray.get_direction(), Tuple::vector(sqrt(2) / 2, 0, -sqrt(2) / 2));
+    ASSERT_EQ(ray->get_origin(), Tuple::point(0, 2, -5));
+    ASSERT_EQ(ray->get_direction(), Tuple::vector(sqrt(2) / 2, 0, -sqrt(2) / 2));
 }

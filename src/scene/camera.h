@@ -7,6 +7,7 @@
 
 #include "src/primitive/matrix.h"
 #include "src/primitive/ray.h"
+#include <memory>
 
 class Camera {
 public:
@@ -26,7 +27,7 @@ public:
 
     void set_transform(const Matrix &transform);
 
-    Ray &ray_for_pixel(int x, int y);
+    std::unique_ptr<Ray> ray_for_pixel(int x, int y);
 
 private:
     int h_size_, v_size_;
