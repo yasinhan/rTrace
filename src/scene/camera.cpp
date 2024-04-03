@@ -46,3 +46,8 @@ void Camera::calculate_pixel_size() {
     }
     pixel_size_ = (half_width_ * 2) / h_size_;
 }
+
+Ray &Camera::ray_for_pixel(int x, int y) {
+
+    return <#initializer#>;
+}

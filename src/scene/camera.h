@@ -6,6 +6,7 @@
 #define RAY_TRACE_CAMERA_H
 
 #include "src/primitive/matrix.h"
+#include "src/primitive/ray.h"
 
 class Camera {
 public:
@@ -24,6 +25,8 @@ public:
     const Matrix &get_transform() const;
 
     void set_transform(const Matrix &transform);
+
+    Ray &ray_for_pixel(int x, int y);
 
 private:
     int h_size_, v_size_;
