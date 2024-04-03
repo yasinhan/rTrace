@@ -27,8 +27,11 @@ public:
 
 private:
     int h_size_, v_size_;
-    float field_of_view_, pixel_size_;
+    float field_of_view_;
+    float pixel_size_, half_width_, half_height_;
     Matrix transform_ = Matrix::build_identity_matrix(4);
+
+    void calculate_pixel_size();
 };
 
 
