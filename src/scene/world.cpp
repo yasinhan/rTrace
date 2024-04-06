@@ -52,7 +52,7 @@ Color World::shade_hit(PrepareComputations &prepare) const {
                                                          prepare.get_normal_vector());
 }
 
-Color World::color_at(Ray &ray) const {
+Color World::color_at(Ray &ray) {
     auto intersections = this->intersect(ray);
     auto intersect = intersections.hit();
     if (!intersect.has_value()) {

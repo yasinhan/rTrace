@@ -64,5 +64,5 @@ TEST(CAMERA_TEST, TEST_RENDER_WORLD) {
 
     camera.set_transform(view_transform(from, to, up));
     auto image = camera.render(world);
-    ASSERT_EQ(image.pixel_at(5, 5), Color(0.38066, 0.47583, 0.2855));
+    ASSERT_EQ(image->pixel_at(5, 5), Color(0.38066, 0.47583, 0.2855));
 }
