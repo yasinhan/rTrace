@@ -7,6 +7,8 @@
 
 #include "src/primitive/matrix.h"
 #include "src/primitive/ray.h"
+#include "src/display/canvas.h"
+#include "world.h"
 #include <memory>
 
 class Camera {
@@ -29,6 +31,7 @@ public:
 
     std::unique_ptr<Ray> ray_for_pixel(int x, int y);
 
+    Canvas &render(World &world) const;
 private:
     int h_size_, v_size_;
     float field_of_view_;

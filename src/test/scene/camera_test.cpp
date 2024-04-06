@@ -53,3 +53,16 @@ TEST(CAMERA_TEST, TEST_RAY_WHEN_CAMERA_TRANSFORM) {
     ASSERT_EQ(ray->get_origin(), Tuple::point(0, 2, -5));
     ASSERT_EQ(ray->get_direction(), Tuple::vector(sqrt(2) / 2, 0, -sqrt(2) / 2));
 }
+
+TEST(CAMERA_TEST, TEST_RENDER_WORLD) {
+    auto world = default_world();
+    auto camera = Camera(11, 11, M_PI_2);
+
+    auto from = Tuple::point(0, 0, -5);
+    auto to = Tuple::point(0, 0, 0);
+    auto up = Tuple::vector(0, 1, 0);
+
+    camera.set_transform(view_transform(from, to, up));
+    auto image = camera.render(world);
+    ASSERT_EQ(image.pixel_at(5, 5), Color(0.38066, 0.47583, 0.2855));
+}

@@ -60,3 +60,7 @@ std::unique_ptr<Ray> Camera::ray_for_pixel(int x, int y) {
     auto direction = (pixel - origin).normalized();
     return std::make_unique<Ray>(Ray(origin, direction));
 }
+
+Canvas &Camera::render(World &world) const {
+    return <#initializer#>;
+}
