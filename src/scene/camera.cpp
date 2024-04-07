@@ -62,15 +62,15 @@ std::unique_ptr<Ray> Camera::ray_for_pixel(int x, int y) {
 }
 
 std::unique_ptr<Canvas> Camera::render(World &world) {
-    auto canvas = Canvas(this->h_size_, this->v_size_);
+    auto canvas = std::make_unique<Canvas>(Canvas(this->h_size_, this->v_size_));
 
     for (int y = 0; y < v_size_ - 1; ++y) {
         for (int x = 0; x < h_size_ - 1; ++x) {
             auto ray = ray_for_pixel(x, y);
             auto color = world.color_at(*ray);
-            canvas.write_pixel(x, y, color);
+            canvas->write_pixel(x, y, color);
         }
 
     }
-    return std::make_unique<Canvas>(canvas);
+    return canvas;
 }
