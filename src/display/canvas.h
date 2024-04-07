@@ -23,6 +23,10 @@ public:
 
     Color pixel_at(int x, int y);
 
+    Canvas &operator=(const Canvas &other);
+
+    Canvas(const Canvas &other);
+
 private:
     int w_;
     int h_;

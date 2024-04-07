@@ -4,6 +4,7 @@
 
 #include <cstdlib>
 #include "canvas.h"
+#include <cstring>
 
 Canvas::Canvas(int width, int height) {
     w_ = width;
@@ -42,3 +43,24 @@ int Canvas::get_h() const {
     return h_;
 }
 
+Canvas::Canvas(const Canvas &other) {
+    w_ = other.w_;
+    h_ = other.h_;
+    canvas_ = (float *) calloc(sizeof(float), w_ * h_ * 3);
+    memcpy(canvas_, other.canvas_, w_ * h_ * 3 * sizeof(float));
+}
+
+Canvas &Canvas::operator=(const Canvas &other) {
+    if (this != &other) {
+        if (w_ == other.w_ && h_ == other.h_) {
+            memcpy(canvas_, other.canvas_, w_ * h_ * 3 * sizeof(float));
+        } else {
+            w_ = other.w_;
+            h_ = other.h_;
+            free(canvas_);
+            canvas_ = (float *) calloc(sizeof(float), w_ * h_ * 3);
+            memcpy(canvas_, other.canvas_, w_ * h_ * 3 * sizeof(float));
+        }
+    }
+    return *this;
+}
