@@ -55,10 +55,33 @@ add_executable(
         src/scene/prepare_computations.cpp
 )
 
+add_library(
+        basic
+        src/primitive/tuple.cpp
+        src/primitive/color.cpp
+        src/primitive/matrix.cpp
+        src/primitive/vector.cpp
+        src/primitive/matrix_sub.cpp
+        src/primitive/transformation.cpp
+        src/primitive/ray.cpp
+        src/primitive/intersection.cpp
+        src/primitive/intersections.cpp
+        src/math.h
+        src/display/canvas.cpp
+        src/display/projectile.cpp
+        src/shape/sphere.cpp
+        src/shape/material.cpp
+        src/shape/shape.cpp
+        src/light/light.cpp
+        src/image/ppm_writer.cpp
+        src/scene/world.cpp
+        src/scene/camera.cpp
+        src/scene/prepare_computations.cpp
+)
+
 add_executable(
-        main
-        src/main.cpp
-        src/application/run_projectile.cpp
+        display
+        src/application/render.cpp
 )
 
 target_link_libraries(
@@ -66,5 +89,11 @@ target_link_libraries(
         gtest
         GTest::gtest_main
 )
+
+target_link_libraries(
+        display
+        basic
+)
+
 include(GoogleTest)
 gtest_discover_tests(tests)
