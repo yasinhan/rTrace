@@ -61,8 +61,8 @@ std::unique_ptr<Ray> Camera::ray_for_pixel(int x, int y) {
     return std::make_unique<Ray>(Ray(origin, direction));
 }
 
-std::unique_ptr<Canvas> Camera::render(World &world) {
-    auto canvas = std::make_unique<Canvas>(Canvas(this->h_size_, this->v_size_));
+Canvas *Camera::render(World &world) {
+    auto canvas = new Canvas(this->h_size_, this->v_size_);
 
     for (int y = 0; y < v_size_ - 1; ++y) {
         for (int x = 0; x < h_size_ - 1; ++x) {

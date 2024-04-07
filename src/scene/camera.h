@@ -31,7 +31,7 @@ public:
 
     std::unique_ptr<Ray> ray_for_pixel(int x, int y);
 
-    std::unique_ptr<Canvas> render(World &world);
+    Canvas *render(World &world);
 private:
     int h_size_, v_size_;
     float field_of_view_;

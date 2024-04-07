@@ -9,6 +9,7 @@
 #include "src/image/ppm_writer.h"
 #include <cmath>
 #include <iostream>
+#include <sstream>
 
 int main() {
     auto floor = Sphere();
@@ -69,8 +70,10 @@ int main() {
     camera.set_transform(view_transform(from, to, up));
 
     auto canvas = camera.render(world);
-    auto writer = PPMWriter(reinterpret_cast<Canvas *>(&canvas));
-    writer.write_file(std::string("output/1.ppm"));
+    auto writer = PPMWriter(canvas);
+    std::ostringstream stream;
+    writer.write_stream(stream);
+    std::cout << stream.str();
 
     return 0;
 }
