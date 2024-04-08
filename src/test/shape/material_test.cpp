@@ -20,7 +20,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_EYE_BETWEEN_SURFACE) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, -10));
 
-    auto ret = m.lighting(light, position, eye, normal);
+    auto ret = m.lighting(light, position, eye, normal, false);
     ASSERT_EQ(ret, Color(1.9, 1.9, 1.9));
 }
 
@@ -32,7 +32,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_EYE_BETWEEN_SURFACE_AND_45) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, -10));
 
-    auto ret = m.lighting(light, position, eye, normal);
+    auto ret = m.lighting(light, position, eye, normal, false);
     ASSERT_EQ(ret, Color(1.0, 1.0, 1.0));
 }
 
@@ -44,7 +44,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_EYE_OPPOSITE_SURFACE_LIGHT_45) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 10, -10));
 
-    auto ret = m.lighting(light, position, eye, normal);
+    auto ret = m.lighting(light, position, eye, normal, false);
     ASSERT_EQ(ret, Color(0.7364, 0.7364, 0.7364));
 }
 
@@ -56,7 +56,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_EYE_45_LIGHT_45_SURFACE) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 10, -10));
 
-    auto ret = m.lighting(light, position, eye, normal);
+    auto ret = m.lighting(light, position, eye, normal, false);
     ASSERT_EQ(ret, Color(1.6364, 1.6364, 1.6364));
 }
 
@@ -68,6 +68,18 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_LIGHT_BEHIND_SURFACE) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, 10));
 
-    auto ret = m.lighting(light, position, eye, normal);
+    auto ret = m.lighting(light, position, eye, normal, false);
+    ASSERT_EQ(ret, Color(0.1, 0.1, 0.1));
+}
+
+TEST(MATERIAL_TEST, TEST_LIGHTING_WITH_SURFACE_IN_SHADOW) {
+    auto m = Material();
+    auto position = Tuple::point(0, 0, 0);
+
+    auto eye = Tuple::vector(0, 0, -1);
+    auto normal = Tuple::vector(0, 0, -1);
+    auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, -10));
+
+    auto ret = m.lighting(light, position, eye, normal, true);
     ASSERT_EQ(ret, Color(0.1, 0.1, 0.1));
 }
