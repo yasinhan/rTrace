@@ -3,6 +3,7 @@
 //
 
 #include "prepare_computations.h"
+#include "src/math.h"
 
 PrepareComputations::PrepareComputations(Intersection hit, Intersections &intersections, Ray &ray) {
     this->t_ = hit.get_t();
@@ -17,7 +18,7 @@ PrepareComputations::PrepareComputations(Intersection hit, Intersections &inters
     } else {
         this->inside_ = false;
     }
-
+    this->over_point_ = point_ + normal_vector_ * EPSILON;
 }
 
 float PrepareComputations::get_t() const {
