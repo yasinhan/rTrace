@@ -16,6 +16,9 @@ Material::Material() {
 Color Material::lighting(Light &light, const Tuple &position, const Tuple &eye_vector, const Tuple &normal_vector, bool in_shadow) const {
     auto effective_color = this->color_ * light.get_intensity();
     auto ambient_color = effective_color * this->ambient_;
+    if (in_shadow) {
+        return ambient_color;
+    }
 
     auto light_vector = (light.get_position() - position).normalized();
     auto light_dot_normal = light_vector.dot(normal_vector);
