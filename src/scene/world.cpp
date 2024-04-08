@@ -53,7 +53,7 @@ Color World::shade_hit(PrepareComputations &prepare) const {
                                                          false);
 }
 
-Color World::color_at(Ray &ray) {
+Color World::color_at(Ray &ray) const {
     auto intersections = this->intersect(ray);
     auto intersect = intersections.hit();
     if (!intersect.has_value()) {
@@ -62,6 +62,18 @@ Color World::color_at(Ray &ray) {
     auto prepare = PrepareComputations(intersect.value(), intersections, ray);
 
     return shade_hit(prepare);
+}
+
+bool World::is_shadowed(const Tuple &point) const {
+    auto vec = light_->get_position() - point;
+    auto distance = vec.get_magnitude();
+    auto direction = vec.normalized();
+
+    auto ray = Ray(point, direction);
+    auto intersections = this->intersect(ray);
+    auto intersect = intersections.hit();
+
+    return intersect.has_value() && intersect.value().get_t() < distance;
 }
 
 World default_world() {

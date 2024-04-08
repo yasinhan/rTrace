@@ -32,7 +32,7 @@ public:
 
     [[nodiscard]] Color shade_hit(PrepareComputations &prepare) const;
 
-    Color color_at(Ray &ray);
+    Color color_at(Ray &ray) const;
 
     bool is_shadowed(const Tuple &point) const;
 private:
