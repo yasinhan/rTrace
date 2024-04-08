@@ -43,3 +43,7 @@ const Tuple &PrepareComputations::get_normal_vector() const {
 bool PrepareComputations::is_inside() const {
     return inside_;
 }
+
+const Tuple &PrepareComputations::get_over_point() const {
+    return over_point_;
+}

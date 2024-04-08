@@ -46,6 +46,7 @@ std::vector<Shape *> World::get_objects() const {
 }
 
 Color World::shade_hit(PrepareComputations &prepare) const {
+//    auto is_shadowed = this->is_shadowed(prepare.get_point());
     return prepare.get_object()->get_material().lighting(*light_,
                                                          prepare.get_point(),
                                                          prepare.get_eye_vector(),
