@@ -33,6 +33,8 @@ public:
     [[nodiscard]] Color shade_hit(PrepareComputations &prepare) const;
 
     Color color_at(Ray &ray);
+
+    bool is_shadowed(const Tuple &point) const;
 private:
 
     std::vector<Shape*> objects_;

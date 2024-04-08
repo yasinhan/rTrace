@@ -117,3 +117,31 @@ TEST(WORLD_TEST, TEST_COLOR_AT_INTERSECTION_BEHIND_RAY) {
     auto color = world.color_at(ray);
     ASSERT_EQ(color, shape_1->get_material().get_color());
 }
+
+TEST(WORLD_TEST, TEST_NO_SHADOW_WHEN_POINT_LIGHT_COLLINEAR) {
+    auto world = default_world();
+    auto p = Tuple::point(0, 10, 0);
+
+    ASSERT_FALSE(world.is_shadowed(p));
+}
+
+TEST(WORLD_TEST, TEST_SHADOW_WHEN_OBJECT_BETWEEN_POINT_LIGHT) {
+    auto world = default_world();
+    auto p = Tuple::point(10, -10, 10);
+
+    ASSERT_TRUE(world.is_shadowed(p));
+}
+
+TEST(WORLD_TEST, TEST_NO_SHADOW_WHEN_OBJET_BEHIND_LIGHT) {
+    auto world = default_world();
+    auto p = Tuple::point(-20, 20, -20);
+
+    ASSERT_FALSE(world.is_shadowed(p));
+}
+
+TEST(WORLD_TEST, TEST_NO_SHADOW_WHEN_OBJET_BEHIND_POINT) {
+    auto world = default_world();
+    auto p = Tuple::point(-2, 2, -2);
+
+    ASSERT_FALSE(world.is_shadowed(p));
+}
