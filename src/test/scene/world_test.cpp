@@ -145,3 +145,26 @@ TEST(WORLD_TEST, TEST_NO_SHADOW_WHEN_OBJET_BEHIND_POINT) {
 
     ASSERT_FALSE(world.is_shadowed(p));
 }
+
+TEST(WORLD_TEST, TEST_SHADE_HIT_INTERSECTION_IN_SHADOW) {
+    auto world = World();
+    auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, -10));
+    world.set_light(&light);
+
+    auto sphere_1 = Sphere();
+    auto sphere_2 = Sphere();
+    sphere_2.set_transform(translation(0, 0, 10));
+
+    world.add_shape(&sphere_1);
+    world.add_shape(&sphere_2);
+
+    auto ray = Ray(Tuple::point(0, 0, 5), Tuple::vector(0, 0, 1));
+    auto intersections = sphere_2.intersect(ray);
+    auto intersect = intersections.hit();
+
+    ASSERT_TRUE(intersect.has_value());
+
+    auto prepare = PrepareComputations(intersect.value(), intersections, ray);
+    auto color = world.shade_hit(prepare);
+    ASSERT_EQ(color, Color(0.1, 0.1, 0.1));
+}
