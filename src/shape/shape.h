@@ -5,9 +5,9 @@
 #ifndef RAY_TRACE_SHAPE_H
 #define RAY_TRACE_SHAPE_H
 
-#include "src//primitive/tuple.h"
-#include "src//primitive/ray.h"
-#include "src//primitive/intersections.h"
+#include "src/primitive/tuple.h"
+#include "src/primitive/ray.h"
+#include "src/primitive/intersections.h"
 #include "material.h"
 
 class Shape {

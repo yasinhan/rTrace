@@ -33,26 +33,7 @@ add_executable(
         src/test/display/projectile_test.cpp
         src/test/display/canvas_test.cpp
         src/test/light/light_test.cpp
-        src/primitive/tuple.cpp
-        src/primitive/color.cpp
-        src/primitive/matrix.cpp
-        src/primitive/vector.cpp
-        src/primitive/matrix_sub.cpp
-        src/primitive/transformation.cpp
-        src/primitive/ray.cpp
-        src/primitive/intersection.cpp
-        src/primitive/intersections.cpp
-        src/math.h
-        src/display/canvas.cpp
-        src/display/projectile.cpp
-        src/shape/sphere.cpp
-        src/shape/material.cpp
-        src/shape/shape.cpp
-        src/light/light.cpp
-        src/image/ppm_writer.cpp
-        src/scene/world.cpp
-        src/scene/camera.cpp
-        src/scene/prepare_computations.cpp
+        src/test/shape/plane_test.cpp
 )
 
 add_library(
@@ -77,6 +58,7 @@ add_library(
         src/scene/world.cpp
         src/scene/camera.cpp
         src/scene/prepare_computations.cpp
+        src/shape/plane.cpp
 )
 
 add_executable(
@@ -88,6 +70,7 @@ target_link_libraries(
         tests
         gtest
         GTest::gtest_main
+        basic
 )
 
 target_link_libraries(
