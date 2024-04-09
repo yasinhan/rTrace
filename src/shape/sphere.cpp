@@ -8,20 +8,11 @@ Sphere::Sphere() {
     origin_ = Tuple::point(0, 0, 0);
 }
 
-Intersections Sphere::intersect(const Ray& ray) const {
-    return intersect_with(ray);
-}
-
-
 Intersections Sphere::intersect_with(const Ray& ray) const {
-    auto actual_ray = ray;
-    if (has_trans) {
-        actual_ray = ray.transform(inverse_trans);
-    }
 
-    auto sphere_to_ray = actual_ray.get_origin() - this->origin_;
-    auto a = actual_ray.get_direction().self_dot();
-    auto b = 2 * actual_ray.get_direction().dot(sphere_to_ray);
+    auto sphere_to_ray = ray.get_origin() - this->origin_;
+    auto a = ray.get_direction().self_dot();
+    auto b = 2 * ray.get_direction().dot(sphere_to_ray);
     auto c = sphere_to_ray.self_dot() - 1;
 
     auto discriminant = b * b - 4 * a * c;
@@ -35,12 +26,7 @@ Intersections Sphere::intersect_with(const Ray& ray) const {
     return Intersections(std::vector<Intersection>{Intersection(t1, this), Intersection(t2, this)});
 }
 
-Tuple Sphere::normal_at(const Tuple &point) const {
-    if (!has_trans) {
-        return (point - this->origin_).normalized();
-    }
-    auto object_normal = inverse_trans * point - origin_;
-    auto world_normal = inverse_trans.transpose() * object_normal;
-    world_normal.setW(0);
-    return world_normal.normalized();
+Tuple &Sphere::local_normal_at(const Tuple &point) const {
+    auto vector = point - this->origin_;
+    return vector;
 }

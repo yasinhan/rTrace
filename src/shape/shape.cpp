@@ -19,9 +19,18 @@ const Material &Shape::get_material() const{
 }
 
 Intersections Shape::intersect(const Ray &ray) const {
-    return intersect_with(ray);
+    auto actual_ray = ray;
+    if (has_trans) {
+        actual_ray = ray.transform(inverse_trans);
+    }
+    return intersect_with(actual_ray);
 }
 
 Tuple Shape::normal_at(const Tuple &point) const {
-    return Tuple::vector(0, 0, 0);
+    auto local_point = has_trans ? inverse_trans * point : point;
+    auto local_normal = local_normal_at(local_point);
+
+    auto world_normal = inverse_trans.transpose() * local_normal;
+    world_normal.setW(0.0);
+    return world_normal.normalized();
 }

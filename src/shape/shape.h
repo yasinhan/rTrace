@@ -19,15 +19,17 @@ public:
 
     void set_material(const Material &material);
 
-    const Material &get_material() const;
+    [[nodiscard]] const Material &get_material() const;
 
-    Intersections intersect(const Ray &ray) const;
+    [[nodiscard]] Intersections intersect(const Ray &ray) const;
 
-    [[nodiscard]] virtual Tuple normal_at(const Tuple &point) const;
+    [[nodiscard]] Tuple normal_at(const Tuple &point) const;
 
 protected:
 
     virtual Intersections intersect_with(const Ray &ray) const = 0;
+
+    virtual Tuple &local_normal_at(const Tuple &point) const = 0;
 
     Matrix trans_ = Matrix::build_identity_matrix(4);
 

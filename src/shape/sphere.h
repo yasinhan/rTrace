@@ -18,14 +18,12 @@ public:
 
     ~Sphere() = default;
 
-    Intersections intersect(const Ray &ray) const;
-
-    [[nodiscard]] Tuple normal_at(const Tuple &point) const override;
-
 private:
     Tuple origin_;
 
     [[nodiscard]] Intersections intersect_with(const Ray &ray) const override;
+
+    [[nodiscard]] Tuple &local_normal_at(const Tuple &point) const override;
 
 };
 
