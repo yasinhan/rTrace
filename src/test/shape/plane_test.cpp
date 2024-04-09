@@ -23,3 +23,35 @@ TEST(PLANE_TEST, TEST_LOCAL_NORMAL_AT) {
     ASSERT_EQ(n2, normal);
     ASSERT_EQ(n3, normal);
 }
+
+TEST(PLANE_TEST, TEST_INTERSECT_WITH_RAY_PARALLEL) {
+    auto plane = Plane();
+
+    auto ray = Ray(Tuple::point(0, 10, 0), Tuple::vector(0, 0, 1));
+    auto intersections = plane.intersect_with(ray);
+    ASSERT_TRUE(intersections.count() == 0);
+
+    auto ray_1 = Ray(Tuple::point(0, 0, 0), Tuple::vector(0, 0, 1));
+    auto intersections_1 = plane.intersect_with(ray_1);
+    ASSERT_TRUE(intersections_1.count() == 0);
+}
+
+TEST(PLANE_TEST, TEST_INTERSECT_WITH_RAY_ABOVE) {
+    auto plane = Plane();
+
+    auto ray = Ray(Tuple::point(0, 1, 0), Tuple::vector(0, -1, 0));
+    auto intersections = plane.intersect_with(ray);
+    ASSERT_EQ(intersections.count(), 1);
+    ASSERT_FLOAT_EQ(intersections[0].get_t(), 1);
+    ASSERT_EQ(intersections[0].get_obj(), &plane);
+}
+
+TEST(PLANE_TEST, TEST_INTERSECT_WITH_RAY_BELOW) {
+    auto plane = Plane();
+
+    auto ray = Ray(Tuple::point(0, -1, 0), Tuple::vector(0, 1, 0));
+    auto intersections = plane.intersect_with(ray);
+    ASSERT_EQ(intersections.count(), 1);
+    ASSERT_FLOAT_EQ(intersections[0].get_t(), 1);
+    ASSERT_EQ(intersections[0].get_obj(), &plane);
+}
