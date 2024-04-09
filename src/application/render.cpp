@@ -59,9 +59,15 @@ int main() {
     material_left.set_specular(0.3);
     left.set_material(material_left);
 
-    auto world = default_world();
+    auto world = World();
     auto light = Light(Color(1, 1, 1), Tuple::point(-10, 10, -10));
     world.set_light(&light);
+    world.add_shape(&floor);
+    world.add_shape(&left_wall);
+    world.add_shape(&right_wall);
+    world.add_shape(&middle);
+    world.add_shape(&right);
+    world.add_shape(&left);
 
     auto camera = Camera(100, 50, M_PI / 3);
     auto from = Tuple::point(0, 1.5, -5);
