@@ -16,7 +16,7 @@ public:
 
     [[nodiscard]] Intersections intersect_with(const Ray &ray) const override;
 
-    [[nodiscard]] Tuple &local_normal_at(const Tuple &point) const override;
+    [[nodiscard]] Tuple local_normal_at(const Tuple &point) const override;
 
 };
 

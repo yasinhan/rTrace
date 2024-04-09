@@ -29,7 +29,7 @@ protected:
 
     virtual Intersections intersect_with(const Ray &ray) const = 0;
 
-    virtual Tuple &local_normal_at(const Tuple &point) const = 0;
+    virtual Tuple local_normal_at(const Tuple &point) const = 0;
 
     Matrix trans_ = Matrix::build_identity_matrix(4);
 

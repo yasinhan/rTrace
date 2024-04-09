@@ -26,7 +26,6 @@ Intersections Sphere::intersect_with(const Ray& ray) const {
     return Intersections(std::vector<Intersection>{Intersection(t1, this), Intersection(t2, this)});
 }
 
-Tuple &Sphere::local_normal_at(const Tuple &point) const {
-    auto vector = point - this->origin_;
-    return vector;
+Tuple Sphere::local_normal_at(const Tuple &point) const {
+    return point - this->origin_;
 }
