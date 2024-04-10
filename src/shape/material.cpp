@@ -14,7 +14,13 @@ Material::Material() {
 }
 
 Color Material::lighting(Light &light, const Tuple &position, const Tuple &eye_vector, const Tuple &normal_vector, bool in_shadow) const {
-    auto effective_color = this->color_ * light.get_intensity();
+    Color color;
+    if (nullptr != pattern_) {
+        color = pattern_->stripe_at(position);
+    } else {
+        color = this->color_;
+    }
+    auto effective_color = color * light.get_intensity();
     auto ambient_color = effective_color * this->ambient_;
     if (in_shadow) {
         return ambient_color;
@@ -84,7 +90,7 @@ void Material::set_shininess(float shininess) {
     shininess_ = shininess;
 }
 
-void Material::setPattern(StripePattern *pattern) {
+void Material::set_pattern(StripePattern *pattern) {
     pattern_ = pattern;
 }
 
