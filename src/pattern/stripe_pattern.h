@@ -6,6 +6,7 @@
 #define RAY_TRACE_STRIPE_PATTERN_H
 
 #include "src/primitive/color.h"
+#include "src/primitive/tuple.h"
 
 class StripePattern {
 public:
@@ -15,6 +16,8 @@ public:
     [[nodiscard]] Color color_a() const;
 
     [[nodiscard]] Color color_b() const;
+
+    [[nodiscard]] Color stripe_at(const Tuple &point) const;
 private:
     Color a_, b_;
 };

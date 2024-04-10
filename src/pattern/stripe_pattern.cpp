@@ -12,3 +12,7 @@ Color StripePattern::color_a() const {
 Color StripePattern::color_b() const {
     return b_;
 }
+
+Color StripePattern::stripe_at(const Tuple &point) const {
+    return Color();
+}
