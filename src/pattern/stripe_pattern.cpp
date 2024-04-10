@@ -2,6 +2,7 @@
 // Created by han on 4/10/24.
 //
 #include "stripe_pattern.h"
+#include <cmath>
 
 StripePattern::StripePattern(const Color &a, const Color &b) : a_(a), b_(b) {}
 
@@ -14,5 +15,5 @@ Color StripePattern::color_b() const {
 }
 
 Color StripePattern::stripe_at(const Tuple &point) const {
-    return Color();
+    return (int )std::floor(point.getX()) % 2 == 0 ? a_ : b_;
 }
