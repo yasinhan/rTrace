@@ -10,7 +10,7 @@
 
 class StripePattern {
 public:
-    StripePattern(const Color &a, const Color &b);
+    StripePattern(Color a, Color b);
     ~StripePattern() = default;
 
     [[nodiscard]] Color color_a() const;

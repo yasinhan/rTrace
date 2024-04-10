@@ -4,7 +4,7 @@
 #include "stripe_pattern.h"
 #include <cmath>
 
-StripePattern::StripePattern(const Color &a, const Color &b) : a_(a), b_(b) {}
+StripePattern::StripePattern(Color a, Color b) : a_(a), b_(b) {}
 
 Color StripePattern::color_a() const {
     return a_;

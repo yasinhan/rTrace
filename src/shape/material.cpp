@@ -84,6 +84,10 @@ void Material::set_shininess(float shininess) {
     shininess_ = shininess;
 }
 
+void Material::setPattern(StripePattern *pattern) {
+    pattern_ = pattern;
+}
+
 bool operator==(const Material &lhs, const Material &rhs) {
     return lhs.get_color() == rhs.get_color()
             && lhs.get_ambient() == rhs.get_ambient()
