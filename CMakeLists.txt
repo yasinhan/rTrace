@@ -34,6 +34,7 @@ add_executable(
         src/test/display/canvas_test.cpp
         src/test/light/light_test.cpp
         src/test/shape/plane_test.cpp
+        src/test/pattern/stripe_pattern_test.cpp
 )
 
 add_library(
@@ -59,6 +60,7 @@ add_library(
         src/scene/camera.cpp
         src/scene/prepare_computations.cpp
         src/shape/plane.cpp
+        src/pattern/stripe_pattern.cpp
 )
 
 add_executable(
