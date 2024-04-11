@@ -4,6 +4,8 @@
 #include <gtest/gtest.h>
 #include "src/primitive/color.h"
 #include "src/pattern/stripe_pattern.h"
+#include "src/shape/sphere.h"
+#include "src/primitive/transformation.h"
 
 class StripePatternTest : public ::testing::Test {
 protected:
@@ -45,4 +47,17 @@ TEST(STRIPE_PATTERN_TEST, TEST_ALTERNATES_IN_X) {
     ASSERT_EQ(pattern.stripe_at(Tuple::point(-0.1, 0, 0)), black_);
     ASSERT_EQ(pattern.stripe_at(Tuple::point(-1, 0, 0)), black_);
     ASSERT_EQ(pattern.stripe_at(Tuple::point(-1.1, 0, 0)), white_);
+}
+
+TEST(STRIPE_PATTERN_TEST, TEST_STRIPE_WITH_TRANSFORM_OBJECT) {
+    auto object = Sphere();
+    object.set_transform(scaling(2, 2, 2));
+
+    auto pattern = StripePattern(white_, black_);
+    auto material = Material();
+
+    material.set_pattern(&pattern);
+    object.set_material(material);
+    auto color = object.pattern_at(Tuple::point(1.5, 0, 0));
+    ASSERT_EQ(color, white_);
 }

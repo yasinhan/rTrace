@@ -25,6 +25,8 @@ public:
 
     [[nodiscard]] Tuple normal_at(const Tuple &point) const;
 
+    [[nodiscard]] Color pattern_at(const Tuple &point) const;
+
 protected:
 
     virtual Intersections intersect_with(const Ray &ray) const = 0;

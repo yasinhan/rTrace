@@ -34,3 +34,7 @@ Tuple Shape::normal_at(const Tuple &point) const {
     world_normal.setW(0.0);
     return world_normal.normalized();
 }
+
+Color Shape::pattern_at(const Tuple &point) const {
+    return Color();
+}
