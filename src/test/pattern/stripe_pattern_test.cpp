@@ -64,13 +64,27 @@ TEST(STRIPE_PATTERN_TEST, TEST_STRIPE_WITH_TRANSFORM_OBJECT) {
 
 TEST(STRIPE_PATTERN_TEST, TEST_STRIPE_WITH_TRANSFORM_PATTERN) {
     auto object = Sphere();
-    object.set_transform(scaling(2, 2, 2));
 
     auto pattern = StripePattern(white_, black_);
+    pattern.set_transform(scaling(2, 2, 2));
     auto material = Material();
 
     material.set_pattern(&pattern);
     object.set_material(material);
     auto color = object.pattern_at(Tuple::point(1.5, 0, 0));
+    ASSERT_EQ(color, white_);
+}
+
+TEST(STRIPE_PATTERN_TEST, TEST_STRIPE_WITH_TRANSFORM_PATTERN_OBJECT_TRANS) {
+    auto object = Sphere();
+    object.set_transform(scaling(2, 2, 2));
+
+    auto pattern = StripePattern(white_, black_);
+    pattern.set_transform(translation(0.5, 0, 0));
+    auto material = Material();
+
+    material.set_pattern(&pattern);
+    object.set_material(material);
+    auto color = object.pattern_at(Tuple::point(2.5, 0, 0));
     ASSERT_EQ(color, white_);
 }
