@@ -44,6 +44,8 @@ public:
 
     void set_pattern(StripePattern *pattern);
 
+    StripePattern *get_pattern() const;
+
 private:
     Color color_;
     float ambient_, diffuse_, specular_, shininess_;

@@ -94,6 +94,10 @@ void Material::set_pattern(StripePattern *pattern) {
     pattern_ = pattern;
 }
 
+StripePattern *Material::get_pattern() const {
+    return pattern_;
+}
+
 bool operator==(const Material &lhs, const Material &rhs) {
     return lhs.get_color() == rhs.get_color()
             && lhs.get_ambient() == rhs.get_ambient()

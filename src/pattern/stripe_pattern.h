@@ -22,6 +22,8 @@ public:
 
     void set_transform(const Matrix &transform);
 
+    Color color_at(const Tuple &point) const;
+
 private:
     Color a_, b_;
 

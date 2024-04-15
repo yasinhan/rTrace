@@ -23,3 +23,11 @@ void StripePattern::set_transform(const Matrix &transform) {
     inverse_trans = trans_.inverse();
     has_trans = true;
 }
+
+Color StripePattern::color_at(const Tuple &point) const {
+    if (has_trans) {
+        auto actual_point = inverse_trans * point;
+        return stripe_at(actual_point);
+    }
+    return stripe_at(point);
+}
