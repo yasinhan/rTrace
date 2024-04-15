@@ -4,6 +4,7 @@
 
 #include "material.h"
 #include <cmath>
+#include "shape.h"
 
 Material::Material() {
     color_ = Color(1, 1, 1);
@@ -13,7 +14,11 @@ Material::Material() {
     shininess_ = DEFAULT_SHININESS;
 }
 
-Color Material::lighting(Light &light, const Tuple &position, const Tuple &eye_vector, const Tuple &normal_vector, bool in_shadow) const {
+Color Material::lighting(Light &light,
+                         const Tuple &position,
+                         const Tuple &eye_vector,
+                         const Tuple &normal_vector,
+                         bool in_shadow) const {
     Color color;
     if (nullptr != pattern_) {
         color = pattern_->stripe_at(position);

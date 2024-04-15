@@ -13,6 +13,7 @@ static const float DEFAULT_DIFFUSE = 0.9;
 static const float DEFAULT_SPECULAR = 0.9;
 static const float DEFAULT_SHININESS = 200.0;
 
+class Shape;
 
 class Material {
 public:
