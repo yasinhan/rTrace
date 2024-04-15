@@ -8,8 +8,9 @@
 #include "src/primitive/color.h"
 #include "src/primitive/tuple.h"
 #include "src/primitive/matrix.h"
+#include "pattern.h"
 
-class StripePattern {
+class StripePattern : public Pattern {
 public:
     StripePattern(Color a, Color b);
     ~StripePattern() = default;
@@ -18,20 +19,10 @@ public:
 
     [[nodiscard]] Color color_b() const;
 
-    [[nodiscard]] Color stripe_at(const Tuple &point) const;
-
-    void set_transform(const Matrix &transform);
-
-    Color color_at(const Tuple &point) const;
+    [[nodiscard]] Color color_at_pattern(const Tuple &point) const override;
 
 private:
     Color a_, b_;
-
-    Matrix trans_ = Matrix::build_identity_matrix(4);
-
-    Matrix inverse_trans = trans_;
-
-    bool has_trans = false;
 };
 
 #endif //RAY_TRACE_STRIPE_PATTERN_H

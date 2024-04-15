@@ -45,12 +45,12 @@ public:
 
     void set_pattern(StripePattern *pattern);
 
-    StripePattern *get_pattern() const;
+    [[nodiscard]] Pattern *get_pattern() const;
 
 private:
     Color color_;
     float ambient_, diffuse_, specular_, shininess_;
-    StripePattern *pattern_ = nullptr;
+    Pattern *pattern_ = nullptr;
 };
 
 bool operator==(const Material &lhs, const Material &rhs);

@@ -14,20 +14,6 @@ Color StripePattern::color_b() const {
     return b_;
 }
 
-Color StripePattern::stripe_at(const Tuple &point) const {
-    return (int )std::floor(point.getX()) % 2 == 0 ? a_ : b_;
-}
-
-void StripePattern::set_transform(const Matrix &transform) {
-    trans_ = transform;
-    inverse_trans = trans_.inverse();
-    has_trans = true;
-}
-
-Color StripePattern::color_at(const Tuple &point) const {
-    if (has_trans) {
-        auto actual_point = inverse_trans * point;
-        return stripe_at(actual_point);
-    }
-    return stripe_at(point);
+Color StripePattern::color_at_pattern(const Tuple &point) const {
+    return (int )std::floor(point.getX()) % 2 == 0 ? a_ : b_;;
 }

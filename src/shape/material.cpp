@@ -21,7 +21,7 @@ Color Material::lighting(Light &light,
                          bool in_shadow) const {
     Color color;
     if (nullptr != pattern_) {
-        color = pattern_->stripe_at(position);
+        color = pattern_->color_at(position);
     } else {
         color = this->color_;
     }
@@ -99,7 +99,7 @@ void Material::set_pattern(StripePattern *pattern) {
     pattern_ = pattern;
 }
 
-StripePattern *Material::get_pattern() const {
+Pattern *Material::get_pattern() const {
     return pattern_;
 }
 

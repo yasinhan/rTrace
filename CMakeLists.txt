@@ -61,6 +61,8 @@ add_library(
         src/scene/prepare_computations.cpp
         src/shape/plane.cpp
         src/pattern/stripe_pattern.cpp
+        src/pattern/pattern.cpp
+        src/pattern/pattern.h
 )
 
 add_executable(
