@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <cmath>
 #include "src/shape/material.h"
+#include "src/shape/sphere.h"
 
 class MaterialTest : public ::testing::Test {
 protected:
@@ -20,7 +21,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_EYE_BETWEEN_SURFACE) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, -10));
 
-    auto ret = m.lighting(light, position, eye, normal, false);
+    auto ret = m.lighting(light, position, eye, normal, false, nullptr);
     ASSERT_EQ(ret, Color(1.9, 1.9, 1.9));
 }
 
@@ -32,7 +33,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_EYE_BETWEEN_SURFACE_AND_45) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, -10));
 
-    auto ret = m.lighting(light, position, eye, normal, false);
+    auto ret = m.lighting(light, position, eye, normal, false, nullptr);
     ASSERT_EQ(ret, Color(1.0, 1.0, 1.0));
 }
 
@@ -44,7 +45,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_EYE_OPPOSITE_SURFACE_LIGHT_45) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 10, -10));
 
-    auto ret = m.lighting(light, position, eye, normal, false);
+    auto ret = m.lighting(light, position, eye, normal, false, nullptr);
     ASSERT_EQ(ret, Color(0.7364, 0.7364, 0.7364));
 }
 
@@ -56,7 +57,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_EYE_45_LIGHT_45_SURFACE) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 10, -10));
 
-    auto ret = m.lighting(light, position, eye, normal, false);
+    auto ret = m.lighting(light, position, eye, normal, false, nullptr);
     ASSERT_EQ(ret, Color(1.6364, 1.6364, 1.6364));
 }
 
@@ -68,7 +69,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_LIGHT_BEHIND_SURFACE) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, 10));
 
-    auto ret = m.lighting(light, position, eye, normal, false);
+    auto ret = m.lighting(light, position, eye, normal, false, nullptr);
     ASSERT_EQ(ret, Color(0.1, 0.1, 0.1));
 }
 
@@ -80,7 +81,7 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_WITH_SURFACE_IN_SHADOW) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, -10));
 
-    auto ret = m.lighting(light, position, eye, normal, true);
+    auto ret = m.lighting(light, position, eye, normal, true, nullptr);
     ASSERT_EQ(ret, Color(0.1, 0.1, 0.1));
 }
 
@@ -97,9 +98,9 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_WITH_PATTERN) {
     auto normal = Tuple::vector(0, 0, -1);
     auto light = Light(Color(1, 1, 1), Tuple::point(0, 0, -10));
 
-    auto color_1 = m.lighting(light, Tuple::point(0.9, 0, 0), eye, normal, false);
+    auto color_1 = m.lighting(light, Tuple::point(0.9, 0, 0), eye, normal, false, nullptr);
     ASSERT_EQ(color_1, Color(1, 1, 1));
 
-    auto color_2 = m.lighting(light, Tuple::point(1.1, 0, 0), eye, normal, false);
+    auto color_2 = m.lighting(light, Tuple::point(1.1, 0, 0), eye, normal, false, nullptr);
     ASSERT_EQ(color_2, Color(0, 0, 0));
 }

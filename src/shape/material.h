@@ -23,7 +23,9 @@ public:
 
     [[nodiscard]] const Color &get_color() const;
 
-    Color lighting(Light &light, const Tuple &position, const Tuple &eye_vector, const Tuple &normal_vector, bool in_shadow) const;
+    Color lighting(Light &light, const Tuple &position,
+                   const Tuple &eye_vector, const Tuple &normal_vector,
+                   bool in_shadow, const Shape *shape) const;
 
     void set_color(const Color &color);
 

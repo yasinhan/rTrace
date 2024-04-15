@@ -51,7 +51,8 @@ Color World::shade_hit(PrepareComputations &prepare) const {
                                                          prepare.get_point(),
                                                          prepare.get_eye_vector(),
                                                          prepare.get_normal_vector(),
-                                                         is_shadowed);
+                                                         is_shadowed,
+                                                         prepare.get_object());
 }
 
 Color World::color_at(Ray &ray) const {

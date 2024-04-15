@@ -18,9 +18,12 @@ Color Material::lighting(Light &light,
                          const Tuple &position,
                          const Tuple &eye_vector,
                          const Tuple &normal_vector,
-                         bool in_shadow) const {
+                         bool in_shadow,
+                         const Shape *shape) const {
     Color color;
-    if (nullptr != pattern_) {
+    if (nullptr != shape) {
+        color = shape->pattern_at(position);
+    } else if (nullptr != pattern_) {
         color = pattern_->color_at(position);
     } else {
         color = this->color_;

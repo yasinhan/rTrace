@@ -37,5 +37,8 @@ Tuple Shape::normal_at(const Tuple &point) const {
 
 Color Shape::pattern_at(const Tuple &point) const {
     auto object_point = inverse_trans * point;
-    return material_.get_pattern()->color_at(object_point);
+    if (nullptr != material_.get_pattern()) {
+        material_.get_pattern()->color_at(object_point);
+    }
+    return material_.get_color();
 }
