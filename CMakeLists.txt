@@ -35,6 +35,7 @@ add_executable(
         src/test/light/light_test.cpp
         src/test/shape/plane_test.cpp
         src/test/pattern/stripe_pattern_test.cpp
+        src/test/pattern/gradient_pattern_test.cpp
 )
 
 add_library(
@@ -63,6 +64,8 @@ add_library(
         src/pattern/stripe_pattern.cpp
         src/pattern/pattern.cpp
         src/pattern/pattern.h
+        src/pattern/gradient_pattern.cpp
+        src/pattern/gradient_pattern.h
 )
 
 add_executable(
