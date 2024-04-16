@@ -19,5 +19,4 @@ private:
 
 };
 
-
 #endif //RAY_TRACE_GRADIENT_PATTERN_H

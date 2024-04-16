@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(FetchContent)
 FetchContent_Declare(
         googletest
-        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+        URL https://github.com/google/googletest/archive/5376968f6948923e2411081fd9372e71a59d8e77.zip
 )
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
@@ -36,6 +36,7 @@ add_executable(
         src/test/shape/plane_test.cpp
         src/test/pattern/stripe_pattern_test.cpp
         src/test/pattern/gradient_pattern_test.cpp
+        src/test/pattern/ring_pattern_test.cpp
 )
 
 add_library(
@@ -63,9 +64,8 @@ add_library(
         src/shape/plane.cpp
         src/pattern/stripe_pattern.cpp
         src/pattern/pattern.cpp
-        src/pattern/pattern.h
         src/pattern/gradient_pattern.cpp
-        src/pattern/gradient_pattern.h
+        src/pattern/ring_pattern.cpp
 )
 
 add_executable(
