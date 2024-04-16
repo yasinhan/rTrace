@@ -37,6 +37,7 @@ add_executable(
         src/test/pattern/stripe_pattern_test.cpp
         src/test/pattern/gradient_pattern_test.cpp
         src/test/pattern/ring_pattern_test.cpp
+        src/test/pattern/checkers_pattern_test.cpp
 )
 
 add_library(
@@ -66,6 +67,7 @@ add_library(
         src/pattern/pattern.cpp
         src/pattern/gradient_pattern.cpp
         src/pattern/ring_pattern.cpp
+        src/pattern/checkers_pattern.cpp
 )
 
 add_executable(
