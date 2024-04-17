@@ -75,6 +75,11 @@ add_executable(
         src/application/render.cpp
 )
 
+add_executable(
+        display_plane
+        src/application/render_plane.cpp
+)
+
 target_link_libraries(
         tests
         gtest
@@ -84,6 +89,11 @@ target_link_libraries(
 
 target_link_libraries(
         display
+        basic
+)
+
+target_link_libraries(
+        display_plane
         basic
 )
 
