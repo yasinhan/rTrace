@@ -104,3 +104,8 @@ TEST(MATERIAL_TEST, TEST_LIGHTING_WITH_PATTERN) {
     auto color_2 = m.lighting(light, Tuple::point(1.1, 0, 0), eye, normal, false, nullptr);
     ASSERT_EQ(color_2, Color(0, 0, 0));
 }
+
+TEST(MATERIAL_TEST, TEST_INIT_MATERIAL) {
+    auto material = Material();
+    ASSERT_EQ(material.get_reflective(), 0.0);
+}

@@ -12,6 +12,7 @@ Material::Material() {
     diffuse_ = DEFAULT_DIFFUSE;
     specular_ = DEFAULT_SPECULAR;
     shininess_ = DEFAULT_SHININESS;
+    reflective_ = DEFAULT_REFLECTIVE;
 }
 
 Color Material::lighting(Light &light,
@@ -98,12 +99,16 @@ void Material::set_shininess(float shininess) {
     shininess_ = shininess;
 }
 
-void Material::set_pattern(StripePattern *pattern) {
+void Material::set_pattern(Pattern *pattern) {
     pattern_ = pattern;
 }
 
 Pattern *Material::get_pattern() const {
     return pattern_;
+}
+
+float Material::get_reflective() const {
+    return reflective_;
 }
 
 bool operator==(const Material &lhs, const Material &rhs) {

@@ -12,6 +12,7 @@ static const float DEFAULT_AMBIENT = 0.1;
 static const float DEFAULT_DIFFUSE = 0.9;
 static const float DEFAULT_SPECULAR = 0.9;
 static const float DEFAULT_SHININESS = 200.0;
+static const float DEFAULT_REFLECTIVE = 0.0;
 
 class Shape;
 
@@ -43,15 +44,17 @@ public:
 
     float get_shininess() const;
 
+    float get_reflective() const;
+
     void set_shininess(float shininess);
 
-    void set_pattern(StripePattern *pattern);
+    void set_pattern(Pattern *pattern);
 
     [[nodiscard]] Pattern *get_pattern() const;
 
 private:
     Color color_;
-    float ambient_, diffuse_, specular_, shininess_;
+    float ambient_, diffuse_, specular_, shininess_, reflective_;
     Pattern *pattern_ = nullptr;
 };
 

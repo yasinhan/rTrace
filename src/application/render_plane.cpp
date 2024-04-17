@@ -17,6 +17,10 @@ int main() {
     auto material = plane.get_material();
     material.set_color(Color(1, 1, 1));
     material.set_specular(0);
+    auto white_ = Color(1, 1, 1);
+    auto black_ = Color(0, 0, 0);
+    auto pattern = StripePattern(white_, black_);
+    material.set_pattern(&pattern);
     plane.set_transform(rotate_x(M_PI_2));
     plane.set_material(material);
 
@@ -52,7 +56,7 @@ int main() {
     world.add_shape(&right);
     world.add_shape(&left);
 
-    auto camera = Camera(200, 100, M_PI / 3);
+    auto camera = Camera(100, 50, M_PI / 3);
     auto from = Tuple::point(0, 1.5, -5);
     auto to = Tuple::point(0, 1, 0);
     auto up = Tuple::vector(0, 1, 0);
