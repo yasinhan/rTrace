@@ -26,12 +26,14 @@ public:
 
     const Tuple &get_over_point() const;
 
+    const Tuple &get_reflect_vector() const;
+
     bool is_inside() const;
 
 private:
     float t_;
     const Shape *object_;
-    Tuple point_, eye_vector_, normal_vector_;
+    Tuple point_, eye_vector_, normal_vector_, reflect_vector_;
     Tuple over_point_;
     bool inside_;
 };

@@ -19,6 +19,7 @@ PrepareComputations::PrepareComputations(Intersection hit, Intersections &inters
         this->inside_ = false;
     }
     this->over_point_ = point_ + normal_vector_ * EPSILON;
+    this->reflect_vector_ = ray.get_direction().reflect(normal_vector_);
 }
 
 float PrepareComputations::get_t() const {
@@ -47,4 +48,8 @@ bool PrepareComputations::is_inside() const {
 
 const Tuple &PrepareComputations::get_over_point() const {
     return over_point_;
+}
+
+const Tuple &PrepareComputations::get_reflect_vector() const {
+    return reflect_vector_;
 }
