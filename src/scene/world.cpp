@@ -5,6 +5,7 @@
 #include "world.h"
 #include "src/shape/sphere.h"
 #include "src/primitive/transformation.h"
+#include "src/math.h"
 #include <algorithm>
 
 World::World() {}
@@ -76,6 +77,14 @@ bool World::is_shadowed(const Tuple &point) const {
     auto intersect = intersections.hit();
 
     return intersect.has_value() && intersect.value().get_t() < distance;
+}
+
+Color World::reflected_color(PrepareComputations &prepare) const {
+    auto reflective = prepare.get_object()->get_material().get_reflective();
+    if (epsilon(reflective, 0)) {
+        return {0, 0, 0};
+    }
+    return {0, 0, 0};
 }
 
 World default_world() {

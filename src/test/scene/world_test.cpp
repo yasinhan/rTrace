@@ -184,6 +184,6 @@ TEST(WORLD_TEST, TEST_REFLECTED_COLOR_FOR_NONREFLECTIVE_MATERIAL) {
     ASSERT_TRUE(intersect.has_value());
 
     auto prepare = PrepareComputations(intersect.value(), intersections, ray);
-    auto color = w.reflectd_color(prepare);
+    auto color = w.reflected_color(prepare);
     ASSERT_EQ(color, Color(0, 0, 0));
 }

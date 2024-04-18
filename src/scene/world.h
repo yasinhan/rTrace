@@ -36,7 +36,7 @@ public:
 
     bool is_shadowed(const Tuple &point) const;
 
-    [[nodiscard]] Color reflectd_color(PrepareComputations &prepare) const;
+    [[nodiscard]] Color reflected_color(PrepareComputations &prepare) const;
 
 private:
 
