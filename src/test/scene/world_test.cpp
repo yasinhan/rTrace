@@ -168,3 +168,22 @@ TEST(WORLD_TEST, TEST_SHADE_HIT_INTERSECTION_IN_SHADOW) {
     auto color = world.shade_hit(prepare);
     ASSERT_EQ(color, Color(0.1, 0.1, 0.1));
 }
+
+TEST(WORLD_TEST, TEST_REFLECTED_COLOR_FOR_NONREFLECTIVE_MATERIAL) {
+    auto w = default_world();
+    auto ray = Ray(Tuple::point(0, 0, 0), Tuple::vector(0, 0, 1));
+
+    auto second_shape = w.get_objects()[1];
+    auto material = second_shape->get_material();
+    material.set_ambient(1);
+    second_shape->set_material(material);
+
+    auto intersections = second_shape->intersect(ray);
+    auto intersect = intersections.hit();
+
+    ASSERT_TRUE(intersect.has_value());
+
+    auto prepare = PrepareComputations(intersect.value(), intersections, ray);
+    auto color = w.reflectd_color(prepare);
+    ASSERT_EQ(color, Color(0, 0, 0));
+}

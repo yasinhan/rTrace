@@ -35,6 +35,9 @@ public:
     Color color_at(Ray &ray) const;
 
     bool is_shadowed(const Tuple &point) const;
+
+    [[nodiscard]] Color reflectd_color(PrepareComputations &prepare) const;
+
 private:
 
     std::vector<Shape*> objects_;
