@@ -46,6 +46,8 @@ public:
 
     float get_reflective() const;
 
+    void set_reflective(float reflective);
+
     void set_shininess(float shininess);
 
     void set_pattern(Pattern *pattern);

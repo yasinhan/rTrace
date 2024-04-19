@@ -111,6 +111,10 @@ float Material::get_reflective() const {
     return reflective_;
 }
 
+void Material::set_reflective(float reflective) {
+    reflective_ = reflective;
+}
+
 bool operator==(const Material &lhs, const Material &rhs) {
     return lhs.get_color() == rhs.get_color()
             && lhs.get_ambient() == rhs.get_ambient()

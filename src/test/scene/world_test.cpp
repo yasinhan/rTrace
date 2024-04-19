@@ -6,6 +6,7 @@
 #include "src/primitive/transformation.h"
 #include "src/scene/world.h"
 #include "src/shape/sphere.h"
+#include "src/shape/plane.h"
 #include "src/scene/prepare_computations.h"
 
 class WorldTest : public ::testing::Test {
@@ -186,4 +187,22 @@ TEST(WORLD_TEST, TEST_REFLECTED_COLOR_FOR_NONREFLECTIVE_MATERIAL) {
     auto prepare = PrepareComputations(intersect.value(), intersections, ray);
     auto color = w.reflected_color(prepare);
     ASSERT_EQ(color, Color(0, 0, 0));
+}
+
+TEST(WORLD_TEST, TEST_REFLECTED_COLOR_FOR_REFLECTIVE_MATERIAL) {
+    auto w = default_world();
+    auto plane = Plane();
+    auto material = plane.get_material();
+    material.set_reflective(0.5);
+    plane.set_material(material);
+    plane.set_transform(translation(0, -1, 0));
+
+    auto ray = Ray(Tuple::point(0, 0, -3), Tuple::vector(0, -sqrt(2) / 2, sqrt(2) / 2));
+
+    auto intersections = plane.intersect(ray);
+    auto intersect = intersections.hit();
+
+    auto prepare = PrepareComputations(intersect.value(), intersections, ray);
+    auto color = w.reflected_color(prepare);
+    ASSERT_EQ(color, Color(0.19032, 0.2379, 0.14274));
 }
