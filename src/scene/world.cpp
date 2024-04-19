@@ -48,12 +48,14 @@ std::vector<Shape *> World::get_objects() const {
 
 Color World::shade_hit(PrepareComputations &prepare) const {
     auto is_shadowed = this->is_shadowed(prepare.get_over_point());
-    return prepare.get_object()->get_material().lighting(*light_,
+    auto surface = prepare.get_object()->get_material().lighting(*light_,
                                                          prepare.get_point(),
                                                          prepare.get_eye_vector(),
                                                          prepare.get_normal_vector(),
                                                          is_shadowed,
                                                          prepare.get_object());
+    auto reflected = reflected_color(prepare);
+    return surface + reflected;
 }
 
 Color World::color_at(Ray &ray) const {
