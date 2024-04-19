@@ -196,10 +196,10 @@ TEST(WORLD_TEST, TEST_REFLECTED_COLOR_FOR_REFLECTIVE_MATERIAL) {
     material.set_reflective(0.5);
     plane.set_material(material);
     plane.set_transform(translation(0, -1, 0));
-
+    w.add_shape(&plane);
     auto ray = Ray(Tuple::point(0, 0, -3), Tuple::vector(0, -sqrt(2) / 2, sqrt(2) / 2));
 
-    auto intersections = plane.intersect(ray);
+    auto intersections = w.intersect(ray);
     auto intersect = intersections.hit();
 
     auto prepare = PrepareComputations(intersect.value(), intersections, ray);

@@ -84,7 +84,9 @@ Color World::reflected_color(PrepareComputations &prepare) const {
     if (epsilon(reflective, 0)) {
         return {0, 0, 0};
     }
-    return {0, 0, 0};
+    auto reflected_ray = Ray(prepare.get_over_point(), prepare.get_reflect_vector());
+    auto color = this->color_at(reflected_ray);
+    return color * prepare.get_object()->get_material().get_reflective();
 }
 
 World default_world() {
