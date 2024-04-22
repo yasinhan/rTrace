@@ -245,6 +245,24 @@ TEST(WORLD_TEST, TEST_COLOR_AT_WITH_MUTUALLY_REFLECTIVE_SURFACES) {
     world.add_shape(&upper);
 
     auto ray = Ray(Tuple::point(0, 0, 0), Tuple::vector(0, 1, 0));
-    auto color = world.color_at(ray);
-    ASSERT_EQ(color, Color(0.87677, 0.92436, 0.82918));
+    auto color = world.color_at(ray, 4);
+    ASSERT_EQ(color, Color(9.5, 9.5, 9.5));
+}
+
+TEST(WORLD_TEST, TEST_REFLECTED_COLOR_AT_MAXIMUM_RECURSIVE_DEPTH) {
+    auto w = default_world();
+    auto plane = Plane();
+    auto material = plane.get_material();
+    material.set_reflective(0.5);
+    plane.set_material(material);
+    plane.set_transform(translation(0, -1, 0));
+    w.add_shape(&plane);
+    auto ray = Ray(Tuple::point(0, 0, -3), Tuple::vector(0, -sqrt(2) / 2, sqrt(2) / 2));
+
+    auto intersections = w.intersect(ray);
+    auto intersect = intersections.hit();
+
+    auto prepare = PrepareComputations(intersect.value(), intersections, ray);
+    auto color = w.reflected_color(prepare, 0);
+    ASSERT_EQ(color, Color(0, 0, 0));
 }

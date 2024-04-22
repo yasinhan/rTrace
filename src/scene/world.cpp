@@ -46,7 +46,7 @@ std::vector<Shape *> World::get_objects() const {
     return objects_;
 }
 
-Color World::shade_hit(PrepareComputations &prepare) const {
+Color World::shade_hit(PrepareComputations &prepare, int depth) const {
     auto is_shadowed = this->is_shadowed(prepare.get_over_point());
     auto surface = prepare.get_object()->get_material().lighting(*light_,
                                                          prepare.get_point(),
@@ -54,11 +54,11 @@ Color World::shade_hit(PrepareComputations &prepare) const {
                                                          prepare.get_normal_vector(),
                                                          is_shadowed,
                                                          prepare.get_object());
-    auto reflected = reflected_color(prepare);
+    auto reflected = reflected_color(prepare, depth);
     return surface + reflected;
 }
 
-Color World::color_at(Ray &ray) const {
+Color World::color_at(Ray &ray, int depth) const {
     auto intersections = this->intersect(ray);
     auto intersect = intersections.hit();
     if (!intersect.has_value()) {
@@ -66,7 +66,7 @@ Color World::color_at(Ray &ray) const {
     }
     auto prepare = PrepareComputations(intersect.value(), intersections, ray);
 
-    return shade_hit(prepare);
+    return shade_hit(prepare, depth);
 }
 
 bool World::is_shadowed(const Tuple &point) const {
@@ -81,13 +81,16 @@ bool World::is_shadowed(const Tuple &point) const {
     return intersect.has_value() && intersect.value().get_t() < distance;
 }
 
-Color World::reflected_color(PrepareComputations &prepare) const {
+Color World::reflected_color(PrepareComputations &prepare, int depth) const {
+    if (depth < 1) {
+        return {0, 0, 0};
+    }
     auto reflective = prepare.get_object()->get_material().get_reflective();
     if (epsilon(reflective, 0)) {
         return {0, 0, 0};
     }
     auto reflected_ray = Ray(prepare.get_over_point(), prepare.get_reflect_vector());
-    auto color = this->color_at(reflected_ray);
+    auto color = this->color_at(reflected_ray, depth - 1);
     return color * prepare.get_object()->get_material().get_reflective();
 }
 

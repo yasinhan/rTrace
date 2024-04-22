@@ -30,13 +30,13 @@ public:
 
     [[nodiscard]] std::vector<Shape *> get_objects() const;
 
-    [[nodiscard]] Color shade_hit(PrepareComputations &prepare) const;
+    [[nodiscard]] Color shade_hit(PrepareComputations &prepare, int depth = 1) const;
 
-    Color color_at(Ray &ray) const;
+    Color color_at(Ray &ray, int depth = 1) const;
 
     bool is_shadowed(const Tuple &point) const;
 
-    [[nodiscard]] Color reflected_color(PrepareComputations &prepare) const;
+    [[nodiscard]] Color reflected_color(PrepareComputations &prepare, int depth = 1) const;
 
 private:
 
