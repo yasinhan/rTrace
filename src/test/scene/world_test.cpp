@@ -224,3 +224,27 @@ TEST(WORLD_TEST, TEST_SHADE_HIT_REFLECTIVE_MATERIAL) {
     auto color = w.shade_hit(prepare);
     ASSERT_EQ(color, Color(0.87677, 0.92436, 0.82918));
 }
+
+TEST(WORLD_TEST, TEST_COLOR_AT_WITH_MUTUALLY_REFLECTIVE_SURFACES) {
+    auto world = World();
+    auto light = new Light(Color(1, 1, 1), Tuple::point(0, 0, 0));
+    world.set_light(light);
+
+    auto lower = Plane();
+    auto material = lower.get_material();
+    material.set_reflective(1);
+    lower.set_material(material);
+    lower.set_transform(translation(0, -1, 0));
+    world.add_shape(&lower);
+
+    auto upper = Plane();
+    auto material_1 = upper.get_material();
+    material_1.set_reflective(1);
+    upper.set_material(material_1);
+    upper.set_transform(translation(0, 1, 0));
+    world.add_shape(&upper);
+
+    auto ray = Ray(Tuple::point(0, 0, 0), Tuple::vector(0, 1, 0));
+    auto color = world.color_at(ray);
+    ASSERT_EQ(color, Color(0.87677, 0.92436, 0.82918));
+}
