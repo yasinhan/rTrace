@@ -109,3 +109,9 @@ TEST(MATERIAL_TEST, TEST_INIT_MATERIAL) {
     auto material = Material();
     ASSERT_EQ(material.get_reflective(), 0.0);
 }
+
+TEST(MATERIAL_TEST, TEST_MATERIAL_WITH_TRANSPARENCY_REFRACTIVE) {
+    auto material = Material();
+    ASSERT_EQ(material.get_transparency(), 0.0);
+    ASSERT_EQ(material.get_refractive_index(), 1.0);
+}

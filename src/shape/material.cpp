@@ -13,6 +13,8 @@ Material::Material() {
     specular_ = DEFAULT_SPECULAR;
     shininess_ = DEFAULT_SHININESS;
     reflective_ = DEFAULT_REFLECTIVE;
+    transparency_ = DEFAULT_TRANSPARENCY;
+    refractive_index_ = DEFAULT_REFRACTIVE_INDEX;
 }
 
 Color Material::lighting(Light &light,
@@ -113,6 +115,14 @@ float Material::get_reflective() const {
 
 void Material::set_reflective(float reflective) {
     reflective_ = reflective;
+}
+
+float Material::get_transparency() const {
+    return transparency_;
+}
+
+float Material::get_refractive_index() const {
+    return refractive_index_;
 }
 
 bool operator==(const Material &lhs, const Material &rhs) {
