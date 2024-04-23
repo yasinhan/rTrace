@@ -58,6 +58,10 @@ public:
 
     float get_refractive_index() const;
 
+    void set_transparency(float transparency);
+
+    void set_refractive_index(float refractive_index);
+
     [[nodiscard]] Pattern *get_pattern() const;
 
 private:

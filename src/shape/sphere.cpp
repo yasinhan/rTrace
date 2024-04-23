@@ -29,3 +29,12 @@ Intersections Sphere::intersect_with(const Ray& ray) const {
 Tuple Sphere::local_normal_at(const Tuple &point) const {
     return point - this->origin_;
 }
+
+std::unique_ptr<Sphere> glass_sphere() {
+    auto sphere = Sphere();
+    auto material = sphere.get_material();
+    material.set_transparency(1.0);
+    material.set_refractive_index(1.5);
+    sphere.set_material(material);
+    return std::make_unique<Sphere>(sphere);
+}

@@ -100,3 +100,10 @@ TEST(SPHERE_TEST, TEST_MATERIAL_EQUAL) {
     s.set_material(m);
     ASSERT_EQ(s.get_material(), m);
 }
+
+TEST(SPHERE_TEST, PRODUCING_SPHERE_WITH_GLASSY_MATERIAL) {
+    auto sphere = glass_sphere();
+    auto material = sphere->get_material();
+    ASSERT_FLOAT_EQ(material.get_transparency(), 1.0);
+    ASSERT_FLOAT_EQ(material.get_refractive_index(), 1.5);
+}

@@ -5,6 +5,7 @@
 #ifndef RAY_TRACE_SPHERE_H
 #define RAY_TRACE_SPHERE_H
 
+#include <memory>
 #include "src/primitive/tuple.h"
 #include "src/primitive/ray.h"
 #include "src/primitive/intersections.h"
@@ -25,5 +26,7 @@ public:
 private:
     Tuple origin_;
 };
+
+std::unique_ptr<Sphere> glass_sphere();
 
 #endif //RAY_TRACE_SPHERE_H

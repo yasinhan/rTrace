@@ -125,6 +125,14 @@ float Material::get_refractive_index() const {
     return refractive_index_;
 }
 
+void Material::set_transparency(float transparency) {
+    transparency_ = transparency;
+}
+
+void Material::set_refractive_index(float refractive_index) {
+    refractive_index_ = refractive_index;
+}
+
 bool operator==(const Material &lhs, const Material &rhs) {
     return lhs.get_color() == rhs.get_color()
             && lhs.get_ambient() == rhs.get_ambient()
