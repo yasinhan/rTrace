@@ -6,6 +6,7 @@
 #include "src/shape/sphere.h"
 #include "src/shape/plane.h"
 #include "src/primitive/transformation.h"
+#include "src/primitive/intersection.h"
 #include "src/primitive/tuple.h"
 #include "src/math.h"
 #include <cmath>
@@ -74,4 +75,34 @@ TEST(PREPARE_COMPUTATIONS, TEST_COMPUTE_REFLECT_VECTOR) {
 
     auto prepare = PrepareComputations(intersection.value(), intersections, ray);
     ASSERT_EQ(prepare.get_reflect_vector(), Tuple::vector(0, sqrt(2) / 2, sqrt(2) / 2));
+}
+
+TEST(PREPARE_COMPUTATIONS, TEST_N1_N2_VARIOUS_INTERSECTIONS) {
+    auto a = glass_sphere();
+    a->set_transform(scaling(2, 2, 2));
+    auto a_material = a->get_material();
+    a_material.set_refractive_index(1.5);
+    a->set_material(a_material);
+
+    auto b = glass_sphere();
+    b->set_transform(translation(0, 0, -0.25));
+    auto b_material = b->get_material();
+    b_material.set_refractive_index(2.0);
+    b->set_material(b_material);
+
+    auto c = glass_sphere();
+    c->set_transform(translation(0, 0, 0.25));
+    auto c_material = c->get_material();
+    c_material.set_refractive_index(2.5);
+    c->set_material(c_material);
+
+    auto ray = Ray(Tuple::point(0, 0, -4), Tuple::vector(0, 0, 1));
+    auto intersections = Intersections(std::vector<Intersection>{
+            Intersection(2, a.get()),
+            Intersection(2.75, b.get()),
+            Intersection(3.25, c.get()),
+            Intersection(4.75, b.get()),
+            Intersection(5.25, c.get()),
+            Intersection(6, a.get())
+    });
 }
