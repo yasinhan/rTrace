@@ -53,3 +53,11 @@ const Tuple &PrepareComputations::get_over_point() const {
 const Tuple &PrepareComputations::get_reflect_vector() const {
     return reflect_vector_;
 }
+
+float PrepareComputations::get_n1() const {
+    return n1_;
+}
+
+float PrepareComputations::get_n2() const {
+    return n2_;
+}

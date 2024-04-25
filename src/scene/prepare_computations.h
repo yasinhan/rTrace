@@ -30,12 +30,17 @@ public:
 
     bool is_inside() const;
 
+    float get_n1() const;
+
+    float get_n2() const;
+
 private:
     float t_;
     const Shape *object_;
     Tuple point_, eye_vector_, normal_vector_, reflect_vector_;
     Tuple over_point_;
     bool inside_;
+    float n1_, n2_;
 };
 
 

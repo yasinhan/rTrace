@@ -105,4 +105,13 @@ TEST(PREPARE_COMPUTATIONS, TEST_N1_N2_VARIOUS_INTERSECTIONS) {
             Intersection(5.25, c.get()),
             Intersection(6, a.get())
     });
+
+    std::vector<float> n1s = std::vector<float>{1.0, 1.5, 2, 2.5, 2.5, 1.5};
+    std::vector<float> n2s = std::vector<float>{1.5, 2.0, 2.5, 2.5, 1.5, 1.0};
+
+    for (int i = 0; i < intersections.count(); ++i) {
+        auto prepare = PrepareComputations(intersections[i], intersections, ray);
+        ASSERT_FLOAT_EQ(prepare.get_n1(), n1s[i]);
+        ASSERT_FLOAT_EQ(prepare.get_n2(), n2s[i]);
+    }
 }
