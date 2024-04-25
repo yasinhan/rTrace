@@ -4,6 +4,7 @@
 
 #include "prepare_computations.h"
 #include "src/math.h"
+#include <vector>
 
 PrepareComputations::PrepareComputations(Intersection &hit, Intersections &intersections, Ray &ray) {
     this->t_ = hit.get_t();
@@ -63,5 +64,6 @@ float PrepareComputations::get_n2() const {
 }
 
 void PrepareComputations::calculate_n1_n2(Intersection &hit, Intersections &intersections) {
+    auto containers = std::vector<Shape*>();
 
 }
