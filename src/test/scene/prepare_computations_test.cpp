@@ -110,7 +110,8 @@ TEST(PREPARE_COMPUTATIONS, TEST_N1_N2_VARIOUS_INTERSECTIONS) {
     std::vector<float> n2s = std::vector<float>{1.5, 2.0, 2.5, 2.5, 1.5, 1.0};
 
     for (int i = 0; i < intersections.count(); ++i) {
-        auto prepare = PrepareComputations(intersections[i], intersections, ray);
+        auto intersection = intersections[i];
+        auto prepare = PrepareComputations(intersection, intersections, ray);
         ASSERT_FLOAT_EQ(prepare.get_n1(), n1s[i]);
         ASSERT_FLOAT_EQ(prepare.get_n2(), n2s[i]);
     }

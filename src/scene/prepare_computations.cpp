@@ -5,7 +5,7 @@
 #include "prepare_computations.h"
 #include "src/math.h"
 
-PrepareComputations::PrepareComputations(Intersection hit, Intersections &intersections, Ray &ray) {
+PrepareComputations::PrepareComputations(Intersection &hit, Intersections &intersections, Ray &ray) {
     this->t_ = hit.get_t();
     this->object_ = static_cast<const Shape *>(hit.get_obj());
     this->point_ = ray.position(t_);
@@ -60,4 +60,8 @@ float PrepareComputations::get_n1() const {
 
 float PrepareComputations::get_n2() const {
     return n2_;
+}
+
+void PrepareComputations::calculate_n1_n2(Intersection &hit, Intersections &intersections) {
+
 }

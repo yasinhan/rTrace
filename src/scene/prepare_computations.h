@@ -10,7 +10,7 @@
 class PrepareComputations {
 
 public:
-    PrepareComputations(Intersection hit, Intersections &intersections, Ray &ray);
+    PrepareComputations(Intersection &hit, Intersections &intersections, Ray &ray);
 
     ~PrepareComputations() = default;
 
@@ -41,6 +41,8 @@ private:
     Tuple over_point_;
     bool inside_;
     float n1_, n2_;
+
+    void calculate_n1_n2(Intersection &hit, Intersections &intersections);
 };
 
 
