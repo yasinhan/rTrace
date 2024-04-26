@@ -14,7 +14,7 @@ Material::Material() {
     shininess_ = DEFAULT_SHININESS;
     reflective_ = DEFAULT_REFLECTIVE;
     transparency_ = DEFAULT_TRANSPARENCY;
-    refractive_index_ = DEFAULT_REFRACTIVE_INDEX;
+    refractive_index_ = REFRACTIVE_INDEX_VACUUM;
 }
 
 Color Material::lighting(Light &light,

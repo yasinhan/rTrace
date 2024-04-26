@@ -5,6 +5,7 @@
 #include "prepare_computations.h"
 #include "src/math.h"
 #include <vector>
+#include <algorithm>
 
 PrepareComputations::PrepareComputations(Intersection &hit, Intersections &intersections, Ray &ray) {
     this->t_ = hit.get_t();
@@ -21,6 +22,7 @@ PrepareComputations::PrepareComputations(Intersection &hit, Intersections &inter
     }
     this->over_point_ = point_ + normal_vector_ * EPSILON;
     this->reflect_vector_ = ray.get_direction().reflect(normal_vector_);
+    calculate_n1_n2(hit, intersections);
 }
 
 float PrepareComputations::get_t() const {
@@ -64,6 +66,30 @@ float PrepareComputations::get_n2() const {
 }
 
 void PrepareComputations::calculate_n1_n2(Intersection &hit, Intersections &intersections) {
-    auto containers = std::vector<Shape*>();
-
+    auto containers = std::vector<const void*>();
+    for (std::size_t i = 0; i < intersections.count(); ++i) {
+        auto intersect = intersections[i];
+        if (hit == intersect) {
+            if (containers.empty()) {
+                n1_ = REFRACTIVE_INDEX_VACUUM;
+            } else {
+                auto shape = (Shape *) containers[containers.size() - 1];
+                n1_ = shape->get_material().get_refractive_index();
+            }
+        }
+        auto it = std::find(containers.begin(), containers.end(), intersect.get_obj());
+        if (it != containers.end()) {
+            containers.erase(it);
+        } else {
+            containers.push_back(intersect.get_obj());
+        }
+        if (hit == intersect) {
+            if (containers.empty()) {
+                n2_ = REFRACTIVE_INDEX_VACUUM;
+            } else {
+                auto shape = (Shape *) containers[containers.size() - 1];
+                n2_ = shape->get_material().get_refractive_index();
+            }
+        }
+    }
 }

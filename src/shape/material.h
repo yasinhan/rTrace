@@ -14,7 +14,7 @@ static const float DEFAULT_SPECULAR = 0.9;
 static const float DEFAULT_SHININESS = 200.0;
 static const float DEFAULT_REFLECTIVE = 0.0;
 static const float DEFAULT_TRANSPARENCY = 0.0;
-static const float DEFAULT_REFRACTIVE_INDEX = 1.0;
+static const float REFRACTIVE_INDEX_VACUUM = 1.0;
 
 class Shape;
 
