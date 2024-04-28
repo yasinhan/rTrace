@@ -34,11 +34,15 @@ public:
 
     float get_n2() const;
 
+    const Tuple &get_under_point() const;
+
+
 private:
     float t_;
     const Shape *object_;
     Tuple point_, eye_vector_, normal_vector_, reflect_vector_;
     Tuple over_point_;
+    Tuple under_point_;
     bool inside_;
     float n1_, n2_;
 

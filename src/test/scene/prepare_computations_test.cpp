@@ -116,3 +116,16 @@ TEST(PREPARE_COMPUTATIONS, TEST_N1_N2_VARIOUS_INTERSECTIONS) {
         ASSERT_FLOAT_EQ(prepare.get_n2(), n2s[i]);
     }
 }
+
+TEST(PREPARE_COMPUTATIONS, TEST_UNDER_POINT_IS_OFFSET_BELOW_SURFACE) {
+    auto ray = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
+    auto shape = glass_sphere();
+    shape->set_transform(translation(0, 0, 1));
+
+    auto intersection = Intersection(5.0, &shape);
+    auto intersections = Intersections(std::vector<Intersection>{intersection});
+
+    auto prepare = PrepareComputations(intersection, intersections, ray);
+    ASSERT_TRUE(prepare.get_under_point().getZ() > EPSILON / 2);
+    ASSERT_TRUE(prepare.get_point().getZ() < prepare.get_under_point().getZ());
+}
