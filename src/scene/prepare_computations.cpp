@@ -9,7 +9,7 @@
 
 PrepareComputations::PrepareComputations(Intersection &hit, Intersections &intersections, Ray &ray) {
     this->t_ = hit.get_t();
-    this->object_ = static_cast<const Shape *>(hit.get_obj());
+    this->object_ = (Shape *)(hit.get_obj());
     this->point_ = ray.position(t_);
     this->eye_vector_ = -ray.get_direction();
     this->normal_vector_ = object_->normal_at(this->point_);
@@ -21,6 +21,7 @@ PrepareComputations::PrepareComputations(Intersection &hit, Intersections &inter
         this->inside_ = false;
     }
     this->over_point_ = point_ + normal_vector_ * EPSILON;
+    this->under_point_ = point_ - normal_vector_ * EPSILON;
     this->reflect_vector_ = ray.get_direction().reflect(normal_vector_);
     calculate_n1_n2(hit, intersections);
 }

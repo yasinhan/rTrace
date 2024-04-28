@@ -122,7 +122,7 @@ TEST(PREPARE_COMPUTATIONS, TEST_UNDER_POINT_IS_OFFSET_BELOW_SURFACE) {
     auto shape = glass_sphere();
     shape->set_transform(translation(0, 0, 1));
 
-    auto intersection = Intersection(5.0, &shape);
+    auto intersection = Intersection(5.0, shape.get());
     auto intersections = Intersections(std::vector<Intersection>{intersection});
 
     auto prepare = PrepareComputations(intersection, intersections, ray);
