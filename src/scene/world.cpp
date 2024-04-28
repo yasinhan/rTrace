@@ -94,6 +94,10 @@ Color World::reflected_color(PrepareComputations &prepare, int depth) const {
     return color * prepare.get_object()->get_material().get_reflective();
 }
 
+Color World::refracted_color(PrepareComputations &prepare, int remaining) const {
+    return Color();
+}
+
 World default_world() {
     auto world = World();
     auto light = new Light(Color(1, 1, 1), Tuple::point(-10, 10, -10));

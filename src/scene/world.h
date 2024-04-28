@@ -38,6 +38,9 @@ public:
 
     [[nodiscard]] Color reflected_color(PrepareComputations &prepare, int depth = 1) const;
 
+    [[nodiscard]] Color refracted_color(PrepareComputations &prepare, int remaining = 1) const;
+
+
 private:
 
     std::vector<Shape*> objects_;
