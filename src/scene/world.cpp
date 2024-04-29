@@ -95,6 +95,9 @@ Color World::reflected_color(PrepareComputations &prepare, int depth) const {
 }
 
 Color World::refracted_color(PrepareComputations &prepare, int remaining) const {
+    if (remaining == 0) {
+        return {0, 0, 0};
+    }
     if (epsilon(prepare.get_object()->get_material().get_transparency(), 0)) {
         return {0, 0, 0};
     }

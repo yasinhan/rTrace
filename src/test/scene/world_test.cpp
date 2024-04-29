@@ -279,3 +279,20 @@ TEST(WORLD_TEST, TEST_REFRACTED_COLOR_WITH_OPAQUE_SURFACE) {
     auto color = w.refracted_color(prepare, 5);
     ASSERT_EQ(color, Color(0, 0, 0));
 }
+
+TEST(WORLD_TEST, TEST_REFRACTED_COLOR_MAXIMUM_DEPTH) {
+    auto w = default_world();
+    auto shape = w.get_objects()[0];
+    auto material = shape->get_material();
+    material.set_transparency(1.0);
+    material.set_refractive_index(1.5);
+    shape->set_material(material);
+
+    auto ray = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
+    auto intersections = Intersections(std::vector<Intersection>{Intersection(4, shape), Intersection(6, shape)});
+    auto intersection = intersections[0];
+    auto prepare = PrepareComputations(intersection, intersections, ray);
+
+    auto color = w.refracted_color(prepare, 0);
+    ASSERT_EQ(color, Color(0, 0, 0));
+}
