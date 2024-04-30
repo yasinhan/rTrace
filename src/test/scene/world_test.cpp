@@ -9,6 +9,14 @@
 #include "src/shape/plane.h"
 #include "src/scene/prepare_computations.h"
 
+class TestPattern : public Pattern {
+public:
+    Color color_at_pattern(const Tuple &point) const override {
+        return Color(point.getX(), point.getY(), point.getZ());
+    }
+
+};
+
 class WorldTest : public ::testing::Test {
 protected:
     WorldTest() = default;
@@ -312,4 +320,27 @@ TEST(WORLD_TEST, TEST_REFRACTED_COLOR_TOTAL_INTERNAL_REFLECTION) {
 
     auto color = w.refracted_color(prepare, 5);
     ASSERT_EQ(color, Color(0, 0, 0));
+}
+
+TEST(WORLD_TEST, TEST_REFRACTED_COLOR_WITH_REFRACTED_RAY) {
+    auto w = default_world();
+    auto shape_0 = w.get_objects()[0];
+    auto material_0 = shape_0->get_material();
+    material_0.set_ambient(1.0);
+    material_0.set_pattern(new TestPattern());
+    shape_0->set_material(material_0);
+
+    auto shape_1 = w.get_objects()[1];
+    auto material_1 = shape_1->get_material();
+    material_1.set_transparency(1.0);
+    material_1.set_refractive_index(1.5);
+    shape_1->set_material(material_1);
+
+    auto ray = Ray(Tuple::point(0, 0, 0.1), Tuple::vector(0, 1, 0));
+    auto intersections = w.intersect(ray);
+
+    auto intersection = intersections[2];
+    auto prepare = PrepareComputations(intersection, intersections, ray);
+    auto color = w.reflected_color(prepare, 5);
+    ASSERT_EQ(color, Color(0, 0.99888, 0.04725));
 }
