@@ -101,6 +101,12 @@ Color World::refracted_color(PrepareComputations &prepare, int remaining) const 
     if (epsilon(prepare.get_object()->get_material().get_transparency(), 0)) {
         return {0, 0, 0};
     }
+    auto ratio = prepare.get_n1() / prepare.get_n2();
+    auto cos_i = prepare.get_eye_vector().dot(prepare.get_normal_vector());
+    auto sin2_t = ratio * ratio * (1 - cos_i * cos_i);
+    if (sin2_t > 1) {
+        return {0, 0, 0};
+    }
     return {1, 1, 1};
 }
 

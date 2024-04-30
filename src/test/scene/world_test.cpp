@@ -306,7 +306,7 @@ TEST(WORLD_TEST, TEST_REFRACTED_COLOR_TOTAL_INTERNAL_REFLECTION) {
     shape->set_material(material);
 
     auto ray = Ray(Tuple::point(0, 0, sqrt(2) / 2), Tuple::vector(0, 1, 0));
-    auto intersections = Intersections(std::vector<Intersection>{Intersection(4, shape), Intersection(6, shape)});
+    auto intersections = Intersections(std::vector<Intersection>{Intersection(-sqrt(2) / 2, shape), Intersection(sqrt(2) / 2, shape)});
     auto intersection = intersections[1];
     auto prepare = PrepareComputations(intersection, intersections, ray);
 
