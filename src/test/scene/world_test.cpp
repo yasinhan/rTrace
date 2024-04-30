@@ -341,6 +341,6 @@ TEST(WORLD_TEST, TEST_REFRACTED_COLOR_WITH_REFRACTED_RAY) {
 
     auto intersection = intersections[2];
     auto prepare = PrepareComputations(intersection, intersections, ray);
-    auto color = w.reflected_color(prepare, 5);
+    auto color = w.refracted_color(prepare, 5);
     ASSERT_EQ(color, Color(0, 0.99888, 0.04725));
 }
