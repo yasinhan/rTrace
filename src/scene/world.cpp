@@ -56,7 +56,8 @@ Color World::shade_hit(PrepareComputations &prepare, int depth) const {
                                                          is_shadowed,
                                                          prepare.get_object());
     auto reflected = reflected_color(prepare, depth);
-    return surface + reflected;
+    auto refracted = refracted_color(prepare, depth);
+    return surface + reflected + refracted;
 }
 
 Color World::color_at(Ray &ray, int depth) const {
