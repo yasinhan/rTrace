@@ -347,6 +347,28 @@ TEST(WORLD_TEST, TEST_REFRACTED_COLOR_WITH_REFRACTED_RAY) {
 
 TEST(WORLD_TEST, TEST_SHADE_HIT_WITH_TRANSPARENT_MATERIAL) {
     auto w = default_world();
+
     auto floor = Plane();
     floor.set_transform(translation(0, -1, 0));
+    auto floor_material = floor.get_material();
+    floor_material.set_transparency(0.5);
+    floor_material.set_refractive_index(1.5);
+    floor.set_material(floor_material);
+    w.add_shape(&floor);
+
+    auto ball = Sphere();
+    ball.set_transform(translation(0, -3.5, -0.5));
+    auto ball_material = ball.get_material();
+    ball_material.set_color(Color(1, 0, 0));
+    ball_material.set_ambient(0.5);
+    ball.set_material(ball_material);
+    w.add_shape(&ball);
+
+    auto ray = Ray(Tuple::point(0, 0, -3), Tuple::vector(0, -(float ) sqrt(2) / 2, (float ) sqrt(2) / 2));
+
+    auto intersections = w.intersect(ray);
+    auto intersection = intersections[0];
+    auto prepare = PrepareComputations(intersection, intersections, ray);
+    auto color = w.shade_hit(prepare, 5);
+    ASSERT_EQ(color, Color(0.93642, 0.68642, 0.68642));
 }
