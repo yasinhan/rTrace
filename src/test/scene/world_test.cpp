@@ -30,7 +30,7 @@ TEST(WORLD_TEST, TEST_INIT_WORLD) {
     ASSERT_FALSE(world.has_shape());
 }
 
-TEST(WORLD_TEST, TEST_DEFAUL_WORLD_iNTERSECT) {
+TEST(WORLD_TEST, TEST_DEFAULT_WORLD_INTERSECT) {
     auto world = World();
     auto light = Light(Color(1, 1, 1), Tuple::point(-10, 10, -10));
     world.set_light(&light);
@@ -343,4 +343,10 @@ TEST(WORLD_TEST, TEST_REFRACTED_COLOR_WITH_REFRACTED_RAY) {
     auto prepare = PrepareComputations(intersection, intersections, ray);
     auto color = w.refracted_color(prepare, 5);
     ASSERT_EQ(color, Color(0, 0.99888, 0.04725));
+}
+
+TEST(WORLD_TEST, TEST_SHADE_HIT_WITH_TRANSPARENT_MATERIAL) {
+    auto w = default_world();
+    auto floor = Plane();
+    floor.set_transform(translation(0, -1, 0));
 }

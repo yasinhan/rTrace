@@ -108,7 +108,7 @@ Color World::refracted_color(PrepareComputations &prepare, int remaining) const 
     if (sin2_t > 1) {
         return {0, 0, 0};
     }
-    float cos_t = (float )sqrt(1 - sin2_t);
+    auto cos_t = (float )sqrt(1 - sin2_t);
     auto direction = prepare.get_normal_vector() * (ratio * cos_i - cos_t) - prepare.get_eye_vector() * ratio;
     auto refracted_ray = Ray(prepare.get_under_point(), direction);
     return color_at(refracted_ray, remaining - 1) * prepare.get_object()->get_material().get_transparency();
