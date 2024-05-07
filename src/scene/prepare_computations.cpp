@@ -98,3 +98,7 @@ void PrepareComputations::calculate_n1_n2(Intersection &hit, Intersections &inte
 const Tuple &PrepareComputations::get_under_point() const {
     return under_point_;
 }
+
+float PrepareComputations::schlick() const {
+    return 0;
+}

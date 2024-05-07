@@ -36,6 +36,7 @@ public:
 
     const Tuple &get_under_point() const;
 
+    float schlick() const;
 
 private:
     float t_;

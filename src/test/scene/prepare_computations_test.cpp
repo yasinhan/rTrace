@@ -129,3 +129,14 @@ TEST(PREPARE_COMPUTATIONS, TEST_UNDER_POINT_IS_OFFSET_BELOW_SURFACE) {
     ASSERT_TRUE(prepare.get_under_point().getZ() > EPSILON / 2);
     ASSERT_TRUE(prepare.get_point().getZ() < prepare.get_under_point().getZ());
 }
+
+TEST(PREPARE_COMPUTATIONS, TEST_SCHLICK_UNDER_TOTAL_INTERNAL_REFLECTION) {
+    auto shape = glass_sphere();
+    auto ray = Ray(Tuple::point(0, 0, (float ) sqrt(2) / 2), Tuple::vector(0, 1, 0));
+    auto intersections = Intersections(std::vector<Intersection>{Intersection(-(float ) sqrt(2) / 2, shape.get()), Intersection((float ) sqrt(2) / 2, shape.get())});
+    auto intersection = intersections[1];
+
+    auto prepare = PrepareComputations(intersection, intersections, ray);
+    ASSERT_FLOAT_EQ(1, prepare.schlick());
+
+}
